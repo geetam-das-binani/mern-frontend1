@@ -1,3 +1,53 @@
-.profile__container{
-display: flex;
+.profile__container {
+  display: flex;
+  width: 100vw;
+  max-width: 100%;
+  height: 100vh;
+  background: white;
+  position: fixed;
+  top: 0%;
+  left: 0;
+}
+.profile__container > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 100%;
+  
+  flex: 1;
+}
+.profile__container > div:nth-of-type(1) > h1{
+color: rgba(0, 0, 0, .555);
+font: 500 2.2vmax 'Roboto';
+transform: translateX(-10vmax) translateY(-2vmax);
+}
+.profile__container > div:nth-of-type(1) > img{
+    width: 20vmax;
+    transition: all .5s;
+    border-radius: 100%;
+}
+.profile__container > div:nth-of-type(1) > img:hover{
+    transform: scale(1.05);
+}
+.profile__container > div:nth-of-type(1) > a{
+    border: none;
+    background: tomato;
+    font: 400 1vmax 'Roboto';
+    text-decoration: none;
+    padding: 0.5vmax;
+    width: 30%;
+    margin: 4vmax;
+    transition: all .5s;
+    text-align: center;
+    color: white;
+}
+.profile__container > div:nth-of-type(1) > a:hover{
+    background: rgb(204, 78, 56);
+}
+.profile__container  > div:nth-of-type(2){
+justify-content: space-evenly;
+align-items: flex-start;
+padding: 5vmax;
+box-sizing: border-box;
 }
