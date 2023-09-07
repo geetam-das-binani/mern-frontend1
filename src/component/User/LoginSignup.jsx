@@ -11,9 +11,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { login, register } from "../../actions/userActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { clearError } from "../../Slices/userSlice";
+import { clearError, clearNotifyMessage } from "../../Slices/userSlice";
 export default function LoginSignup() {
-  const { error, isAuthenticatedUser } = useSelector((state) => state.user);
+  const { error, isAuthenticatedUser,loginRegisterNotify } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -73,7 +73,15 @@ export default function LoginSignup() {
       dispatch(clearError());
     }
     if (isAuthenticatedUser) {
-      toast.success('Log in Successfull',{theme:'dark'})
+      if(loginRegisterNotify==='Loged in'){
+        toast.success('Log in Successfull',{theme:'dark'})
+          dispatch(clearNotifyMessage())
+      }
+      else if(loginRegisterNotify ==='registered'){
+        toast.success('Registered Successfully',{theme:'dark'})
+        dispatch(clearNotifyMessage())
+      }
+     
       navigate("/account");
     }
     if (loading) {

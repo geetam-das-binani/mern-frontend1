@@ -8,6 +8,7 @@ import Home from "./component/Home/Home";
 import ProductDetails from "./component/Product/ProductDetails";
 import Products from "./component/Product/Products";
 import Search from "./component/Product/Search";
+import Profile from "./component/User/Profile.jsx";
 import LoginSignup from "./component/User/LoginSignup";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./actions/userActions";
@@ -16,7 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { clearError } from "./Slices/userSlice";
 export default function App() {
-  const { isAuthenticatedUser, user, notifyMessage } = useSelector(
+  const { isAuthenticatedUser, user, logoutNotify } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
@@ -26,16 +27,15 @@ export default function App() {
         families: ["Roboto Mono", "monospace"],
       },
     });
-    if (notifyMessage) {
-      toast.success("Logout Succcessfully", { theme: "dark", autoClose: 2000 });
+    if (logoutNotify) {
+      toast.success("Logout Succcessfull", { theme: "dark", autoClose: 2500 });
       setTimeout(() => {
         dispatch(clearError());
-      }, 2500);
+      }, 3000);
     }
 
     loadUser(dispatch);
-  }, [notifyMessage]);
-
+  }, [logoutNotify]);
   return (
     <BrowserRouter>
       <Header />
@@ -46,6 +46,8 @@ export default function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/search" element={<Search />} />
+        {isAuthenticatedUser && <Route path="/account" element={<Profile />} />}
+
         <Route path="/login" element={<LoginSignup />} />
       </Routes>
 

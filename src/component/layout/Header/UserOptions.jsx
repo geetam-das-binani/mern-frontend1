@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import "./Header.css";
+import Backdrop from '@mui/material/Backdrop';
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -57,12 +58,15 @@ export default function UserOptions({ avatar, role }) {
 
   return (
     <Fragment>
+      <Backdrop open={open} style={{zIndex:'10'}}/>
       <SpeedDial
         ariaLabel="Speeddial tooltip example"
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
         direction="down"
+        className="speed__dial"
+        style={{zIndex:'11'}}
         icon={
           <img
             src={avatar?.url}
