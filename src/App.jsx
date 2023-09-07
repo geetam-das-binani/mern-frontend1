@@ -12,9 +12,13 @@ import LoginSignup from "./component/User/LoginSignup";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./actions/userActions";
 import UserOptions from "./component/layout/Header/UserOptions";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { clearError } from "./Slices/userSlice";
 export default function App() {
-  const { isAuthenticatedUser, user } = useSelector((state) => state.user);
+  const { isAuthenticatedUser, user, notifyMessage } = useSelector(
+    (state) => state.user
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     webFont.load({
@@ -22,9 +26,15 @@ export default function App() {
         families: ["Roboto Mono", "monospace"],
       },
     });
+    if (notifyMessage) {
+      toast.success("Logout Succcessfully", { theme: "dark", autoClose: 2000 });
+      setTimeout(() => {
+        dispatch(clearError());
+      }, 2500);
+    }
 
     loadUser(dispatch);
-  }, []);
+  }, [notifyMessage]);
 
   return (
     <BrowserRouter>
@@ -38,8 +48,9 @@ export default function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/login" element={<LoginSignup />} />
       </Routes>
-     
+
       <Footer />
+      <ToastContainer />
     </BrowserRouter>
   );
 }

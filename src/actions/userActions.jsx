@@ -6,6 +6,8 @@ import {
   registerFail,
   loadUserFail,
   loadUserSuccess,
+  logoutSuccess,
+  logoutFail,
 } from "../Slices/userSlice";
 
 // login user
@@ -24,7 +26,7 @@ export const login = async (dispatch, email, password) => {
       },
       config
     );
-   
+
     dispatch(loginSuccess(data.user));
   } catch (error) {
     if (error.message === "Network Error") {
@@ -72,6 +74,25 @@ export const loadUser = async (dispatch) => {
       return dispatch(loadUserFail(error.message));
     }
 
-    dispatch(loadUserFail(error.response.data.errorMessage));
+    dispatch(loadUserFail());
+  }
+};
+
+// logout user
+
+export const logout = async (dispatch) => {
+  try {
+ const {data}=   await axios.get(`http://localhost:8000/logout`, {
+      withCredentials: true,
+    });
+    dispatch(logoutSuccess());
+   return data.message
+   
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(logoutFail(error.message));
+    }
+
+    dispatch(logoutFail(error.response.data.errorMessage));
   }
 };

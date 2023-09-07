@@ -43,6 +43,4 @@ export const getProductDetails = async (dispatch, id) => {
   }
 };
 
-// export const removeError=(dispatch)=>{
-//          dispatch(clearErrors())
-// }
+

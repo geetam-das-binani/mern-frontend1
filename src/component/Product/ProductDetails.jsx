@@ -29,7 +29,7 @@ export default function ProductDetails() {
     }
     getProductDetails(dispatch, id);
   }, [dispatch, error, id]);
-  console.log(error);
+
   return (
     <Fragment>
       {loading ? (

@@ -31,10 +31,12 @@ export default function LoginSignup() {
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
-  const loginSubmit = (e) => {
+  const loginSubmit =async (e) => {
     e.preventDefault();
       setLoading(true)
-    login(dispatch, loginEmail, loginPassword);
+  await login(dispatch, loginEmail, loginPassword);
+ 
+
   };
 
   const registerSubmit = (e) => {
@@ -71,6 +73,7 @@ export default function LoginSignup() {
       dispatch(clearError());
     }
     if (isAuthenticatedUser) {
+      toast.success('Log in Successfull',{theme:'dark'})
       navigate("/account");
     }
     if (loading) {
