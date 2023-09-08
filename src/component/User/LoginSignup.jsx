@@ -201,8 +201,8 @@ export default function LoginSignup() {
                   type="submit"
                   value="Register"
                   className="signUp__btn"
-                  onChange={registerDateChange}
-                  // disabled={loading ? true :false}
+                 
+                  
                 />
               </form>
             </div>

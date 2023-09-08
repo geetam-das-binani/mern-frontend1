@@ -1,0 +1,143 @@
+.update__profile__container {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  position: fixed;
+  background: rgb(211, 211, 211);
+}
+.update__profile__box {
+  background: white;
+  width: 25vw;
+  height: 75vh;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.update__profile__box > h2{
+    text-align: center;
+    color: rgba(0, 0, 0, .664);
+    font: 400 1.3vmax 'Roboto';
+    padding: 1.3vmax;
+    border-bottom: 1px solid rgba(0, 0, 0, .205);
+    width: 50%;
+    margin: auto;
+}
+
+.update_profile__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 2vmax;
+  height: 70%;
+  transition: all 0.5s;
+}
+
+.update_profile__form > div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.update_profile__form > div > input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1vmax 4vmax;
+  padding-right: 1vmax;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  outline: none;
+  font: 300 0.9vmax cursive;
+  border-radius: 4px;
+}
+
+.update_profile__form > div > svg {
+  position: absolute;
+  transform: translateX(1vmax);
+  font-size: 1.6vmax;
+  color: rgba(0, 0, 0, 0.623);
+}
+
+#update__profile__image > img {
+  border-radius: 100%;
+  width: 3vmax;
+  margin: 1vmax;
+}
+#update__profile__image > input {
+  display: flex;
+  padding: 0;
+}
+
+#update__profile__image > input::file-selector-button {
+  cursor: pointer;
+  width: 100%;
+  height: 4vmax;
+  z-index: 2;
+  border: none;
+  margin: 0;
+  transition: all 0.5s;
+  padding: 0 1vmax;
+  font: 400 0.8vmax cursive;
+  color: rgba(0, 0, 0, 0.623);
+  background: rgb(255, 255, 255);
+}
+
+#update__profile__image > input::file-selector-button:hover {
+  background: rgb(235, 235, 235);
+}
+.update_profile__btn {
+  border: none;
+  background: tomato;
+  color: white;
+  font: 300 0.9vmax "Roboto";
+  width: 100%;
+  cursor: pointer;
+  padding: 0.8vmax;
+  transition: all 0.5s;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+}
+.update_profile__btn:hover {
+  background: rgb(170, 66, 46);
+}
+
+@media screen and (max-width: 600px) {
+  .update__profile__container {
+    background: white;
+  }
+  .update__profile__box {
+    width: 100vw;
+    height: 95vh;
+  }
+
+  .update_profile__form {
+    padding: 2.5vmax 5vmax;
+
+    font: 300 1.7vmax cursive;
+  }
+  .update_profile__form > div > input {
+    font: 300 1.7vmax cursive;
+    padding: 2.5vmax 5vmax;
+  }
+
+  .update_profile__form > div > svg {
+    font-size: 2.8vmax;
+  }
+
+  #update__profile__image > img {
+    width: 8vmax;
+    border-radius: 100%;
+  }
+  #update__profile__image > input::file-selector-button {
+    height: 7vh;
+    font: 400 1.8vmax cursive;
+  }
+  .update_profile__btn {
+    padding: 1.8vmax;
+    font: 300 1.9vmax "Roboto";
+  }
+}

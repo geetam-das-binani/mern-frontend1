@@ -102,6 +102,7 @@ export const logout = async (dispatch) => {
 // update user profile
 
 export const updateProfile = async (dispatch, userData) => {
+  
   try {
     const config = {
       headers: { "Content-Type": "multipart/form-data" },
@@ -114,7 +115,7 @@ export const updateProfile = async (dispatch, userData) => {
 
       config
     );
-    dispatch(updateProfileSuccess(data.user));
+    dispatch(updateProfileSuccess(data.success));
   } catch (error) {
     if (error.message === "Network Error") {
       return dispatch(updateProfileFail(error.message));
