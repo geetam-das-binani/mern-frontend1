@@ -9,6 +9,10 @@ import {
   logoutSuccess,
   logoutFail,
 } from "../Slices/userSlice";
+import {
+  updateProfileFail,
+  updateProfileSuccess,
+} from "../Slices/profileSlice";
 
 // login user
 
@@ -82,17 +86,40 @@ export const loadUser = async (dispatch) => {
 
 export const logout = async (dispatch) => {
   try {
- const {data}=   await axios.get(`http://localhost:8000/logout`, {
+    await axios.get(`http://localhost:8000/logout`, {
       withCredentials: true,
     });
     dispatch(logoutSuccess());
-   return data.message
-   
   } catch (error) {
     if (error.message === "Network Error") {
       return dispatch(logoutFail(error.message));
     }
 
     dispatch(logoutFail(error.response.data.errorMessage));
+  }
+};
+
+// update user profile
+
+export const updateProfile = async (dispatch, userData) => {
+  try {
+    const config = {
+      headers: { "Content-Type": "multipart/form-data" },
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `http://localhost:8000/me/update`,
+
+      userData,
+
+      config
+    );
+    dispatch(updateProfileSuccess(data.user));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(updateProfileFail(error.message));
+    }
+
+    dispatch(updateProfileFail(error.response.data.errorMessage));
   }
 };

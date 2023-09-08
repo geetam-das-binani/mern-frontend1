@@ -59,7 +59,8 @@ const userReducer = createSlice({
     },
     clearNotifyMessage:(state)=>{
       state.loginRegisterNotify=false
-    }
+    },
+    
 
   },
 });

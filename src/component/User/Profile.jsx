@@ -15,7 +15,7 @@ export default function Profile() {
     if (loading) {
       setTimeout(() => {
         setLoading(false);
-      }, 1000);
+      }, 200);
     }
   }, [loading]);
   return (

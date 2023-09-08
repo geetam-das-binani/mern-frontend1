@@ -26,8 +26,8 @@ export default function UserOptions({ avatar, role }) {
     navigate("/account");
   };
   const logoutUser =async() => {
-   await logout(dispatch);
-    navigate('/')
+    logout(dispatch);
+   
     
     
   };

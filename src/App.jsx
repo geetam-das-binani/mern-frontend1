@@ -11,11 +11,13 @@ import Search from "./component/Product/Search";
 import Profile from "./component/User/Profile.jsx";
 import LoginSignup from "./component/User/LoginSignup";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "./actions/userActions";
+import { loadUser, updateProfile } from "./actions/userActions";
 import UserOptions from "./component/layout/Header/UserOptions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { clearError } from "./Slices/userSlice";
+import ProtectedRoute from "./component/Route/ProtectedRoute";
+import UpdateProfile from './component/User/UpdateProfile.jsx'
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
     (state) => state.user
@@ -46,8 +48,15 @@ export default function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/search" element={<Search />} />
-        {isAuthenticatedUser && <Route path="/account" element={<Profile />} />}
 
+        <Route
+          path="/account"
+          element={<ProtectedRoute Component={Profile} />}
+        />
+        <Route
+          path="/me/update"
+          element={<ProtectedRoute Component={UpdateProfile} />}
+        />
         <Route path="/login" element={<LoginSignup />} />
       </Routes>
 
