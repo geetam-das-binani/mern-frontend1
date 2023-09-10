@@ -50,7 +50,7 @@ export default function UpdateProfile() {
       setName(user.name);
       setEmail(user.email);
       setAvatarPreview(user.avatar.url);
-      setAvatar(user.avatar.url);
+     
       setTimeout(() => {
         setLoading(false);
       }, 300);
@@ -118,7 +118,7 @@ export default function UpdateProfile() {
                 </div>
                 <input
                   type="submit"
-                  value="updateProfile"
+                  value="Update"
                   className="update_profile__btn"
                 />
               </form>
