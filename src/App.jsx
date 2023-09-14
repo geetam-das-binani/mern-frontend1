@@ -19,6 +19,10 @@ import { clearError } from "./Slices/userSlice";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
 import UpdateProfile from './component/User/UpdateProfile'
 import UpdatePassword from './component/User/UpdatePassword'
+import ForgotPassword from './component/User/ForgotPassword'
+import ResetPassword from './component/User/ResetPassword.jsx'
+
+
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
     (state) => state.user
@@ -62,6 +66,11 @@ export default function App() {
           path="/password/update"
           element={<ProtectedRoute Component={UpdatePassword} />}
         />
+           <Route
+          path="/password/forget"
+          element={<ForgotPassword />}
+        />
+        <Route path="/password/reset/:token" element={< ResetPassword/>} />
         <Route path="/login" element={<LoginSignup />} />
       </Routes>
 

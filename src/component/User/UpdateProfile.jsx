@@ -80,11 +80,11 @@ export default function UpdateProfile() {
               <h2>Update Profile</h2>
 
               <form
-                className="update_profile__form"
+                className="update__profile__form"
                 encType="multipart/form-data"
                 onSubmit={updateProfileSubmit}
               >
-                <div className="update_profile__name">
+                <div className="update__profile__name">
                   <FaceIcon />
                   <input
                     type="text"
@@ -95,7 +95,7 @@ export default function UpdateProfile() {
                     onChange={({ target }) => setName(target.value)}
                   />
                 </div>
-                <div className="update_profile__Email">
+                <div className="update__profile__Email">
                   <MailOutlineIcon />
                   <input
                     type="email"
@@ -119,7 +119,7 @@ export default function UpdateProfile() {
                 <input
                   type="submit"
                   value="Update"
-                  className="update_profile__btn"
+                  className="update__profile__btn"
                 />
               </form>
             </div>

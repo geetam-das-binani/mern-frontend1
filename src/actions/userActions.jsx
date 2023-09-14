@@ -15,6 +15,7 @@ import {
   updateProfileFail,
   updateProfileSuccess,
 } from "../Slices/profileSlice";
+import { forgotPasswordSuccess,forgotPasswordFail } from "../Slices/forgotPasswordSlice";
 
 // login user
 
@@ -150,5 +151,30 @@ export const  updatePassword= async (dispatch, passwords) => {
     }
 
     dispatch(updatePasswordFail(error.response.data.errorMessage));
+  }
+};
+
+// forgot password
+export const  forgotPassword= async (dispatch, email) => {
+  
+  try {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `http://localhost:8000/password/forgot`,
+
+      email,
+
+      config
+    );
+    dispatch(forgotPasswordSuccess(data.message));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(forgotPasswordFail(error.message));
+    }
+
+    dispatch(forgotPasswordFail(error.response.data.errorMessage));
   }
 };

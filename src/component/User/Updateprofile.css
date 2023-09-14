@@ -27,7 +27,7 @@
     margin: auto;
 }
 
-.update_profile__form {
+.update__profile__form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,13 +38,13 @@
   transition: all 0.5s;
 }
 
-.update_profile__form > div {
+.update__profile__form > div {
   display: flex;
   width: 100%;
   align-items: center;
 }
 
-.update_profile__form > div > input {
+.update__profile__form > div > input {
   width: 100%;
   box-sizing: border-box;
   padding: 1vmax 4vmax;
@@ -55,7 +55,7 @@
   border-radius: 4px;
 }
 
-.update_profile__form > div > svg {
+.update__profile__form > div > svg {
   position: absolute;
   transform: translateX(1vmax);
   font-size: 1.6vmax;
@@ -89,7 +89,7 @@
 #update__profile__image > input::file-selector-button:hover {
   background: rgb(235, 235, 235);
 }
-.update_profile__btn {
+.update__profile__btn {
   border: none;
   background: tomato;
   color: white;
@@ -101,7 +101,7 @@
   outline: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
 }
-.update_profile__btn:hover {
+.update__profile__btn:hover {
   background: rgb(170, 66, 46);
 }
 
@@ -114,17 +114,17 @@
     height: 95vh;
   }
 
-  .update_profile__form {
+  .update__profile__form {
     padding: 2.5vmax 5vmax;
 
     font: 300 1.7vmax cursive;
   }
-  .update_profile__form > div > input {
+  .update__profile__form > div > input {
     font: 300 1.7vmax cursive;
     padding: 2.5vmax 5vmax;
   }
 
-  .update_profile__form > div > svg {
+  .update__profile__form > div > svg {
     font-size: 2.8vmax;
   }
 
@@ -136,7 +136,7 @@
     height: 7vh;
     font: 400 1.8vmax cursive;
   }
-  .update_profile__btn {
+  .update__profile__btn {
     padding: 1.8vmax;
     font: 300 1.9vmax "Roboto";
   }

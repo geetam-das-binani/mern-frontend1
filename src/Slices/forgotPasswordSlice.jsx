@@ -1,20 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  isUpdated: null,
-  error: null
+  message: null,
+  error: null,
 };
 
-const  forgotPasswordReducer= createSlice({
-    name: "forgot password",
-  
-    initialState: initialState,
-   reducers:{
-    
+const forgotPasswordReducer = createSlice({
+  name: "forgot password",
 
-   }
-  });
-  
-  export default forgotPasswordReducer.reducer
-  export const {
-  
-  } = forgotPasswordReducer.actions;
+  initialState: initialState,
+  reducers: {
+    forgotPasswordSuccess: (state, { payload }) => {
+      state.message = payload;
+    },
+    forgotPasswordFail: (state, { payload }) => {
+      state.error = payload;
+    },
+    clearForgotPasswordError:(state)=>{
+      state.error=null
+    },
+    forgotPasswordResetMessage:(state)=>{
+      state.message=null
+    }
+  },
+});
+
+export default forgotPasswordReducer.reducer;
+export const {forgotPasswordSuccess,forgotPasswordResetMessage,forgotPasswordFail,clearForgotPasswordError} = forgotPasswordReducer.actions;
