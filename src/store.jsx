@@ -4,13 +4,15 @@ import productsReducer from './Slices/productsSlice'
 import productReducer from './Slices/productSlice'
 import  userReducer  from  './Slices/userSlice'
 import profileReducer   from  './Slices/profileSlice'
+import forgotPasswordReducer from './Slices/forgotPasswordSlice'
 
 const store = configureStore({
   reducer: {
     products: productsReducer,
     product:productReducer,
     user:userReducer,
-    profile:profileReducer
+    profile:profileReducer,
+    forgotPassword:forgotPasswordReducer
     
   },
  

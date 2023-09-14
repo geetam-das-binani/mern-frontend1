@@ -4,9 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Loader from "../layout/loader/Loader";
 import {  useDispatch, useSelector } from "react-redux";
 import './Profile.css'
-import { loadUser } from "../../actions/userActions";
 export default function Profile() {
-  const dispatch=useDispatch()
+ 
   const navigate = useNavigate();
   const { user, isAuthenticatedUser } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);

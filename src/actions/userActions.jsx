@@ -10,6 +10,8 @@ import {
   logoutFail,
 } from "../Slices/userSlice";
 import {
+  updatePasswordFail,
+  updatePasswordSuccess,
   updateProfileFail,
   updateProfileSuccess,
 } from "../Slices/profileSlice";
@@ -122,5 +124,31 @@ export const updateProfile = async (dispatch, userData) => {
     }
 
     dispatch(updateProfileFail(error.response.data.errorMessage));
+  }
+};
+
+
+//  change password 
+export const  updatePassword= async (dispatch, passwords) => {
+  
+  try {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `http://localhost:8000/password/update`,
+
+      passwords,
+
+      config
+    );
+    dispatch(updatePasswordSuccess(data.success));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(updateProfileFail(error.message));
+    }
+
+    dispatch(updatePasswordFail(error.response.data.errorMessage));
   }
 };
