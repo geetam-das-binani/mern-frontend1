@@ -29,11 +29,7 @@ export default function App() {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    webFont.load({
-      google: {
-        families: ["Roboto Mono", "monospace"],
-      },
-    });
+  
     if (logoutNotify) {
       toast.success("Logout Succcessfull", { theme: "dark", autoClose: 2500 });
       setTimeout(() => {
@@ -70,8 +66,9 @@ export default function App() {
           path="/password/forget"
           element={<ForgotPassword />}
         />
-        <Route path="/password/reset/:token" element={< ResetPassword/>} />
+        <Route path="/api/v1/password/reset/:token" element={< ResetPassword/>} />
         <Route path="/login" element={<LoginSignup />} />
+      
       </Routes>
 
       <Footer />
@@ -79,3 +76,6 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+
+// http://localhost:5173//api/v1/password/reset/d351996de2a72613d0490c598a83962ecb1e7a8b

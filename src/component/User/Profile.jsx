@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import Metadata from "../layout/Metadata";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../layout/loader/Loader";
-import {  useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import './Profile.css'
 export default function Profile() {
  

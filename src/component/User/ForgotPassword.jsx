@@ -7,7 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { forgotPassword } from "../../actions/userActions";
 import Metadata from "../layout/Metadata";
 import Loader from "../layout/loader/Loader";
-import { clearForgotPasswordError, forgotPasswordResetMessage } from "../../Slices/forgotPasswordSlice";
+import {
+  clearForgotPasswordError,
+  forgotPasswordResetMessage,
+} from "../../Slices/forgotPasswordSlice";
 
 export default function ForgotPassword() {
   const { error, message } = useSelector((state) => state.forgotPassword);
@@ -20,27 +23,29 @@ export default function ForgotPassword() {
     const myform = new FormData();
 
     myform.set("email", email);
-
+    setLoading(true);
     forgotPassword(dispatch, myform);
   };
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 300);
+    }, 2500);
 
     if (error) {
+      setLoading(false);
       toast.error(error, { theme: "dark" });
 
-      dispatch(clearForgotPasswordError);
+      dispatch(clearForgotPasswordError());
     }
     if (message) {
+      setLoading(false);
       toast.success(message, { theme: "dark" });
 
       dispatch(forgotPasswordResetMessage());
     }
   }, [dispatch, error, message, loading]);
-
+  console.log(error);
   return (
     <Fragment>
       {loading ? (

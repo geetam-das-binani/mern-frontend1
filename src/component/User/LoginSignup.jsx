@@ -87,7 +87,7 @@ export default function LoginSignup() {
     if (loading) {
       setTimeout(() => {
         setLoading(false);
-      }, 1500);
+      }, 500);
     }
   }, [dispatch, error, isAuthenticatedUser,navigate,loading]);
 

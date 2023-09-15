@@ -107,7 +107,7 @@ export default function UpdatePassword() {
                 <input
                   type="submit"
                   value="Change"
-                  className="update_password__btn"
+                  className="update__password__btn"
                 />
               </form>
             </div>

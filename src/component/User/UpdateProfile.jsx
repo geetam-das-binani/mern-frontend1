@@ -33,6 +33,7 @@ export default function UpdateProfile() {
     myform.set("avatar", avatar);
 
     updateProfile(dispatch, myform);
+    setLoading(true);
   };
 
   const updateProfileDateChange = (e) => {
@@ -46,23 +47,25 @@ export default function UpdateProfile() {
     reader.readAsDataURL(e.target.files[0]);
   };
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 5500);
+
+
     if (user) {
       setName(user.name);
       setEmail(user.email);
       setAvatarPreview(user.avatar.url);
-     
-      setTimeout(() => {
-        setLoading(false);
-      }, 300);
     }
+
     if (error) {
       toast.error(error, { theme: "dark" });
-     
+
       dispatch(clearProfileError());
     }
     if (isUpdated) {
       toast.success("Profile Updated Successfully", { theme: "dark" });
-      loadUser(dispatch)
+      loadUser(dispatch);
       navigate("/account");
       dispatch(updateProfileReset());
     }

@@ -15,7 +15,7 @@ import {
   updateProfileFail,
   updateProfileSuccess,
 } from "../Slices/profileSlice";
-import { forgotPasswordSuccess,forgotPasswordFail } from "../Slices/forgotPasswordSlice";
+import { forgotPasswordSuccess,forgotPasswordFail, resetPasswordFail, resetPasswordSuccess } from "../Slices/forgotPasswordSlice";
 
 // login user
 
@@ -176,5 +176,30 @@ export const  forgotPassword= async (dispatch, email) => {
     }
 
     dispatch(forgotPasswordFail(error.response.data.errorMessage));
+  }
+};
+
+
+// reset password 
+export const  resetPassword= async (dispatch, passwords,token) => {
+  
+  try {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `http://localhost:8000/api/v1/password/reset/${token}`,
+
+   passwords,
+      config
+    );
+    dispatch(resetPasswordSuccess(data.success));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(resetPasswordFail(error.message));
+    }
+
+    dispatch(resetPasswordFail(error.response.data.errorMessage));
   }
 };
