@@ -8,19 +8,19 @@ import { resetPassword } from "../../actions/userActions";
 import {
   resetPasswordSuccessMessage,
   clearForgotPasswordError,
+  setLoading,
 } from "../../Slices/forgotPasswordSlice";
 import Metadata from "../layout/Metadata";
 import Loader from "../layout/loader/Loader";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 
-
-
-
 export default function ResetPassword() {
   const { token } = useParams();
-  const { error, success } = useSelector((state) => state.forgotPassword);
-  const [loading, setLoading] = useState(true);
+  const { error, success, loading } = useSelector(
+    (state) => state.forgotPassword
+  );
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,26 +35,26 @@ export default function ResetPassword() {
     myform.set("confirmPassword", confirmPassword);
 
     resetPassword(dispatch, myform, token);
-    setLoading(true)
+    dispatch(setLoading(true));
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2500);
-
     if (error) {
       toast.error(error, { theme: "dark" });
 
-      dispatch(clearForgotPasswordError()); 
+      dispatch(clearForgotPasswordError());
     }
     if (success) {
+      dispatch(setLoading(false));
       toast.success("Password Updated Successfully", { theme: "dark" });
 
       navigate("/login");
       dispatch(resetPasswordSuccessMessage());
     }
-  }, [dispatch, error, navigate, loading,success]);
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 500);
+  }, [dispatch, error, navigate, success]);
 
   return (
     <Fragment>
@@ -71,8 +71,7 @@ export default function ResetPassword() {
                 className="reset__password__form"
                 onSubmit={resetPasswordUpdate}
               >
-              
-                <div >
+                <div>
                   <LockOpenIcon />
                   <input
                     type="password"
@@ -83,7 +82,7 @@ export default function ResetPassword() {
                     onChange={({ target }) => setNewPassword(target.value)}
                   />
                 </div>
-                <div >
+                <div>
                   <LockIcon />
                   <input
                     type="password"

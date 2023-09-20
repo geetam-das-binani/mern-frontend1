@@ -1,5 +1,5 @@
 import axios from "axios";
-import { allProductsFail, allProductsSuccess, clearErrors } from "../Slices/productsSlice";
+import { allProductsFail, allProductsSuccess } from "../Slices/productsSlice";
 import { productFail, productSuccess } from "../Slices/productSlice";
 
 export const getAllProducts = async (

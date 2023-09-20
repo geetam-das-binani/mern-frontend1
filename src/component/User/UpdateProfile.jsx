@@ -10,13 +10,14 @@ import { loadUser, updateProfile } from "../../actions/userActions";
 import {
   clearProfileError,
   updateProfileReset,
+  setLoading,
 } from "../../Slices/profileSlice";
 import Metadata from "../layout/Metadata";
 import Loader from "../layout/loader/Loader";
 export default function UpdateProfile() {
   const { user } = useSelector((state) => state.user);
-  const { error, isUpdated } = useSelector((state) => state.profile);
-  const [loading, setLoading] = useState(true);
+  const { error, isUpdated, loading } = useSelector((state) => state.profile);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [avatar, setAvatar] = useState("");
@@ -31,9 +32,8 @@ export default function UpdateProfile() {
     myform.set("email", email);
 
     myform.set("avatar", avatar);
-
+    dispatch(setLoading(true));
     updateProfile(dispatch, myform);
-    setLoading(true);
   };
 
   const updateProfileDateChange = (e) => {
@@ -47,11 +47,6 @@ export default function UpdateProfile() {
     reader.readAsDataURL(e.target.files[0]);
   };
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 5500);
-
-
     if (user) {
       setName(user.name);
       setEmail(user.email);
@@ -64,12 +59,16 @@ export default function UpdateProfile() {
       dispatch(clearProfileError());
     }
     if (isUpdated) {
+      dispatch(setLoading(false))
       toast.success("Profile Updated Successfully", { theme: "dark" });
       loadUser(dispatch);
       navigate("/account");
       dispatch(updateProfileReset());
     }
-  }, [dispatch, error, isUpdated, navigate, user, loading]);
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 500);
+  }, [dispatch, error, isUpdated, navigate, user]);
 
   return (
     <Fragment>

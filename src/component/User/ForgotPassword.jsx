@@ -10,11 +10,13 @@ import Loader from "../layout/loader/Loader";
 import {
   clearForgotPasswordError,
   forgotPasswordResetMessage,
+  setLoading,
 } from "../../Slices/forgotPasswordSlice";
 
 export default function ForgotPassword() {
-  const { error, message } = useSelector((state) => state.forgotPassword);
-  const [loading, setLoading] = useState(true);
+  const { error, message, loading } = useSelector(
+    (state) => state.forgotPassword
+  );
 
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -23,15 +25,11 @@ export default function ForgotPassword() {
     const myform = new FormData();
 
     myform.set("email", email);
-    setLoading(true);
+    dispatch(setLoading(true));
     forgotPassword(dispatch, myform);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2500);
-
     if (error) {
       setLoading(false);
       toast.error(error, { theme: "dark" });
@@ -44,7 +42,10 @@ export default function ForgotPassword() {
 
       dispatch(forgotPasswordResetMessage());
     }
-  }, [dispatch, error, message, loading]);
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 500);
+  }, [dispatch, error, message]);
   console.log(error);
   return (
     <Fragment>

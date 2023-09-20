@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isUpdated: null,
   error: null,
+  loading:true
 };
 
 const profileReducer = createSlice({
@@ -29,6 +30,9 @@ const profileReducer = createSlice({
     },
     updatePasswordReset:(state)=>{
       state.isUpdated=null
+    },
+    setLoading:(state,{payload})=>{
+      state.loading=payload
     }
   },
 });
@@ -39,5 +43,5 @@ export const {
   updateProfileSuccess,
   clearProfileError,
   updateProfileReset,
-  updatePasswordFail,updatePasswordSuccess,updatePasswordReset
+  updatePasswordFail,updatePasswordSuccess,updatePasswordReset,setLoading
 } = profileReducer.actions;

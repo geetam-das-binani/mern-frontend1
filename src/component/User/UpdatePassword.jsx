@@ -8,6 +8,7 @@ import { updatePassword } from "../../actions/userActions";
 import {
   clearProfileError,
   updatePasswordReset,
+  setLoading
 } from "../../Slices/profileSlice";
 import Metadata from "../layout/Metadata";
 import Loader from "../layout/loader/Loader";
@@ -16,8 +17,8 @@ import LockIcon from "@mui/icons-material/Lock";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 
 export default function UpdatePassword() {
-  const { error, isUpdated } = useSelector((state) => state.profile);
-  const [loading, setLoading] = useState(true);
+  const { error, isUpdated,loading } = useSelector((state) => state.profile);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [oldPassword, setOldPassword] = useState("");
@@ -31,14 +32,12 @@ export default function UpdatePassword() {
     myform.set("newPassword", newPassword);
 
     myform.set("confirmPassword", confirmPassword);
-
+      dispatch(setLoading(true))
     updatePassword(dispatch,myform);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 300);
+   
 
     if (error) {
       toast.error(error, { theme: "dark" });
@@ -46,12 +45,16 @@ export default function UpdatePassword() {
       dispatch(clearProfileError());
     }
     if (isUpdated) {
+      dispatch(setLoading(false));
       toast.success("Password Updated Successfully", { theme: "dark" });
 
       navigate("/account");
       dispatch(updatePasswordReset());
     }
-  }, [dispatch, error, isUpdated, navigate, loading]);
+    setTimeout(() => {
+     dispatch(setLoading(false));
+    }, 300);
+  }, [dispatch, error, isUpdated, navigate]);
 
 
 

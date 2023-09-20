@@ -11,15 +11,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { login, register } from "../../actions/userActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { clearError, clearNotifyMessage } from "../../Slices/userSlice";
+import { clearError, clearNotifyMessage,setLoading } from "../../Slices/userSlice";
 export default function LoginSignup() {
-  const { error, isAuthenticatedUser,loginRegisterNotify } = useSelector((state) => state.user);
+  const { error, isAuthenticatedUser,loginRegisterNotify ,loading} = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginPassword, setLoginPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
-  const [loading, setLoading] = useState(true);
+ 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
   const switcherTab = useRef(null);
@@ -33,7 +33,7 @@ export default function LoginSignup() {
 
   const loginSubmit =async (e) => {
     e.preventDefault();
-      setLoading(true)
+    dispatch(setLoading(true))
   await login(dispatch, loginEmail, loginPassword);
  
 
@@ -46,7 +46,7 @@ export default function LoginSignup() {
     myform.set("email", user.email);
     myform.set("password", user.password);
     myform.set("avatar", avatar);
-    setLoading(true);
+    dispatch(setLoading(true))
     register(dispatch, myform);
   };
 
@@ -68,11 +68,12 @@ export default function LoginSignup() {
   };
   useEffect(() => {
     if (error) {
-      setLoading(false)
+      dispatch(setLoading(false))
       toast.error(error, { theme: "dark" });
       dispatch(clearError());
     }
     if (isAuthenticatedUser) {
+      dispatch(setLoading(false))
       if(loginRegisterNotify==='Loged in'){
         toast.success('Log in Successfull',{theme:'dark'})
           dispatch(clearNotifyMessage())
@@ -84,12 +85,12 @@ export default function LoginSignup() {
      
       navigate("/account");
     }
-    if (loading) {
+   
       setTimeout(() => {
-        setLoading(false);
+       dispatch(setLoading(false))
       }, 500);
-    }
-  }, [dispatch, error, isAuthenticatedUser,navigate,loading]);
+    
+  }, [dispatch, error, isAuthenticatedUser,navigate]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {

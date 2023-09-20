@@ -78,4 +78,3 @@ export default function App() {
 }
 
 
-// http://localhost:5173//api/v1/password/reset/d351996de2a72613d0490c598a83962ecb1e7a8b

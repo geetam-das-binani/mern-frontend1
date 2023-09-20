@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   message: null,
   error: null,
-  success:false
+  success:false,
+  loading:true
 };
 
 const forgotPasswordReducer = createSlice({
@@ -31,9 +32,12 @@ const forgotPasswordReducer = createSlice({
     },
     resetPasswordSuccessMessage:(state)=>{
       state.success=false
+    },
+    setLoading:(state,{payload})=>{
+      state.loading=payload
     }
   },
 });
 
 export default forgotPasswordReducer.reducer;
-export const {forgotPasswordSuccess,resetPasswordSuccessMessage,forgotPasswordResetMessage,forgotPasswordFail,clearForgotPasswordError,resetPasswordFail,resetPasswordSuccess} = forgotPasswordReducer.actions;
+export const {forgotPasswordSuccess,resetPasswordSuccessMessage,forgotPasswordResetMessage,forgotPasswordFail,clearForgotPasswordError,resetPasswordFail,resetPasswordSuccess,setLoading} = forgotPasswordReducer.actions;

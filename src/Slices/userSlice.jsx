@@ -4,7 +4,8 @@ const initialState = {
   error: null,
   isAuthenticatedUser: false,
   logoutNotify:false,
-  loginRegisterNotify:false
+  loginRegisterNotify:false,
+  loading:true
 };
 
 const userReducer = createSlice({
@@ -61,6 +62,9 @@ const userReducer = createSlice({
       state.loginRegisterNotify=false
     },
     
+    setLoading:(state,{payload})=>{
+      state.loading=payload
+    }
 
   },
 });
@@ -77,5 +81,6 @@ export const {
   loadUserSuccess,
   logoutFail,
   logoutSuccess,
-  clearNotifyMessage
+  clearNotifyMessage,
+  setLoading
 } = userReducer.actions;

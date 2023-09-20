@@ -5,8 +5,7 @@ const initialState = {
   loading: true,
   productsCount: 0,
   error: null,
-  resultsPerPage:''
-
+  resultsPerPage: "",
 };
 
 const productsReducer = createSlice({
@@ -18,24 +17,20 @@ const productsReducer = createSlice({
       state.products = payload.products;
       state.loading = false;
       state.productsCount = payload.productCounts;
-      state.resultsPerPage=payload.resultsPerPage
-      state.filteredProductsCount=payload.filteredProductsCount
-
+      state.resultsPerPage = payload.resultsPerPage;
+      state.filteredProductsCount = payload.filteredProductsCount;
     },
     allProductsFail: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
-
     },
     clearErrors: (state, action) => {
       state.error = null;
     },
-  
- 
-}
+  },
 });
 
 export default productsReducer.reducer;
 
-export const { allProductsFail, allProductsSuccess, clearErrors} =
+export const { allProductsFail, allProductsSuccess, clearErrors } =
   productsReducer.actions;
