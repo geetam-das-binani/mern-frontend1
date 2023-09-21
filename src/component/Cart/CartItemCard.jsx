@@ -2,10 +2,10 @@ import React from "react";
 import "./CartItemCard.css";
 import { Link } from "react-router-dom";
 
-export default function CartItemCard({ product, price, name }) {
+export default function CartItemCard({ product, price, name,images }) {
   return (
     <div className="cart__item__card">
-      <img src={''} alt="product_image" />
+      <img src={images[0]} alt="product_image" />
       <div>
         <Link to={`/product/${product}`}>{name}</Link>
         <span>

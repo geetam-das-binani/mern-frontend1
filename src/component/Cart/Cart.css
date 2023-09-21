@@ -1,19 +1,136 @@
-.cart__page{
-    padding: 5vmax;
+.cart__page {
+  padding: 5vmax;
 }
 
-.cart__header{
-background: tomato;
-display: grid;
-grid-template-columns: 4fr 1fr 1fr;
-width: 90%;
-color: white;
-margin: auto;
-font: 300 .7vmax 'Roboto';
+.cart__header {
+  background: tomato;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  width: 90%;
+  color: white;
+  margin: auto;
+  font: 300 0.7vmax "Roboto";
 }
-.cart__header >p{
-    margin: .6rem;
+.cart__header > p {
+  margin: 0.6rem;
 }
-.cart__header >p:nth-child(3){
-    text-align: end;
+.cart__header > p:nth-child(3) {
+  text-align: end;
+}
+.cart__container {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  width: 90%;
+  margin: auto;
+}
+.cart__input {
+  display: flex;
+  align-items: center;
+  height: 8vmax;
+}
+.cart__input > button {
+  border: none;
+  background: rgba(0, 0, 0, 0.616);
+  padding: 0.5vmax;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s;
+}
+.cart__input > button:hover {
+  background: rgba(0, 0, 0, 0.767);
+}
+.cart__input > input {
+  border: none;
+  padding: 0.5vmax;
+  width: 1.5vmax;
+  text-align: center;
+  outline: none;
+  font: 400 0.8vmax "Roboto";
+  color: rgba(0, 0, 0, 0.74);
+}
+.cart__subtotal {
+  display: flex;
+
+  justify-content: flex-end;
+  font: 300 1vmax cursive;
+  color: rgba(0, 0, 0, 0.75);
+  padding: 0.5vmax;
+  align-items: center;
+  height: 8vmax;
+}
+.cart__gross__total {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+}
+.cart__gross__profit__box {
+  display: flex;
+  justify-content: space-between;
+  border-top: 3px solid tomato;
+  margin: 1vmax 4vmax;
+  font: 300 1vmax "Roboto";
+  padding: 2vmax 0;
+}
+.checkout__btn {
+  display: flex;
+  justify-content: flex-end;
+}
+.checkout__btn > button {
+  border: none;
+  background: tomato;
+  font: 500 0.7vmax "Roboto";
+  border-radius: 30px;
+  padding: 0.8vmax 4vmax;
+  margin: 1vmax 4vmax;
+  color: white;
+  cursor: pointer;
+  transition: all 0.5s;
+  outline: none;
+}
+.checkout__btn > button:hover {
+  transform: scale(1.1);
+  background: rgb(197, 68, 45);
+}
+
+@media screen and (max-width: 600px) {
+  .cart__page {
+    padding: 6vmax;
+    min-height: 60vh;
+  }
+  .cart__header {
+    grid-template-columns: 3fr 1fr 1fr;
+    width: 100%;
+    font: 300 1.7vmax "Roboto";
+  }
+  .cart__container {
+    width: 100%;
+    grid-template-columns: 3fr 1fr 1fr;
+  }
+  .cart__input {
+    height: 20vmax;
+  }
+  .cart__input > button {
+    padding: 1.5vmax;
+  }
+  .cart__input > input {
+    width: 2vmax;
+    font: 400 1.8vmax "Roboto";
+  }
+  .cart__subtotal {
+    padding: 1.5vmax;
+    font: 300 2vmax "Roboto";
+    justify-content: center;
+    height: 20vmax;
+  }
+  .cart__gross__total {
+    grid-template-columns: 0fr 2fr;
+  }
+  .cart__gross__profit__box {
+    padding: 2vmax 4vmax;
+    font: 300 2vmax "Roboto";
+  }
+  .checkout__btn > button {
+    padding: 2vmax 4vmax;
+    font: 300 2vmax "Roboto";
+    width: 100%;
+  }
 }
