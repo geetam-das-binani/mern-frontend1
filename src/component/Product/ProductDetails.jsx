@@ -18,6 +18,7 @@ export default function ProductDetails() {
 
   const { product, loading, error } = useSelector((state) => state.product);
  
+
   const options = {
     edit: false,
     color: "rgba(20,20,20,.1)",
@@ -27,9 +28,10 @@ export default function ProductDetails() {
     size: window.innerWidth < 600 ? 20 : 25,
   };
   const [quantity, setQuantity] = useState(1);
+
   const addToCartHandler = () => {
     addItemsToCart(dispatch, id, quantity);
-    toast.success("Item added to Cart", { theme: "dark",autoClose:1500});
+    toast.success("Item added to Cart", { theme: "dark", autoClose: 1500 });
   };
 
   useEffect(() => {

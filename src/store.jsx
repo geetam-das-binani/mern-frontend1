@@ -23,10 +23,3 @@ const store = configureStore({
 
 export {store}
 
-// let initialState={
-//   cart:{
-//     cartItems: localStorage.getItem("cartItems")
-//     ? JSON.parse(localStorage.getItem("cartItems"))
-//     : [],
-//   }
-// }

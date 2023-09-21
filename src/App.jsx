@@ -21,6 +21,7 @@ import UpdateProfile from './component/User/UpdateProfile'
 import UpdatePassword from './component/User/UpdatePassword'
 import ForgotPassword from './component/User/ForgotPassword'
 import ResetPassword from './component/User/ResetPassword.jsx'
+import Cart from './component/Cart/Cart'
 
 
 export default function App() {
@@ -68,6 +69,7 @@ export default function App() {
         />
         <Route path="/api/v1/password/reset/:token" element={< ResetPassword/>} />
         <Route path="/login" element={<LoginSignup />} />
+        <Route  path="/cart" element={<Cart/>}/>
       
       </Routes>
 

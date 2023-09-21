@@ -1,0 +1,19 @@
+.cart__page{
+    padding: 5vmax;
+}
+
+.cart__header{
+background: tomato;
+display: grid;
+grid-template-columns: 4fr 1fr 1fr;
+width: 90%;
+color: white;
+margin: auto;
+font: 300 .7vmax 'Roboto';
+}
+.cart__header >p{
+    margin: .6rem;
+}
+.cart__header >p:nth-child(3){
+    text-align: end;
+}
