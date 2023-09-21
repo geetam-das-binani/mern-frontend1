@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
@@ -10,11 +10,14 @@ import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard";
 import Loader from "../layout/loader/Loader";
 import Metadata from "../layout/Metadata";
+
+import { addItemsToCart } from "../../actions/cartActions";
 export default function ProductDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const { product, loading, error } = useSelector((state) => state.product);
+ 
   const options = {
     edit: false,
     color: "rgba(20,20,20,.1)",
@@ -23,6 +26,12 @@ export default function ProductDetails() {
     isHalf: true,
     size: window.innerWidth < 600 ? 20 : 25,
   };
+  const [quantity, setQuantity] = useState(1);
+  const addToCartHandler = () => {
+    addItemsToCart(dispatch, id, quantity);
+    toast.success("Item added to Cart", { theme: "dark",autoClose:1500});
+  };
+
   useEffect(() => {
     if (error) {
       toast.error(error, { theme: "dark" });
@@ -67,11 +76,26 @@ export default function ProductDetails() {
 
                 <div className="details__block__3__1">
                   <div className="details__block__3__1__1">
-                    <button>-</button>
-                    <input type="number" value="1" />
-                    <button>+</button>
+                    <button
+                      onClick={() => {
+                        if (quantity <= 1) return;
+                        setQuantity(quantity - 1);
+                      }}
+                    >
+                      -
+                    </button>
+                    <input type="number" value={quantity} readOnly />
+                    <button
+                      onClick={() => {
+                        if (quantity < product.Stock) {
+                          setQuantity(quantity + 1);
+                        }
+                      }}
+                    >
+                      +
+                    </button>
                   </div>
-                  <button>Add to Cart</button>
+                  <button onClick={addToCartHandler}>Add to Cart</button>
                 </div>
                 <p>
                   Status:

@@ -5,6 +5,8 @@ import productReducer from './Slices/productSlice'
 import  userReducer  from  './Slices/userSlice'
 import profileReducer   from  './Slices/profileSlice'
 import forgotPasswordReducer from './Slices/forgotPasswordSlice'
+import cartReducer from './Slices/cartSlice'
+
 
 const store = configureStore({
   reducer: {
@@ -12,9 +14,19 @@ const store = configureStore({
     product:productReducer,
     user:userReducer,
     profile:profileReducer,
-    forgotPassword:forgotPasswordReducer
+    forgotPassword:forgotPasswordReducer,
+    cart:cartReducer
     
   },
  
 });
+
 export {store}
+
+// let initialState={
+//   cart:{
+//     cartItems: localStorage.getItem("cartItems")
+//     ? JSON.parse(localStorage.getItem("cartItems"))
+//     : [],
+//   }
+// }
