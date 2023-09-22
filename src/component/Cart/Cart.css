@@ -1,5 +1,36 @@
+.empty__card{
+  margin: auto;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 50vh;
+  padding: 10vmax;
+}
+.empty__card > svg{
+  color: tomato;
+  font-size: 5vmax;
+}
+.empty__card > p{
+font-size: 2vmax;
+}
+.empty__card > a{
+text-decoration: none;
+color: white;
+background: rgb(51, 51, 51);
+font: 400 1vmax 'Roboto';
+border: none;
+padding: 1vmax 3vmax ;
+cursor: pointer;
+transition: all .5s;
+}
+.empty__card > a:hover{
+  background: rgba(0, 0, 0, 0.616);
+}
 .cart__page {
   padding: 5vmax;
+
 }
 
 .cart__header {
@@ -42,7 +73,7 @@
 .cart__input > input {
   border: none;
   padding: 0.5vmax;
-  width: 1.5vmax;
+  width:2vmax;
   text-align: center;
   outline: none;
   font: 400 0.8vmax "Roboto";
@@ -91,6 +122,7 @@
   background: rgb(197, 68, 45);
 }
 
+
 @media screen and (max-width: 600px) {
   .cart__page {
     padding: 6vmax;
@@ -112,7 +144,7 @@
     padding: 1.5vmax;
   }
   .cart__input > input {
-    width: 2vmax;
+    width: 3vmax;
     font: 400 1.8vmax "Roboto";
   }
   .cart__subtotal {

@@ -17,7 +17,6 @@ export default function ProductDetails() {
   const dispatch = useDispatch();
 
   const { product, loading, error } = useSelector((state) => state.product);
- 
 
   const options = {
     edit: false,
@@ -91,6 +90,11 @@ export default function ProductDetails() {
                       onClick={() => {
                         if (quantity < product.Stock) {
                           setQuantity(quantity + 1);
+                        } else {
+                          toast.warning("Not enough stock", {
+                            theme: "dark",
+                            autoClose: 1500,
+                          });
                         }
                       }}
                     >

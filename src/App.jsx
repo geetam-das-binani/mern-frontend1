@@ -43,7 +43,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Header />
-      {isAuthenticatedUser && <UserOptions {...user} />}
+      {isAuthenticatedUser && <UserOptions {...user}  />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
