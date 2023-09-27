@@ -12,6 +12,7 @@ import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStati
 import { Country, State } from "country-state-city";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CheckoutSteps from '../Cart/CheckoutSteps'
 export default function Shipping() {
   const dispatch = useDispatch();
   const { shippingInfo } = useSelector((state) => state.cart);
@@ -21,11 +22,15 @@ export default function Shipping() {
   const [pincode, setPincode] = useState(shippingInfo.pincode);
   const [country, setCountry] = useState(shippingInfo.country);
   const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
-  const shippingSubmit = () => {};
+
+  const shippingSubmit = (e) => {
+    e.preventDefault()
+  };
 
   return (
     <Fragment>
-      <Metadata title="Shipping Info" />
+      <Metadata title="Shipping Details" />
+      <CheckoutSteps activeStep={0}/>
       <div className="shipping__container">
         <div className="shipping__box">
           <h2 className="shipping__heading">Shipping Details</h2>
@@ -38,7 +43,7 @@ export default function Shipping() {
               <HomeIcon />
               <input
                 type="text"
-                placeholder=""
+                placeholder="Address"
                 required
                 value={address}
                 onChange={({ target }) => setAddress(target.value)}
@@ -48,7 +53,7 @@ export default function Shipping() {
               <LocationCityIcon />
               <input
                 type="text"
-                placeholder=""
+                placeholder="City"
                 required
                 value={city}
                 onChange={({ target }) => setCity(target.value)}
@@ -57,8 +62,8 @@ export default function Shipping() {
             <div>
               <PinDropIcon />
               <input
-                type="text"
-                placeholder=""
+                type="number"
+                placeholder="Pin Code"
                 required
                 value={pincode}
                 onChange={({ target }) => setPincode(target.value)}
@@ -67,8 +72,8 @@ export default function Shipping() {
             <div>
               <PhoneIcon />
               <input
-                type="text"
-                placeholder=""
+                type="number"
+                placeholder="Phone Number"
                 required
                 value={phoneNo}
                 onChange={({ target }) => setPhoneNo(target.value)}

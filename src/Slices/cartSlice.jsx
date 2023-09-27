@@ -42,6 +42,7 @@ const cartReducer = createSlice({
 function saveToStorage(cartItems) {
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
+
 function saveShippingInfoToStorage(shippingInfo) {
   localStorage.setItem("shippingInfo", JSON.stringify(shippingInfo));
 }
