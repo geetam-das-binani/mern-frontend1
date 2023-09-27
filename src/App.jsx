@@ -17,12 +17,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { clearError } from "./Slices/userSlice";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
-import UpdateProfile from './component/User/UpdateProfile'
-import UpdatePassword from './component/User/UpdatePassword'
-import ForgotPassword from './component/User/ForgotPassword'
-import ResetPassword from './component/User/ResetPassword.jsx'
-import Cart from './component/Cart/Cart'
-
+import UpdateProfile from "./component/User/UpdateProfile";
+import UpdatePassword from "./component/User/UpdatePassword";
+import ForgotPassword from "./component/User/ForgotPassword";
+import ResetPassword from "./component/User/ResetPassword.jsx";
+import Cart from "./component/Cart/Cart";
+import Shipping from "./component/Cart/Shipping";
 
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
@@ -30,7 +30,6 @@ export default function App() {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-  
     if (logoutNotify) {
       toast.success("Logout Succcessfull", { theme: "dark", autoClose: 2500 });
       setTimeout(() => {
@@ -39,11 +38,11 @@ export default function App() {
     }
 
     loadUser(dispatch);
-  }, [logoutNotify]);
+  }, [logoutNotify, dispatch]);
   return (
     <BrowserRouter>
       <Header />
-      {isAuthenticatedUser && <UserOptions {...user}  />}
+      {isAuthenticatedUser && <UserOptions {...user} />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
@@ -59,18 +58,21 @@ export default function App() {
           path="/me/update"
           element={<ProtectedRoute Component={UpdateProfile} />}
         />
-           <Route
+        <Route
           path="/password/update"
           element={<ProtectedRoute Component={UpdatePassword} />}
         />
-           <Route
-          path="/password/forget"
-          element={<ForgotPassword />}
+        <Route path="/password/forget" element={<ForgotPassword />} />
+        <Route
+          path="/api/v1/password/reset/:token"
+          element={<ResetPassword />}
         />
-        <Route path="/api/v1/password/reset/:token" element={< ResetPassword/>} />
         <Route path="/login" element={<LoginSignup />} />
-        <Route  path="/cart" element={<Cart/>}/>
-      
+        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/shipping"
+          element={<ProtectedRoute Component={Shipping} />}
+        />
       </Routes>
 
       <Footer />
@@ -78,5 +80,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-

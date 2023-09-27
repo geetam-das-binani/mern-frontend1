@@ -10,9 +10,12 @@ import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Loader from "../layout/loader/Loader";
+import {useNavigate} from 'react-router-dom'
+import Metadata from "../layout/Metadata";
 
 export default function Cart() {
   const [loading, setLoading] = useState(true);
+  const navigate=useNavigate()
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const increaseQuantity = (id, quantity, stock) => {
@@ -38,7 +41,14 @@ export default function Cart() {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  });
+  },[]);
+
+  const grosstotal = () => {
+    return cartItems?.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  };
+  const checkoutHandler=()=>{
+     navigate('/login?redirect=shipping')
+  }
   return (
     <Fragment>
       {loading ? (
@@ -46,13 +56,18 @@ export default function Cart() {
       ) : (
         <Fragment>
           {cartItems.length === 0 ? (
-            <div className="empty__card">
+            <>
+            <Metadata title='Your Cart'/>
+               <div className="empty__card">
               <RemoveShoppingCartIcon />
               <Typography>No Products in your cart</Typography>
               <Link to="/products">View Products</Link>
             </div>
+            </>
+         
           ) : (
             <Fragment>
+              <Metadata title='Your Cart'/>
               <div className="cart__page">
                 <div className="cart__header">
                   <p>Product</p>
@@ -100,11 +115,11 @@ export default function Cart() {
                   <div></div>
                   <div className="cart__gross__profit__box">
                     <p>Gross Total</p>
-                    <p>{`₹${600}`}</p>
+                    <p>{`₹${grosstotal()}`}</p>
                   </div>
                   <div></div>
                   <div className="checkout__btn">
-                    <button>Check out</button>
+                    <button onClick={checkoutHandler}>Check out</button>
                   </div>
                 </div>
               </div>

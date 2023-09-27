@@ -9,9 +9,9 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
-import { useDispatch ,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../actions/userActions";
-export default function UserOptions({ avatar, role }) {
+export default function UserOptions({ avatar:{url}, role}) {
   const { cartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ export default function UserOptions({ avatar, role }) {
       func: account,
     },
     {
-      icon: <ShoppingCartIcon />,
+      icon: <ShoppingCartIcon style={{color:cartItems.length>0 ?'tomato':'unset'}} />,
       name: `Cart(${cartItems.length})`,
       func: goToCart,
     },
@@ -75,7 +75,7 @@ export default function UserOptions({ avatar, role }) {
         style={{ zIndex: "11" }}
         icon={
           <img
-            src={avatar?.url}
+            src={url}
             alt="Profile"
             className="speed__dial__icon"
           ></img>
@@ -87,7 +87,7 @@ export default function UserOptions({ avatar, role }) {
             icon={item.icon}
             tooltipTitle={item.name}
             onClick={item.func}
-            tooltipOpen
+            tooltipOpen={window.innerWidth <= 600 ? true : false}
           />
         ))}
       </SpeedDial>

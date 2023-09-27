@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addToCart, removeFromCart } from "../Slices/cartSlice";
+import { addToCart, removeFromCart ,saveShippingInfo} from "../Slices/cartSlice";
 
 
 //add to cart
@@ -22,3 +22,9 @@ export const removeCartItems = async (dispatch, id) => {
 
   dispatch(removeFromCart(data.product._id));
 };
+
+
+// save shipping info 
+export  const  saveShippingDetails=(dispatch,data)=>{
+    dispatch(saveShippingInfo(data))
+}

@@ -11,15 +11,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { login, register } from "../../actions/userActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { clearError, clearNotifyMessage,setLoading } from "../../Slices/userSlice";
+import {
+  clearError,
+  clearNotifyMessage,
+  setLoading,
+} from "../../Slices/userSlice";
 export default function LoginSignup() {
-  const { error, isAuthenticatedUser,loginRegisterNotify ,loading} = useSelector((state) => state.user);
+  const { error, isAuthenticatedUser, loginRegisterNotify, loading } =
+    useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginPassword, setLoginPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
- 
+
   const loginTab = useRef(null);
   const registerTab = useRef(null);
   const switcherTab = useRef(null);
@@ -31,12 +36,10 @@ export default function LoginSignup() {
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
-  const loginSubmit =async (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault();
-    dispatch(setLoading(true))
-  await login(dispatch, loginEmail, loginPassword);
- 
-
+    dispatch(setLoading(true));
+    await login(dispatch, loginEmail, loginPassword);
   };
 
   const registerSubmit = (e) => {
@@ -46,7 +49,7 @@ export default function LoginSignup() {
     myform.set("email", user.email);
     myform.set("password", user.password);
     myform.set("avatar", avatar);
-    dispatch(setLoading(true))
+    dispatch(setLoading(true));
     register(dispatch, myform);
   };
 
@@ -66,31 +69,33 @@ export default function LoginSignup() {
       });
     }
   };
+
+  const redirect = location.search ? location.search.split("=")[1] : "account";
+
   useEffect(() => {
     if (error) {
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
       toast.error(error, { theme: "dark" });
       dispatch(clearError());
     }
     if (isAuthenticatedUser) {
-      dispatch(setLoading(false))
-      if(loginRegisterNotify==='Loged in'){
-        toast.success('Log in Successfull',{theme:'dark'})
-          dispatch(clearNotifyMessage())
+      dispatch(setLoading(false));
+      if (loginRegisterNotify === "Loged in") {
+        toast.success("Log in Successfull", { theme: "dark" });
+        dispatch(clearNotifyMessage());
+      } else if (loginRegisterNotify === "registered") {
+        toast.success("Registered Successfully", { theme: "dark" });
+        dispatch(clearNotifyMessage());
       }
-      else if(loginRegisterNotify ==='registered'){
-        toast.success('Registered Successfully',{theme:'dark'})
-        dispatch(clearNotifyMessage())
-      }
+
+      navigate(`/${redirect}`);
      
-      navigate("/account");
     }
-   
-      setTimeout(() => {
-       dispatch(setLoading(false))
-      }, 500);
-    
-  }, [dispatch, error, isAuthenticatedUser,navigate]);
+
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 500);
+  }, [dispatch, error, isAuthenticatedUser, navigate]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -198,13 +203,7 @@ export default function LoginSignup() {
                     onChange={registerDateChange}
                   />
                 </div>
-                <input
-                  type="submit"
-                  value="Register"
-                  className="signUp__btn"
-                 
-                  
-                />
+                <input type="submit" value="Register" className="signUp__btn" />
               </form>
             </div>
           </div>
