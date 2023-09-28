@@ -23,7 +23,7 @@ import ForgotPassword from "./component/User/ForgotPassword";
 import ResetPassword from "./component/User/ResetPassword.jsx";
 import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
-
+import ConfirmOrder from './component/Cart/ConfirmOrder'
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
     (state) => state.user
@@ -72,6 +72,10 @@ export default function App() {
         <Route
           path="/shipping"
           element={<ProtectedRoute Component={Shipping} />}
+        />
+          <Route
+          path="/order/confirm"
+          element={<ProtectedRoute Component={ConfirmOrder} />}
         />
       </Routes>
 

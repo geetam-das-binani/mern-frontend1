@@ -30,7 +30,7 @@ const cartReducer = createSlice({
     },
     removeFromCart: (state, { payload }) => {
       state.cartItems = state.cartItems.filter((i) => i.product !== payload);
-      saveToStorage(state.cartItems);
+      saveItemsToStorage(state.cartItems);
     },
     saveShippingInfo: (state, { payload }) => {
       state.shippingInfo = payload;
@@ -39,7 +39,7 @@ const cartReducer = createSlice({
   },
 });
 
-function saveToStorage(cartItems) {
+function saveItemsToStorage(cartItems) {
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
 

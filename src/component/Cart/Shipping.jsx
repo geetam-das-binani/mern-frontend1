@@ -12,9 +12,11 @@ import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStati
 import { Country, State } from "country-state-city";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CheckoutSteps from '../Cart/CheckoutSteps'
+import CheckoutSteps from "../Cart/CheckoutSteps";
+import {useNavigate} from 'react-router-dom'
 export default function Shipping() {
   const dispatch = useDispatch();
+  const navigate=useNavigate()
   const { shippingInfo } = useSelector((state) => state.cart);
   const [address, setAddress] = useState(shippingInfo.address);
   const [city, setCity] = useState(shippingInfo.city);
@@ -24,13 +26,26 @@ export default function Shipping() {
   const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
 
   const shippingSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    if (phoneNo.length < 10 || phoneNo.length > 10) {
+      toast.warn("Phone Number should be 10 digits long");
+      return;
+    }
+    saveShippingDetails(dispatch, {
+      address,
+      city,
+      state,
+      phoneNo,
+      country,
+      pincode,
+    });
+    navigate('/order/confirm')
   };
 
   return (
     <Fragment>
       <Metadata title="Shipping Details" />
-      <CheckoutSteps activeStep={0}/>
+      <CheckoutSteps activeStep={0} />
       <div className="shipping__container">
         <div className="shipping__box">
           <h2 className="shipping__heading">Shipping Details</h2>
@@ -45,7 +60,7 @@ export default function Shipping() {
                 type="text"
                 placeholder="Address"
                 required
-                value={address}
+                value={address ?? ""}
                 onChange={({ target }) => setAddress(target.value)}
               />
             </div>
@@ -55,7 +70,7 @@ export default function Shipping() {
                 type="text"
                 placeholder="City"
                 required
-                value={city}
+                value={city ?? ""}
                 onChange={({ target }) => setCity(target.value)}
               />
             </div>{" "}
@@ -65,7 +80,7 @@ export default function Shipping() {
                 type="number"
                 placeholder="Pin Code"
                 required
-                value={pincode}
+                value={pincode ?? ""}
                 onChange={({ target }) => setPincode(target.value)}
               />
             </div>{" "}
@@ -75,7 +90,7 @@ export default function Shipping() {
                 type="number"
                 placeholder="Phone Number"
                 required
-                value={phoneNo}
+                value={phoneNo ?? ""}
                 onChange={({ target }) => setPhoneNo(target.value)}
               />
             </div>{" "}
@@ -83,7 +98,7 @@ export default function Shipping() {
               <PublicIcon />
               <select
                 required
-                value={country}
+                value={country ?? ""}
                 onChange={({ target }) => setCountry(target.value)}
               >
                 <option value="">Country</option>
@@ -102,7 +117,7 @@ export default function Shipping() {
                 <TransferWithinAStationIcon />
                 <select
                   required
-                  value={state}
+                  value={state ?? ""}
                   onChange={({ target }) => setState(target.value)}
                 >
                   <option value="">State</option>

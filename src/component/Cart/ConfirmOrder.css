@@ -1,0 +1,69 @@
+.confirm__order__page {
+  height: 100vh;
+  background: white;
+  display: grid;
+  grid-template-columns: 6fr 3fr;
+}
+.confirm__order__page > div:nth-child(2) {
+  border-left: 1px solid rgba(0, 0, 0, 0.247);
+}
+.confirm__shipping__area {
+  padding: 5vmax;
+  padding-bottom: 0%;
+}
+.confirm__shipping__area > p {
+  font: 400 1.8vmax "Roboto";
+}
+.confirm__shipping__area__box,
+.confirm__cart__items__container {
+    margin: 2vmax;
+}
+.confirm__shipping__area__box > div{
+    display: flex;
+margin: 1vmax;
+}
+.confirm__shipping__area__box > div > p{
+    font: 400 1vmax "Roboto";
+    color: black;
+}
+.confirm__shipping__area__box > div > span{
+    font: 100 1vmax "Roboto";
+    color: #575757;
+}
+
+.confirm__cart__items >p{
+    padding: 5vmax;
+    padding-top: 2vmax;
+}
+
+.confirm__cart__items__container{
+    overflow-y: auto;
+    max-height: 20vmax;
+}
+.confirm__cart__items__container > div{
+    font: 400 1vmax 'Roboto';
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2vmax 0;
+} 
+
+.confirm__cart__items__container > div > img{
+    width: 3vmax;
+}
+.confirm__cart__items__container > div > a{
+    width: 60%;
+    text-decoration: none;
+    margin: 0 2vmax;
+    color: #575757;
+}
+.confirm__cart__items__container > div > span{
+    font: 100 1vmax 'Roboto';
+    color: #5e5e5e;
+}
+.order__summary{
+    padding: 7vmax;
+}
+.order__summary > p{
+    text-align: center;
+}
