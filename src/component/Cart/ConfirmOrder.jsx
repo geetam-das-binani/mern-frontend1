@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
 import "./ConfirmOrder.css";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import Metadata from "../layout/Metadata";
 import { Typography } from "@mui/material";
 import CheckoutSteps from "./CheckoutSteps";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function ConfirmOrder() {
+  const navigate = useNavigate();
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const subtotal = cartItems.reduce(
@@ -17,7 +18,16 @@ export default function ConfirmOrder() {
   const tax = subtotal * 0.18;
   const totalPrice = subtotal + shippingCharges + tax;
   const address = `${shippingInfo.address} ,${shippingInfo.city},${shippingInfo.state} ,${shippingInfo.country},${shippingInfo.pincode}`;
-
+  const proceedToPayment = () => {
+    const data = {
+      subtotal,
+      tax,
+      shippingCharges,
+      totalPrice,
+    };
+    sessionStorage.setItem("orderInfo", JSON.stringify(data));
+    navigate("/process/payment");
+  };
 
   return (
     <Fragment>
@@ -45,14 +55,7 @@ export default function ConfirmOrder() {
             <div className="confirm__cart__items__container">
               {cartItems &&
                 cartItems.map(
-                  ({
-                    image: { url },
-                    name,
-                    price,
-                    product,
-                    quantity,
-                   
-                  }) => (
+                  ({ image: { url }, name, price, product, quantity }) => (
                     <div key={product}>
                       <img src={url} alt="productImage" />
                       <Link to={`/product/${product}`}>{name}</Link>
@@ -64,33 +67,32 @@ export default function ConfirmOrder() {
                 )}
             </div>
           </div>
-          
         </div>
         <div className="order__summary">
-            <Typography>Order Summary:</Typography>
+          <Typography>Order Summary:</Typography>
+          <div>
             <div>
-              <div>
-                <p>Subtotal:</p>
-                <span> ₹ {subtotal}</span>
-              </div>
+              <p>Subtotal:</p>
+              <span> ₹ {subtotal}</span>
+            </div>
 
-              <div>
-                <p>Shipping Charges:</p>
-                <span> ₹{shippingCharges}</span>
-              </div>
-              <div>
-                <p>GST:18%</p>
-                <span> ₹{tax}</span>
-              </div>
+            <div>
+              <p>Shipping Charges:</p>
+              <span> ₹{shippingCharges}</span>
             </div>
-            <div className="order__summary__total">
-              <p>
-                <b>Total:</b>
-              </p>
-                <span>₹ {totalPrice}</span>
+            <div>
+              <p>GST:18%</p>
+              <span> ₹{tax}</span>
             </div>
-            <button>Proceed To Payment</button>
           </div>
+          <div className="order__summary__total">
+            <p>
+              <b>Total:</b>
+            </p>
+            <span>₹ {totalPrice}</span>
+          </div>
+          <button onClick={proceedToPayment}>Proceed To Payment</button>
+        </div>
       </div>
     </Fragment>
   );

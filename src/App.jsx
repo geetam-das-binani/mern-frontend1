@@ -1,8 +1,8 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Header from "./component/layout/Header/Header";
 import Footer from "./component/layout/Footer/Footer";
-import webFont from "webfontloader";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./component/Home/Home";
 import ProductDetails from "./component/Product/ProductDetails";
@@ -23,11 +23,17 @@ import ForgotPassword from "./component/User/ForgotPassword";
 import ResetPassword from "./component/User/ResetPassword.jsx";
 import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
-import ConfirmOrder from './component/Cart/ConfirmOrder'
+import ConfirmOrder from "./component/Cart/ConfirmOrder";
+import Payment from "./component/Cart/Payment";
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
     (state) => state.user
   );
+  const [stripeApiKey, setStripeapiKey] = useState("");
+  const getStripeApiKey = async () => {
+    const { data } = await axios.get("http://localhost:8000/stripeApiKey");
+    setStripeapiKey(data.stripeApiKey);
+  };
   const dispatch = useDispatch();
   useEffect(() => {
     if (logoutNotify) {
@@ -38,6 +44,7 @@ export default function App() {
     }
 
     loadUser(dispatch);
+    getStripeApiKey();
   }, [logoutNotify, dispatch]);
   return (
     <BrowserRouter>
@@ -73,9 +80,13 @@ export default function App() {
           path="/shipping"
           element={<ProtectedRoute Component={Shipping} />}
         />
-          <Route
+        <Route
           path="/order/confirm"
           element={<ProtectedRoute Component={ConfirmOrder} />}
+        />
+        <Route
+          path="/process/payment"
+          element={<ProtectedRoute Component={Payment} />}
         />
       </Routes>
 

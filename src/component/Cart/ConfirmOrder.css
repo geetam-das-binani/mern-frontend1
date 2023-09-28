@@ -105,5 +105,71 @@
     background: rgb(192, 71, 50);
 }
 @media screen and (max-width:600px) {
+    .confirm__order__page{
+      grid-template-columns: 1fr;
+      height: unset;
+    }
+    .confirm__order__page > div:nth-child(2){
+      border-left: 0;
+      border-top: 1px solid rgba(0, 0, 0, .247);
+    }
+    .confirm__shipping__area > p{
+      font: 400 6vw 'Roboto';
+    }
+    .confirm__shipping__area__box > div{
+      display: flex;
+      margin: 6vw 0 ;
+      align-items: center;
+    }
+    .confirm__shipping__area__box > div > p{
+      font: 400 4vw 'Roboto';
+    }
+    .confirm__shipping__area__box > div > span {
+      font: 100 2.5vmax "Roboto";
     
+    }
+    .confirm__cart__items >p{
+      font: 400 6vw 'Roboto';
+    }
+    .confirm__cart__items__container{
+      max-height: 50vw;
+
+    }
+    .confirm__cart__items__container > div{
+      font: 400 4vw 'Roboto';
+      margin: 4vw 0 ;
+    }
+    .confirm__cart__items__container > di > img{
+      width: 10vw;
+    }
+    .confirm__cart__items__container > div >a{
+      margin: 0;
+      width: 30%;
+    }
+    .confirm__cart__items__container > div > span{
+      font: 300 4vw 'Roboto';
+    }
+    .order__summary{
+      padding: 12vw;
+    }
+    .order__summary >p{
+      font: 300 6vw 'Roboto';
+      padding: 4vw;
+
+
+    }
+    .order__summary > div >div{
+      font: 300 4vw 'Roboto';
+    }
+    .order__summary__total{
+      font: 300 4vw 'Roboto';
+      padding: 5vw 0;
+    }
+    .order__summary > button{
+      font: 400 4vw 'Roboto';
+      margin: 4vw auto;
+      padding: 4vw;
+    }
+
+
 }
