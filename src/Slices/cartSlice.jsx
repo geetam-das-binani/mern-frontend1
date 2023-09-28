@@ -22,10 +22,10 @@ const cartReducer = createSlice({
           i.product === item.product ? item : i
         );
 
-        saveToStorage(state.cartItems);
+        saveItemsToStorage(state.cartItems);
       } else {
         state.cartItems.push(item);
-        saveToStorage(state.cartItems);
+        saveItemsToStorage(state.cartItems);
       }
     },
     removeFromCart: (state, { payload }) => {

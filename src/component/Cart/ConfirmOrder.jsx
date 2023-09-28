@@ -79,15 +79,15 @@ export default function ConfirmOrder() {
                 <span> ₹{shippingCharges}</span>
               </div>
               <div>
-                <p>GST:</p>
+                <p>GST:18%</p>
                 <span> ₹{tax}</span>
               </div>
             </div>
             <div className="order__summary__total">
               <p>
                 <b>Total:</b>
-                <span>₹ {totalPrice}</span>
               </p>
+                <span>₹ {totalPrice}</span>
             </div>
             <button>Proceed To Payment</button>
           </div>
