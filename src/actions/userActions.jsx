@@ -15,7 +15,12 @@ import {
   updateProfileFail,
   updateProfileSuccess,
 } from "../Slices/profileSlice";
-import { forgotPasswordSuccess,forgotPasswordFail, resetPasswordFail, resetPasswordSuccess } from "../Slices/forgotPasswordSlice";
+import {
+  forgotPasswordSuccess,
+  forgotPasswordFail,
+  resetPasswordFail,
+  resetPasswordSuccess,
+} from "../Slices/forgotPasswordSlice";
 
 // login user
 
@@ -77,10 +82,6 @@ export const loadUser = async (dispatch) => {
     });
     dispatch(loadUserSuccess(data.user));
   } catch (error) {
-    if (error.message === "Network Error") {
-      return dispatch(loadUserFail(error.message));
-    }
-
     dispatch(loadUserFail());
   }
 };
@@ -105,7 +106,6 @@ export const logout = async (dispatch) => {
 // update user profile
 
 export const updateProfile = async (dispatch, userData) => {
-  
   try {
     const config = {
       headers: { "Content-Type": "multipart/form-data" },
@@ -128,10 +128,8 @@ export const updateProfile = async (dispatch, userData) => {
   }
 };
 
-
-//  change password 
-export const  updatePassword= async (dispatch, passwords) => {
-  
+//  change password
+export const updatePassword = async (dispatch, passwords) => {
   try {
     const config = {
       headers: { "Content-Type": "application/json" },
@@ -155,8 +153,7 @@ export const  updatePassword= async (dispatch, passwords) => {
 };
 
 // forgot password
-export const  forgotPassword= async (dispatch, email) => {
-  
+export const forgotPassword = async (dispatch, email) => {
   try {
     const config = {
       headers: { "Content-Type": "application/json" },
@@ -179,10 +176,8 @@ export const  forgotPassword= async (dispatch, email) => {
   }
 };
 
-
-// reset password 
-export const  resetPassword= async (dispatch, passwords,token) => {
-  
+// reset password
+export const resetPassword = async (dispatch, passwords, token) => {
   try {
     const config = {
       headers: { "Content-Type": "application/json" },
@@ -191,7 +186,7 @@ export const  resetPassword= async (dispatch, passwords,token) => {
     const { data } = await axios.post(
       `http://localhost:8000/api/v1/password/reset/${token}`,
 
-   passwords,
+      passwords,
       config
     );
     dispatch(resetPasswordSuccess(data.success));

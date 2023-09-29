@@ -25,14 +25,20 @@ import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Payment from "./component/Cart/Payment";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
     (state) => state.user
   );
+
   const [stripeApiKey, setStripeapiKey] = useState("");
   const getStripeApiKey = async () => {
-    const { data } = await axios.get("http://localhost:8000/stripeApiKey");
-    setStripeapiKey(data.stripeApiKey);
+    const { data } = await axios.get("http://localhost:8000/stripeApiKey", {
+      withCredentials: true,
+    });
+   
+    setStripeapiKey(String(data.stripeApiKey));
   };
   const dispatch = useDispatch();
   useEffect(() => {
@@ -46,6 +52,7 @@ export default function App() {
     loadUser(dispatch);
     getStripeApiKey();
   }, [logoutNotify, dispatch]);
+
   return (
     <BrowserRouter>
       <Header />
@@ -84,10 +91,17 @@ export default function App() {
           path="/order/confirm"
           element={<ProtectedRoute Component={ConfirmOrder} />}
         />
-        <Route
-          path="/process/payment"
-          element={<ProtectedRoute Component={Payment} />}
-        />
+
+        {stripeApiKey && (
+          <Route
+            path="/process/payment"
+            element={
+              <Elements stripe={loadStripe(stripeApiKey)}>
+                <ProtectedRoute Component={Payment} />
+              </Elements>
+            }
+          />
+        )}
       </Routes>
 
       <Footer />

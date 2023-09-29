@@ -3,9 +3,9 @@ const initialState = {
   user: {},
   error: null,
   isAuthenticatedUser: false,
-  logoutNotify:false,
-  loginRegisterNotify:false,
-  loading:true
+  logoutNotify: false,
+  loginRegisterNotify: false,
+  loading: true,
 };
 
 const userReducer = createSlice({
@@ -17,19 +17,19 @@ const userReducer = createSlice({
       state.user = payload;
 
       state.isAuthenticatedUser = true;
-      state.loginRegisterNotify='Loged in'
+      state.loginRegisterNotify = "Loged in";
     },
     loginFail: (state, { payload }) => {
       state.error = payload;
       state.isAuthenticatedUser = false;
       state.user = null;
     },
-   
+
     registerSuccess: (state, { payload }) => {
       state.user = payload;
 
       state.isAuthenticatedUser = true;
-      state.loginRegisterNotify='registered'
+      state.loginRegisterNotify = "registered";
     },
     registerFail: (state, { payload }) => {
       state.error = payload;
@@ -46,26 +46,24 @@ const userReducer = createSlice({
       state.isAuthenticatedUser = false;
       state.user = null;
     },
-    logoutSuccess:(state)=>{
-      state.isAuthenticatedUser=false,
-      state.user=null
-      state.logoutNotify=true
+    logoutSuccess: (state) => {
+      (state.isAuthenticatedUser = false), (state.user = null);
+      state.logoutNotify = true;
     },
-    logoutFail:(state,{payload})=>{
-     state.error=payload
+    logoutFail: (state, { payload }) => {
+      state.error = payload;
     },
     clearError: (state) => {
       state.error = null;
-      state.logoutNotify=false
+      state.logoutNotify = false;
     },
-    clearNotifyMessage:(state)=>{
-      state.loginRegisterNotify=false
+    clearNotifyMessage: (state) => {
+      state.loginRegisterNotify = false;
     },
-    
-    setLoading:(state,{payload})=>{
-      state.loading=payload
-    }
 
+    setLoading: (state, { payload }) => {
+      state.loading = payload;
+    },
   },
 });
 
@@ -82,5 +80,5 @@ export const {
   logoutFail,
   logoutSuccess,
   clearNotifyMessage,
-  setLoading
+  setLoading,
 } = userReducer.actions;
