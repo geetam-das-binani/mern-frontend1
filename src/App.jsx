@@ -32,13 +32,15 @@ export default function App() {
     (state) => state.user
   );
 
-  const [stripeApiKey, setStripeapiKey] = useState("");
+  const [stripeApikey, setStripeApikey] = useState("");
   const getStripeApiKey = async () => {
     const { data } = await axios.get("http://localhost:8000/stripeApiKey", {
       withCredentials: true,
     });
+  
    
-    setStripeapiKey(String(data.stripeApiKey));
+    setStripeApikey(data.stripeApikey);
+  
   };
   const dispatch = useDispatch();
   useEffect(() => {
@@ -92,16 +94,16 @@ export default function App() {
           element={<ProtectedRoute Component={ConfirmOrder} />}
         />
 
-        {stripeApiKey && (
+        {/* {stripeApiKey && ( */}
           <Route
             path="/process/payment"
             element={
-              <Elements stripe={loadStripe(stripeApiKey)}>
-                <ProtectedRoute Component={Payment} />
+              <Elements stripe={loadStripe(stripeApikey)}>
+                <ProtectedRoute Component={Payment} apikey={stripeApikey} />
               </Elements>
             }
           />
-        )}
+        {/* )} */}
       </Routes>
 
       <Footer />

@@ -20,7 +20,7 @@ import EventIcon from "@mui/icons-material/Event";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Payment() {
+export default function Payment({ apikey }) {
   const navigate = useNavigate();
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
@@ -42,7 +42,8 @@ export default function Payment() {
     try {
       const config = {
         headers: {
-          "Content-type": "application/json",
+          Authorization: `Bearer ${apikey}`,
+          "Content-Type": "application/json",
         },
         withCredentials: true,
       };
@@ -53,7 +54,7 @@ export default function Payment() {
 
         config
       );
-      console.log(data);
+
       const client_secret = data.client_secret;
       if (!stripe || !elements) return;
       const result = await stripe.confirmCardPayment(client_secret, {
@@ -87,6 +88,7 @@ export default function Payment() {
     } catch (error) {
       payBtn.current.disabled = false;
       toast.error(error.response.data.message, { theme: "dark" });
+      
     }
   };
   return (
