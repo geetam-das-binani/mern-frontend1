@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import { CgMouse } from "react-icons/cg";
 import "./Home.css";
 import ProductCard from "./ProductCard";
 import Metadata from "../layout/Metadata";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts} from "../../actions/productActions";
+import { getAllProducts } from "../../actions/productActions";
 
 import Loader from "../layout/loader/Loader";
 
@@ -12,18 +12,40 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
-  
+  const heading = useRef(null);
+  const showEffect=()=>{
+    if (heading.current) {
+      const typeWriter = () => {
+        let count = 0;
+        heading.current.innerHTML = "";
+        const str = "FIND AMAZING PRODUCTS BELOW";
+        let breakApart = str.split("");
+        return function timer() {
+          heading.current.innerHTML += breakApart[count];
+          count++;
+          if (count <= breakApart.length) {
+            setTimeout(timer, 100);
+          } else {
+            count = 0;
+            typeWriter()();
+          }
+        };
+      };
+      typeWriter()()
+    }
+
+  }
+
   const dispatch = useDispatch();
-  const { loading, products, error } = useSelector(
-    (state) => state.products
-  );
+  const { loading, products, error } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (error) {
-       toast.error(error, { theme: "dark" });
-   
+      toast.error(error, { theme: "dark" });
     }
     getAllProducts(dispatch);
+
+    showEffect()
   }, [dispatch, error]);
 
   return (
@@ -36,7 +58,7 @@ export default function Home() {
 
           <div className="banner">
             <p>Welcome to E-commerce</p>
-            <h1>FIND AMAZING PRODUCTS BELOW</h1>
+            <h1 ref={heading}></h1>
             <a href="#container">
               <button>
                 Scroll <CgMouse />
@@ -53,7 +75,6 @@ export default function Home() {
         </Fragment>
       )}
       <ToastContainer />
-     
     </Fragment>
   );
 }
