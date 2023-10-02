@@ -13,18 +13,20 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const heading = useRef(null);
+  let clearLoop;
   const showEffect=()=>{
     if (heading.current) {
       const typeWriter = () => {
         let count = 0;
         heading.current.innerHTML = "";
+        clearTimeout(clearLoop)
         const str = "FIND AMAZING PRODUCTS BELOW";
         let breakApart = str.split("");
         return function timer() {
           heading.current.innerHTML += breakApart[count];
           count++;
           if (count <= breakApart.length) {
-            setTimeout(timer, 100);
+           clearLoop= setTimeout(timer, 100);
           } else {
             count = 0;
             typeWriter()();

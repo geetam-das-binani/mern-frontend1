@@ -51,9 +51,15 @@
   padding: 0.8vmax;
   transition: all 0.5s;
   outline: none;
+
+  display: grid;
+  place-items: center;
 }
-.payment__form__btn:hover {
-  background: rgb(179, 66, 46);
+
+.payment__form__btn:disabled {
+  background: #e7e8e9;
+  color: #9fa3a9;
+  cursor: not-allowed;
 }
 
 @media screen and (max-width: 600px) {

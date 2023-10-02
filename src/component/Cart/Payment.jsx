@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import "./Payment.css";
 import { useSelector, useDispatch } from "react-redux";
 import Metadata from "../layout/Metadata";
@@ -19,8 +19,10 @@ import EventIcon from "@mui/icons-material/Event";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ButtonLoader from "../layout/loader/ButtonLoader";
 
 export default function Payment({ apikey }) {
+  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
@@ -34,11 +36,10 @@ export default function Payment({ apikey }) {
   const stripe = useStripe();
   const elements = useElements();
 
-  const payBtn = useRef(null);
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    payBtn.current.disabled = true;
+    setDisabled(true);
     try {
       const config = {
         headers: {
@@ -74,7 +75,7 @@ export default function Payment({ apikey }) {
         },
       });
       if (result.error) {
-        payBtn.current.disabled = false;
+       setDisabled(false)
         toast.error(result.error.message, { theme: "dark" });
       } else {
         if (result.paymentIntent.status === "succeeded") {
@@ -86,9 +87,8 @@ export default function Payment({ apikey }) {
         }
       }
     } catch (error) {
-      payBtn.current.disabled = false;
+      setDisabled(false);
       toast.error(error.response.data.message, { theme: "dark" });
-      
     }
   };
   return (
@@ -113,12 +113,16 @@ export default function Payment({ apikey }) {
 
             <CardCvcElement className="payment__input" />
           </div>
-          <input
+
+          <button
             type="submit"
-            value={`Pay -  ₹${orderInfo && orderInfo.totalPrice}`}
-            ref={payBtn}
+            disabled={disabled}
             className="payment__form__btn"
-          />
+          >
+            {disabled
+              ? <ButtonLoader />
+              : `Pay -  ₹${orderInfo && orderInfo.totalPrice}`}
+          </button>
         </form>
       </div>
       <ToastContainer />

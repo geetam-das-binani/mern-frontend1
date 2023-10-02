@@ -27,6 +27,7 @@ import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Payment from "./component/Cart/Payment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ButtonLoader from "./component/layout/loader/ButtonLoader";
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
     (state) => state.user
@@ -37,10 +38,8 @@ export default function App() {
     const { data } = await axios.get("http://localhost:8000/stripeApiKey", {
       withCredentials: true,
     });
-  
-   
+
     setStripeApikey(data.stripeApikey);
-  
   };
   const dispatch = useDispatch();
   useEffect(() => {
@@ -94,7 +93,7 @@ export default function App() {
           element={<ProtectedRoute Component={ConfirmOrder} />}
         />
 
-        {/* {stripeApiKey && ( */}
+        {stripeApikey && (
           <Route
             path="/process/payment"
             element={
@@ -103,7 +102,8 @@ export default function App() {
               </Elements>
             }
           />
-        {/* )} */}
+        )}
+        
       </Routes>
 
       <Footer />
