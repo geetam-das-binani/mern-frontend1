@@ -25,9 +25,10 @@ import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Payment from "./component/Cart/Payment";
+import OrderSuccess from './component/Cart/OrderSuccess'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import ButtonLoader from "./component/layout/loader/ButtonLoader";
+
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
     (state) => state.user
@@ -103,6 +104,10 @@ export default function App() {
             }
           />
         )}
+           <Route
+          path="/success"
+          element={<ProtectedRoute Component={OrderSuccess} />}
+        />
         
       </Routes>
 

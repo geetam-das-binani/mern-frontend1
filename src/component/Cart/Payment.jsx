@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./Payment.css";
 import { useSelector, useDispatch } from "react-redux";
 import Metadata from "../layout/Metadata";
@@ -16,17 +16,20 @@ import axios from "axios";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import EventIcon from "@mui/icons-material/Event";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ButtonLoader from "../layout/loader/ButtonLoader";
+import { clearOrderError } from "../../Slices/orderSlice";
+import { createOrder } from "../../actions/orderActions";
 
 export default function Payment({ apikey }) {
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+
   const { user } = useSelector((state) => state.user);
+  const { error } = useSelector((state) => state.newOrder);
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
@@ -35,6 +38,16 @@ export default function Payment({ apikey }) {
   const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
+
+  const order = {
+    shippingInfo,
+    orderItems: cartItems,
+    paymentInfo: "",
+    itemsPrice: orderInfo.subtotal,
+    taxPrice: orderInfo.tax,
+    shippingPrice: orderInfo.shippingCharges,
+    totalPrice: orderInfo.totalPrice,
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -75,10 +88,15 @@ export default function Payment({ apikey }) {
         },
       });
       if (result.error) {
-       setDisabled(false)
+        setDisabled(false);
         toast.error(result.error.message, { theme: "dark" });
       } else {
         if (result.paymentIntent.status === "succeeded") {
+          order.paymentInfo={
+            id:result.paymentIntent.id,
+            status:result.paymentIntent.status
+          }
+          createOrder(dispatch,order)
           navigate("/success");
         } else {
           toast.error(`There's is some issue while processing payment`, {
@@ -91,6 +109,12 @@ export default function Payment({ apikey }) {
       toast.error(error.response.data.message, { theme: "dark" });
     }
   };
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { theme: "dark" });
+      dispatch(clearOrderError());
+    }
+  }, [dispatch, error]);
   return (
     <Fragment>
       <Metadata title="Payment" />
@@ -119,9 +143,11 @@ export default function Payment({ apikey }) {
             disabled={disabled}
             className="payment__form__btn"
           >
-            {disabled
-              ? <ButtonLoader />
-              : `Pay -  ₹${orderInfo && orderInfo.totalPrice}`}
+            {disabled ? (
+              <ButtonLoader />
+            ) : (
+              `Pay -  ₹${orderInfo && orderInfo.totalPrice}`
+            )}
           </button>
         </form>
       </div>
