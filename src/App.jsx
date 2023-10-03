@@ -25,7 +25,8 @@ import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Payment from "./component/Cart/Payment";
-import OrderSuccess from './component/Cart/OrderSuccess'
+import OrderSuccess from "./component/Cart/OrderSuccess";
+import MyOrders from "./component/Order/MyOrders.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -85,6 +86,7 @@ export default function App() {
         />
         <Route path="/login" element={<LoginSignup />} />
         <Route path="/cart" element={<Cart />} />
+
         <Route
           path="/shipping"
           element={<ProtectedRoute Component={Shipping} />}
@@ -104,11 +106,14 @@ export default function App() {
             }
           />
         )}
-           <Route
+        <Route
           path="/success"
           element={<ProtectedRoute Component={OrderSuccess} />}
         />
-        
+        <Route
+          path="/orders"
+          element={<ProtectedRoute Component={MyOrders} />}
+        />
       </Routes>
 
       <Footer />

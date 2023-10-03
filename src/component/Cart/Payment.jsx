@@ -96,7 +96,7 @@ export default function Payment({ apikey }) {
             id:result.paymentIntent.id,
             status:result.paymentIntent.status
           }
-          createOrder(dispatch,order)
+         await createOrder(dispatch,order)
           navigate("/success");
         } else {
           toast.error(`There's is some issue while processing payment`, {

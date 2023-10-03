@@ -17,6 +17,7 @@ export const createOrder = async (dispatch, order) => {
       config
     );
     dispatch(createOrderSuccess(data));
+    return data
   } catch (error) {
     if (error.message === "Network Error") {
       return dispatch(createOrderFail(error.message));
@@ -39,7 +40,7 @@ export const myOrders = async (dispatch) => {
 
       config
     );
-    dispatch(myOrderSuccess(data));
+    dispatch(myOrderSuccess(data.orders));
   } catch (error) {
     if (error.message === "Network Error") {
       return dispatch(myOrderFail(error.message));
