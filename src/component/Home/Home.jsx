@@ -12,32 +12,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
-  const heading = useRef(null);
-  let clearLoop;
-  const showEffect=()=>{
-    if (heading.current) {
-      const typeWriter = () => {
-        let count = 0;
-        heading.current.innerHTML = "";
-        clearTimeout(clearLoop)
-        const str = "FIND AMAZING PRODUCTS BELOW";
-        let breakApart = str.split("");
-        return function timer() {
-          heading.current.innerHTML += breakApart[count];
-          count++;
-          if (count <= breakApart.length) {
-           clearLoop= setTimeout(timer, 100);
-          } else {
-            count = 0;
-            typeWriter()();
-          }
-        };
-      };
-      typeWriter()()
-    }
-
-  }
-
   const dispatch = useDispatch();
   const { loading, products, error } = useSelector((state) => state.products);
 
@@ -46,8 +20,6 @@ export default function Home() {
       toast.error(error, { theme: "dark" });
     }
     getAllProducts(dispatch);
-
-    showEffect()
   }, [dispatch, error]);
 
   return (
@@ -60,7 +32,7 @@ export default function Home() {
 
           <div className="banner">
             <p>Welcome to E-commerce</p>
-            <h1 ref={heading}></h1>
+            <h1>FIND AMAZING PRODUCTS BELOW</h1>
             <a href="#container">
               <button>
                 Scroll <CgMouse />

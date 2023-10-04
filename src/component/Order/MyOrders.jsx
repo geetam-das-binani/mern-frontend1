@@ -3,7 +3,7 @@ import "./myOrders.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { myOrders } from "../../actions/orderActions";
-import { myOrderSuccess, clearMyOrderFail } from "../../Slices/myOrdersSlice";
+import {  clearMyOrderFail } from "../../Slices/myOrdersSlice";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Metadata from "../layout/Metadata";
@@ -19,7 +19,18 @@ export default function MyOrders() {
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
-    { field: "status", headerName: "Status", minWidth: 150, flex: 0.3 },
+    {
+      field: "status",
+      headerName: "Status",
+      minWidth: 150,
+      flex: 0.3,
+
+      cellClassName: (params) => {
+        return (params.id, "status") === "Delivered"
+          ? "green_Color"
+          : "red_Color";
+      },
+    },
     {
       field: "itemsQty",
       headerName: "Items Qty",
@@ -35,20 +46,20 @@ export default function MyOrders() {
       flex: 0.5,
     },
     {
-      field:"actions",
-      headerName:"Actions",
-      flex:0.3,
-      minWidth:150,
-      type:"number",
-      sortable:false,
-      renderCell:(params)=>{
+      field: "actions",
+      headerName: "Actions",
+      flex: 0.3,
+      minWidth: 150,
+      type: "number",
+      sortable: false,
+      renderCell: (params) => {
         return (
           <Link to={`/order/${params.id}`}>
-            <LaunchIcon/>
+            <LaunchIcon />
           </Link>
-        )
-      }
-    }
+        );
+      },
+    },
   ];
   const rows = [];
   orders &&
@@ -58,8 +69,6 @@ export default function MyOrders() {
         id: item._id,
         status: item.paymentInfo.orderStatus,
         amount: item.paymentInfo.totalPrice,
-
-
       });
     });
 
@@ -70,25 +79,25 @@ export default function MyOrders() {
     }
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
     myOrders(dispatch);
   }, [dispatch, error]);
   return (
     <Fragment>
-      <Metadata title={`${user.name}- Orders`} />
+      <Metadata title={`${user.name}'s -  Orders`} />
       {loading ? (
         <Loader />
       ) : (
-        <div className="myOrdersPage">
+        <div className="my__orders__page">
           <DataGrid
             rows={rows}
             columns={columns}
-           pageSize={10}
+            pageSize={10}
             disableSelectionOnClick
-            className="myOrdersTable"
+            className="my__orders__table"
             autoHeight
           />
-          <Typography id="myOrderHeading">{`${user.name}'s Orders`}</Typography>
+          <Typography id="my__order__heading">{`${user.name}'s Orders`}</Typography>
         </div>
       )}
       <ToastContainer />

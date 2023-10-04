@@ -8,6 +8,8 @@ import forgotPasswordReducer from './Slices/forgotPasswordSlice'
 import cartReducer from './Slices/cartSlice'
 import newOrderReducer from './Slices/orderSlice'
 import myOrdersReducer from './Slices/myOrdersSlice'
+import orderDetailsReducer from './Slices/orderDetailsSlice'
+
 
 
 const store = configureStore({
@@ -19,7 +21,8 @@ const store = configureStore({
     forgotPassword:forgotPasswordReducer,
     cart:cartReducer,
     newOrder:newOrderReducer,
-    myOrders:myOrdersReducer
+    myOrders:myOrdersReducer,
+    myOrderDetails:orderDetailsReducer
     
   },
  

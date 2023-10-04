@@ -8,7 +8,7 @@ export default function OrderSuccess() {
    <div className="order__success">
     <CheckCircleIcon/>
    <Typography>Your Order has been placed Successfully</Typography>
-    <Link to='/order/me'>View Orders</Link>
+    <Link to='/orders'>View Orders</Link>
     
 
    </div>

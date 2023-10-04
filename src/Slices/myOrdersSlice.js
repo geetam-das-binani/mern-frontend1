@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   orders: [],
   error: null,
+ 
 };
 const myOrdersReducer = createSlice({
   name: "myOrder",
@@ -9,12 +10,15 @@ const myOrdersReducer = createSlice({
   reducers: {
     myOrderSuccess: (state, { payload }) => {
       state.orders = payload;
+      
     },
     myOrderFail: (state,{payload}) => {
       state.error = payload;
+     
     },
     clearMyOrderFail:(state) => {
         state.error = null
+
       },
   },
 });
