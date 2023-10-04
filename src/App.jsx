@@ -92,10 +92,7 @@ export default function App() {
           path="/shipping"
           element={<ProtectedRoute Component={Shipping} />}
         />
-        <Route
-          path="/order/confirm"
-          element={<ProtectedRoute Component={ConfirmOrder} />}
-        />
+     
 
         {stripeApikey && (
           <Route
@@ -115,10 +112,16 @@ export default function App() {
           path="/orders"
           element={<ProtectedRoute Component={MyOrders} />}
         />
+         
             <Route
           path="/order/:id"
           element={<ProtectedRoute Component={OrderDetails} />}
         />
+          <Route
+          path="/order/confirm"
+          element={<ProtectedRoute Component={ConfirmOrder} />}
+        />
+
       </Routes>
 
 

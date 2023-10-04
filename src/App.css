@@ -11,8 +11,8 @@ input::-webkit-inner-spin-button{
 }
 
 .green_Color{
-  color: green;
+  color: green !important;
 }
 .red_Color{
-  color: red;
+  color: red !important;
 }

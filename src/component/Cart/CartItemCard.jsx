@@ -7,7 +7,7 @@ export default function CartItemCard({ product, price, name, image,deleteCartIte
 
   return (
     <div className="cart__item__card">
-      <img src={image.url} alt="product_image" />
+      <img src={image} alt="product_image" />
       <div>
         <Link to={`/product/${product}`}>{name}</Link>
         <span>{`Price ₹${price}`}</span>

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import profilePng from '../../images/Profile.png'
-export default function ReviewCard({ name, rating, comment, user }) {
+export default function ReviewCard({ name, rating, comment}) {
   const options = {
     edit: false,
     color: "rgba(20,20,20,.1)",

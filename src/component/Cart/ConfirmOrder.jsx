@@ -55,9 +55,9 @@ export default function ConfirmOrder() {
             <div className="confirm__cart__items__container">
               {cartItems &&
                 cartItems.map(
-                  ({ image: { url }, name, price, product, quantity }) => (
+                  ({ image, name, price, product, quantity }) => (
                     <div key={product}>
-                      <img src={url} alt="productImage" />
+                      <img src={image} alt="productImage" />
                       <Link to={`/product/${product}`}>{name}</Link>
                       <span>
                         {price} X {quantity}= <b>{price * quantity}</b>

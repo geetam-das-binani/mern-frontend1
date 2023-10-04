@@ -75,11 +75,47 @@ export default function OrderDetails() {
                   </p>
                 </div>
                 <div>
-               <p>Amount</p>
-               <span>{order.paymentInfo && order.paymentInfo.totalPrice }</span>
+                  <p>Amount</p>
+                  <span>
+                    {order.paymentInfo && order.paymentInfo.totalPrice}
+                  </span>
                 </div>
-              </div>
+                </div>
+                <Typography>Order Status</Typography>
+                <div className="order__details__container__box">
+                  <div>
+                    <p
+                      className={
+                        order.paymentInfo &&
+                        order.paymentInfo.orderStatus === "Delievered"
+                          ? "green_Color"
+                          : "red_Color"
+                      }
+                    >
+                      {order.paymentInfo && order.paymentInfo.orderStatus}
+                    </p>
+                  </div>
+                </div>  
+                </div>
+
+            <div className="order__details__cart__items">
+                <Typography>Order Items:</Typography>
+                <div className="order__details__cart__items__container">
+                    {
+                 order.orderItems && 
+                 order.orderItems.map(({image, name, price, product, quantity})=>(
+                  <div key={product}>
+                      <img src={image} alt="productImage" />
+                      <Link to={`/product/${product}`}>{name}</Link>
+                      <span>
+                        {price} X {quantity}= <b>{price * quantity}</b>
+                      </span>
+                    </div>
+                 ))
+                    }
+                </div>
             </div>
+
           </div>
         </Fragment>
       )}

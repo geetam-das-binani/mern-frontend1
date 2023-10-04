@@ -10,8 +10,19 @@ import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard";
 import Loader from "../layout/loader/Loader";
 import Metadata from "../layout/Metadata";
-
 import { addItemsToCart } from "../../actions/cartActions";
+import { newReview } from "../../actions/productActions";
+import {
+  newReviewSuccess,
+  clearNewReviewError,
+} from "../../Slices/newReviewReducer";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
+import Button from "@mui/material/Button";
 export default function ProductDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -101,14 +112,19 @@ export default function ProductDetails() {
                       +
                     </button>
                   </div>
-                  <button onClick={addToCartHandler}>Add to Cart</button>
+                  <button
+                    disabled={product.Stock <= 1 ? true : false}
+                    onClick={addToCartHandler}
+                  >
+                    Add to Cart
+                  </button>
                 </div>
                 <p>
                   Status:
                   <b
-                    className={product.stock < 1 ? "red_Color" : "green_Color"}
+                    className={product.Stock <= 1 ? "red_Color" : "green_Color"}
                   >
-                    {product.stock < 1 ? "OutOfStock" : "InStock"}
+                    {product.Stock <= 1 ? "OutOfStock" : "InStock"}
                   </b>
                 </p>
               </div>
@@ -121,6 +137,13 @@ export default function ProductDetails() {
           </div>
           <h3 className="reviews__heading">REVIEWS</h3>
 
+          <Dialog
+            aria-labelledby="simple-dialog-title"
+            // open={open}
+            // onClose={submitReviewToggle}
+          >
+            <DialogTitle>Submit Review</DialogTitle>
+          </Dialog>
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">
               {product.reviews &&
