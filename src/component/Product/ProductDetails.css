@@ -129,6 +129,19 @@
     transform: scale(1.1);
     background: rgb(197, 68, 45);
   }
+
+  .submit__dialog{
+    display: flex;
+    flex-direction: column;
+  }
+  .submit__dialog__textarea{
+    border: 1px solid rgba(0, 0, 0, .082);
+    margin: 1vmax 0;
+    padding: 1rem;
+    font: 300 1rem 'Roboto';
+    outline: none;
+
+  }
   .reviews__heading{
     color: #000000be;
     border-bottom: 1px solid rgba(0, 0, 0, .226);

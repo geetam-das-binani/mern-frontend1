@@ -13,7 +13,7 @@ import Metadata from "../layout/Metadata";
 import { addItemsToCart } from "../../actions/cartActions";
 import { newReview } from "../../actions/productActions";
 import {
-  newReviewSuccess,
+  reviewReset,
   clearNewReviewError,
 } from "../../Slices/newReviewReducer";
 import {
@@ -21,13 +21,17 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Rating
+ 
 } from "@mui/material";
+
 import Button from "@mui/material/Button";
 export default function ProductDetails() {
-  const { id } = useParams();
+  const { Id } = useParams();
   const dispatch = useDispatch();
 
   const { product, loading, error } = useSelector((state) => state.product);
+  const { success,error:reviewError} = useSelector((state) => state.newReview);
 
   const options = {
     edit: false,
@@ -38,18 +42,40 @@ export default function ProductDetails() {
     size: window.innerWidth < 600 ? 20 : 25,
   };
   const [quantity, setQuantity] = useState(1);
+  const [open,setOpen]=useState(false)
+  const [rating,setRating]=useState(0)
+  const [comment,setComment]=useState('')
+
 
   const addToCartHandler = () => {
-    addItemsToCart(dispatch, id, quantity);
+    addItemsToCart(dispatch, Id, quantity);
     toast.success("Item added to Cart", { theme: "dark", autoClose: 1500 });
   };
-
+const submitReviewToggle=()=>{
+  open ? setOpen(false):setOpen(true)
+}
+const  reviewSubmitHandler=()=>{
+  const form=new FormData()
+  form.set('rating',rating)
+  form.set('comment',comment)
+  form.set('productId',Id)
+  newReview(dispatch,form)
+  setOpen(false)
+}
   useEffect(() => {
     if (error) {
       toast.error(error, { theme: "dark" });
     }
-    getProductDetails(dispatch, id);
-  }, [dispatch, error, id]);
+    if(reviewError){
+      toast.error(reviewError,{theme:'dark'})
+      dispatch(clearNewReviewError())
+    }
+    if(success){
+      toast.success('Review Submit Successfully',{theme:'dark'})
+      dispatch(reviewReset())
+    }
+    getProductDetails(dispatch, Id);
+  }, [dispatch, error, Id,reviewError,success]);
 
   return (
     <Fragment>
@@ -132,17 +158,35 @@ export default function ProductDetails() {
                 Description : <p>{product.description}</p>
               </div>
 
-              <button className="submit__button">Submit Review</button>
+              <button onClick={submitReviewToggle} className="submit__button">Submit Review</button>
             </div>
           </div>
           <h3 className="reviews__heading">REVIEWS</h3>
 
           <Dialog
             aria-labelledby="simple-dialog-title"
-            // open={open}
-            // onClose={submitReviewToggle}
+            open={open}
+            onClose={submitReviewToggle}
           >
             <DialogTitle>Submit Review</DialogTitle>
+            <DialogContent className="submit__dialog">
+              <Rating
+                onChange={(e) => setRating(e.target.value)}
+                value={rating}
+                size="'large"
+              />
+              <textarea
+                className="submit__dialog__textarea"
+                cols="30"
+                rows="5"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              ></textarea>
+              <DialogActions>
+                <Button  color="error" onClick={submitReviewToggle}>Cancel</Button>
+                <Button onClick={reviewSubmitHandler} color="success">Submit</Button>
+              </DialogActions>
+            </DialogContent>
           </Dialog>
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">

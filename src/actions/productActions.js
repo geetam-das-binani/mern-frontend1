@@ -48,19 +48,17 @@ export const getProductDetails = async (dispatch, id) => {
 // submit  new review
 export const newReview = async (dispatch, reviewData) => {
   const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "multipart/form-data" },
     withCredentials: true,
   };
   try {
     const { data } = await axios.post(
       `http://localhost:8000/review`,
+      reviewData,
       config,
-      reviewData
     );
     dispatch(newReviewSuccess(data.success));
-    return data.product;
+    
   } catch (error) {
     if (error.message === "Network Error") {
       return dispatch(newReviewFail(error.message));
