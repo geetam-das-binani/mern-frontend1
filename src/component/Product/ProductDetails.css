@@ -41,9 +41,9 @@
     width: 70%;
     padding: 1vmax 0;
   }
-  .details__block__2> span {
-    color: rgba(14, 14, 14, 0.582);
-    font: 200 0.6vmax cursive;
+  .details__block__2__span {
+  color: rgba(0, 0, 0, .699);
+    font: 200 .8vmax cursive;
   }
   .details__block__3 {
     width: 70%;
@@ -179,10 +179,11 @@
     font: 600 .9vmax 'Roboto';
   
   }
-  .review__card > span{
+  .review__card__comment{
     color: rgba(0, 0, 0, .445);
     font: 300 .8vmax cursive;
   }
+
   .no__reviews{
     font: 400 1.3vmax 'Gill Sans';
     text-align: center;
@@ -252,6 +253,12 @@
       width: 20vmax;
       margin: 3vmax 0;
       font:500 1.7vmax 'Roboto' ;
+    }
+    .review__card >p{
+      font: 600 3vw 'Roboto';
+    }
+    .review__card__comment{
+      font: 300 5vw 'Roboto';
     }
   }
   

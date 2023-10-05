@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../../actions/productActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard";
 import Loader from "../layout/loader/Loader";
 import Metadata from "../layout/Metadata";
@@ -21,8 +20,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Rating
- 
+  Rating,
 } from "@mui/material";
 
 import Button from "@mui/material/Button";
@@ -31,51 +29,50 @@ export default function ProductDetails() {
   const dispatch = useDispatch();
 
   const { product, loading, error } = useSelector((state) => state.product);
-  const { success,error:reviewError} = useSelector((state) => state.newReview);
+  const { success, error: reviewError } = useSelector(
+    (state) => state.newReview
+  );
 
   const options = {
-    edit: false,
-    color: "rgba(20,20,20,.1)",
-    activeColor: "tomato",
-    value: product.ratings,
-    isHalf: true,
-    size: window.innerWidth < 600 ? 20 : 25,
+     value: product.ratings,
+    readOnly: true,
+    size: "medium",
+    precision:.5
   };
   const [quantity, setQuantity] = useState(1);
-  const [open,setOpen]=useState(false)
-  const [rating,setRating]=useState(0)
-  const [comment,setComment]=useState('')
-
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
 
   const addToCartHandler = () => {
     addItemsToCart(dispatch, Id, quantity);
     toast.success("Item added to Cart", { theme: "dark", autoClose: 1500 });
   };
-const submitReviewToggle=()=>{
-  open ? setOpen(false):setOpen(true)
-}
-const  reviewSubmitHandler=()=>{
-  const form=new FormData()
-  form.set('rating',rating)
-  form.set('comment',comment)
-  form.set('productId',Id)
-  newReview(dispatch,form)
-  setOpen(false)
-}
+  const submitReviewToggle = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+  const reviewSubmitHandler = () => {
+    const form = new FormData();
+    form.set("rating", rating);
+    form.set("comment", comment);
+    form.set("productId", Id);
+    newReview(dispatch, form);
+    setOpen(false);
+  };
   useEffect(() => {
     if (error) {
       toast.error(error, { theme: "dark" });
     }
-    if(reviewError){
-      toast.error(reviewError,{theme:'dark'})
-      dispatch(clearNewReviewError())
+    if (reviewError) {
+      toast.error(reviewError, { theme: "dark" });
+      dispatch(clearNewReviewError());
     }
-    if(success){
-      toast.success('Review Submit Successfully',{theme:'dark'})
-      dispatch(reviewReset())
+    if (success) {
+      toast.success("Review Submit Successfully", { theme: "dark" });
+      dispatch(reviewReset());
     }
     getProductDetails(dispatch, Id);
-  }, [dispatch, error, Id,reviewError,success]);
+  }, [dispatch, error, Id, reviewError, success]);
 
   return (
     <Fragment>
@@ -106,8 +103,8 @@ const  reviewSubmitHandler=()=>{
                 <p>Product # {product._id}</p>
               </div>
               <div className="details__block__2">
-                <ReactStars {...options} />
-                <span>{product.numOfReviews}Reviews </span>
+                <Rating {...options} />
+                <span className="details__block__2__span ">{product.numOfReviews}Reviews </span>
               </div>
               <div className="details__block__3">
                 <h1>₹{product.price}</h1>
@@ -158,7 +155,9 @@ const  reviewSubmitHandler=()=>{
                 Description : <p>{product.description}</p>
               </div>
 
-              <button onClick={submitReviewToggle} className="submit__button">Submit Review</button>
+              <button onClick={submitReviewToggle} className="submit__button">
+                Submit Review
+              </button>
             </div>
           </div>
           <h3 className="reviews__heading">REVIEWS</h3>
@@ -183,8 +182,12 @@ const  reviewSubmitHandler=()=>{
                 onChange={(e) => setComment(e.target.value)}
               ></textarea>
               <DialogActions>
-                <Button  color="error" onClick={submitReviewToggle}>Cancel</Button>
-                <Button onClick={reviewSubmitHandler} color="success">Submit</Button>
+                <Button color="error" onClick={submitReviewToggle}>
+                  Cancel
+                </Button>
+                <Button onClick={reviewSubmitHandler} color="success">
+                  Submit
+                </Button>
               </DialogActions>
             </DialogContent>
           </Dialog>

@@ -17,7 +17,7 @@ export default function UserOptions({ avatar:{url}, role}) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const dashboard = () => {
-    navigate("/dashboard");
+    navigate("/admin/dashboard");
   };
   const orders = () => {
     navigate("/orders");

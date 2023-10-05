@@ -1,21 +1,20 @@
 import React from "react";
-import ReactStars from "react-rating-stars-component";
 import profilePng from '../../images/Profile.png'
+import { Rating } from "@mui/material";
 export default function ReviewCard({ name, rating, comment}) {
   const options = {
-    edit: false,
-    color: "rgba(20,20,20,.1)",
-    activeColor: "tomato",
+    
     value: rating,
-    isHalf: true,
-    size: window.innerWidth < 600 ? 20 : 25,
+    readOnly: true,
+    size: "small",
+    precision:.5
   };
   return (
     <div className="review__card">
       <img src={profilePng} alt="User" />
       <p>{name}</p>
-      <ReactStars {...options} />
-      <span>{comment}</span>
+      <Rating {...options} />
+      <span className="review__card__comment">{comment}</span>
     </div>
   );
 }

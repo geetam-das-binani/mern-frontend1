@@ -30,6 +30,7 @@ import MyOrders from "./component/Order/MyOrders";
 import OrderDetails from "./component/Order/OrderDetails.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import DashBoard from './component/Admin/DashBoard.jsx'
 
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
@@ -122,6 +123,10 @@ export default function App() {
           element={<ProtectedRoute Component={ConfirmOrder} />}
         />
 
+        <Route
+          path="/admin/dashboard"
+          element={<ProtectedRoute Component={DashBoard} />}
+        />
       </Routes>
 
 
