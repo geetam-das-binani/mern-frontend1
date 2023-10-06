@@ -2,7 +2,7 @@ import axios from "axios";
 import { allProductsFail, allProductsSuccess } from "../Slices/productsSlice";
 import { productFail, productSuccess } from "../Slices/productSlice";
 import { newReviewFail, newReviewSuccess } from "../Slices/newReviewReducer";
-
+import { admniProductsSuccess } from "../Slices/productsSlice";
 // get all products
 export const getAllProducts = async (
   dispatch,
@@ -55,15 +55,34 @@ export const newReview = async (dispatch, reviewData) => {
     const { data } = await axios.post(
       `http://localhost:8000/review`,
       reviewData,
-      config,
+      config
     );
     dispatch(newReviewSuccess(data.success));
-    
   } catch (error) {
     if (error.message === "Network Error") {
       return dispatch(newReviewFail(error.message));
     }
 
     dispatch(newReviewFail(error.response.data.errorMessage));
+  }
+};
+
+export const getAdminProducts = async (dispatch) => {
+  const config = {
+    withCredentials: true,
+  };
+  try {
+    const { data } = await axios.get(
+      `http://localhost:8000/admin/products`,
+      reviewData,
+      config
+    );
+    dispatch(admniProductsSuccess(data.products));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(allProductsFail(error.message));
+    }
+
+    dispatch(allProductsFail(error.response.data.errorMessage));
   }
 };

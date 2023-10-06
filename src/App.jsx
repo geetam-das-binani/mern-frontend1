@@ -30,7 +30,9 @@ import MyOrders from "./component/Order/MyOrders";
 import OrderDetails from "./component/Order/OrderDetails.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import DashBoard from './component/Admin/DashBoard.jsx'
+import DashBoard from "./component/Admin/DashBoard";
+import ProductList from './component/Admin/ProductList'
+
 
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
@@ -93,7 +95,6 @@ export default function App() {
           path="/shipping"
           element={<ProtectedRoute Component={Shipping} />}
         />
-     
 
         {stripeApikey && (
           <Route
@@ -113,22 +114,27 @@ export default function App() {
           path="/orders"
           element={<ProtectedRoute Component={MyOrders} />}
         />
-         
-            <Route
+
+        <Route
           path="/order/:id"
           element={<ProtectedRoute Component={OrderDetails} />}
         />
-          <Route
+        <Route
           path="/order/confirm"
           element={<ProtectedRoute Component={ConfirmOrder} />}
         />
 
-        <Route
-          path="/admin/dashboard"
-          element={<ProtectedRoute Component={DashBoard} />}
-        />
+        
+          <Route
+            path="/admin/dashboard"
+            element={<ProtectedRoute isAdmin={true} Component={DashBoard} />}
+          />
+           <Route
+            path="/admin/products"
+            element={<ProtectedRoute isAdmin={true} Component={ProductList} />}
+          />
+        
       </Routes>
-
 
       <Footer />
       <ToastContainer />

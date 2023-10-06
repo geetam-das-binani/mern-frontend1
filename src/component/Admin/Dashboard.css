@@ -1,0 +1,93 @@
+.dashboard {
+  width: 100vw;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  position: absolute;
+}
+
+.dashboard__container {
+  background: rgb(255, 255, 255);
+  border-left: 1px solid rgba(0, 0, 0, 0.11);
+  padding: 3rem 0;
+}
+.dashboard__container > h1 {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  padding: 1.5rem;
+  color: rgba(0, 0, 0, 0.733);
+  font: 300 2rem "Roboto";
+}
+.dashboard__summary {
+  margin: 2rem 0;
+}
+.dashboard__summary > div {
+  display: flex;
+  justify-content: center;
+  background: white;
+}
+.dashboard__summary > div > p {
+  background-color: rgba(70, 117, 218, 0.912);
+  color: white;
+  padding: 1.5rem;
+  width: 100%;
+  margin: 0 2rem;
+  text-align: center;
+  font: 300 1.3rem "Roboto";
+}
+.dashboard__summary__box2 > a {
+  color: rgb(0, 0, 0);
+  font: 300 1.4rem "Roboto";
+  text-align: center;
+  background-color: rgb(255, 233, 174);
+  text-decoration: none;
+  padding: 1.5rem;
+  width: 11vmax;
+  height: 11vmax;
+  margin: 2rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.dashboard__summary__box2 > a:first-child {
+  background-color: rgb(255, 110, 110);
+  color: rgb(255, 255, 255);
+}
+.dashboard__summary__box2 > a:last-child {
+  background-color: rgb(51, 51, 51);
+  color: rgb(255, 255, 255);
+}
+.line__chart {
+  width: 80% ;
+  margin: auto;
+}
+
+.donut__chart {
+  width: 30vmax;
+  margin: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard__container {
+    border-left: none;
+  }
+
+  .dashboard__summary > div > p {
+    margin: 0;
+  }
+
+  .dashboard__summary__box2 > a {
+    padding: 0.5rem;
+    margin: 1rem;
+    font: 300 0.9rem "Roboto";
+  }
+}

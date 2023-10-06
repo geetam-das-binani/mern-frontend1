@@ -24,7 +24,11 @@ const productsReducer = createSlice({
       state.loading = false;
       state.error = payload;
     },
-    clearErrors: (state, action) => {
+    admniProductsSuccess: (state, { payload }) => {
+      state.products = payload;
+      state.loading = false;
+    },
+    clearErrors: (state) => {
       state.error = null;
     },
   },
@@ -32,5 +36,5 @@ const productsReducer = createSlice({
 
 export default productsReducer.reducer;
 
-export const { allProductsFail, allProductsSuccess, clearErrors } =
+export const { allProductsFail, allProductsSuccess,admniProductsSuccess, clearErrors } =
   productsReducer.actions;
