@@ -21,6 +21,7 @@ const categories = [
   "camera",
   "Tops",
   "SmartPhones",
+  "Toys"
 ];
 export default function Products() {
   const { keyword } = useParams();

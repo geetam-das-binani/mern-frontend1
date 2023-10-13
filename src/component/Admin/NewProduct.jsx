@@ -14,7 +14,6 @@ import StorageIcon from "@mui/icons-material/Storage";
 import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Sidebar from "../Admin/Sidebar";
-import Description from "@mui/icons-material/Description";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import ButtonLoader from "../layout/loader/ButtonLoader";
@@ -28,9 +27,11 @@ const categories = [
   "camera",
   "Tops",
   "SmartPhones",
+  "Toys"
 ];
 
 export default function NewProduct() {
+  
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -52,6 +53,7 @@ export default function NewProduct() {
       setDisabled(false);
     }
     if (success) {
+      toast.success('Product Created Successfully',{theme:'dark'})
       dispatch(resetProductSuccess());
       navigate("/admin/dashboard");
     }
@@ -69,12 +71,14 @@ export default function NewProduct() {
     images.forEach((image)=>{
         myform.append('images',image)
     })
+    setDisabled(true)
     createProduct(dispatch,myform)
   };
 
   const createProductImageChange=(e)=>{
        const files=Array.from(e.target.files)
-        
+        setImages([])
+        setImagePreview([])
        files.forEach((file)=>{
         const reader=new FileReader()
         reader.onload=()=>{
@@ -98,7 +102,7 @@ export default function NewProduct() {
             encType="multipart/form-data"
             onSubmit={submitHandler}
           >
-            <h1>Create pRODUCT</h1>
+            <h1>Create Product</h1>
             <div>
               <SpellcheckIcon />
               <input
@@ -120,7 +124,7 @@ export default function NewProduct() {
               />
             </div>
             <div>
-              <Description />
+              <DescriptionIcon />
               <textarea
                 type="text"
                 placeholder="Product Descripton"
@@ -149,21 +153,27 @@ export default function NewProduct() {
                 type="number"
                 placeholder="Stock"
                 required
-                onChange={({ target }) => setStock(target.value)}
+               onChange={({ target }) => setStock(target.value)}
               />
             </div>
             <div id="create__product__form__file">
               <input 
               type="file"
               onChange={createProductImageChange} 
-              name="avatar" accept="images/*" />
+              name="avatar" 
+              accept="images/*"
+              multiple
+               />
             </div>
             <div id="create__product__form__image">
               {imagePreviev.map((pic) => (
                 <img src={pic} key={pic} alt="avatar preview" />
               ))}
             </div>
-            <Button id="create__product__btn" type="submit" disabled={disabled}>
+            <Button id="create__product__btn" 
+            type="submit" 
+            disabled={disabled}
+            >
               {disabled ? <ButtonLoader /> : "Create Product"}
             </Button>
           </form>

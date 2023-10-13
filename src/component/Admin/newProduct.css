@@ -1,22 +1,153 @@
+.new__product__container{
+  width: 100%;
+  
+  background-color: rgb(221, 221, 221);
+  border-left: 1px solid rgba(0, 0, 0, 0.158);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.new__product__container h1{
+  color: rgba(0, 0, 0, 0.733);
+  font: 300 2rem "Roboto";
+  text-align: center;
+}
+.create__product__form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 3vmax;
+  justify-content: space-evenly;
+  height: 80%;
+  width: 60vh;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.267);
+}
+.create__product__form > div{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  
+}
+.create__product__form > div > input,
+.create__product__form > div > select,
+.create__product__form > div > textarea{
+  padding: 1vmax 4vmax;
+  padding-right: 1vmax;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  border-radius: 4px;
+  font: 300 0.9vmax cursive;
+  outline: none;
+}
 
+.create__product__form > div > svg{
+  position: absolute;
+  transform: translateX(1vmax);
+  font-size: 1.6vmax;
+  color: rgba(0, 0, 0, 0.623);
+}
 
+#create__product__form__file > input{
+  display: flex;
+  padding: 0%;
+}
+ #create__product__form__file > input::file-selector-button{
+  cursor: pointer;
+  width: 100%;
+  z-index: 2;
+  height: 5vh;
+  border: none;
+  margin: 0%;
+  font: 400 0.8vmax cursive;
+  transition: all 0.5s;
+  padding: 0 1vmax;
+  color: rgba(0, 0, 0, 0.623);
+  background-color: rgb(255, 255, 255);
+ }
 
+#create__product__form__file > input::file-selector-button:hover{
+  background-color: rgb(235, 235, 235);
+}
 
+#create__product__form__image{
+  width: 100%;
+  overflow: auto;
+}
+#create__product__form__image > img{
+  width: 3vmax;
+  margin: 0 .5vmax;
 
-
-
-
-
-
-
-
-
-
-
+}
+#create__product__btn{
+  border: none;
+  background-color: tomato;
+  color: white;
+  font: 300 0.9vmax "Roboto";
+  width: 100%;
+  padding: 0.8vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+}
+#create__product__btn:hover{
+  background: rgb(179,66,46)
+}
 
 #create__product__btn:disabled {
-    background: #e7e8e9;
-    color: #9fa3a9;
-    cursor: not-allowed;
+  background: #e7e8e9;
+  color: #9fa3a9;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 600px) {
+  .new__product__container{
+    background-color: rgb(255, 255, 255);
   }
-  
+
+  .create__product__form{
+    padding: 5vmax;
+    width: 40vh;
+    height: 70%;
+
+  }
+  .create__product__form > div > input,
+.create__product__form > div > select,
+.create__product__form > div > textarea{
+  padding: 2.5vmax 5vmax;
+  font: 300 1.7vmax cursive;
+}
+.create__product__form > div > svg{
+  font-size: 2.8vmax;
+}
+#create__product__form__image > img{
+    width: 8vmax;
+    border-radius: 100%;
+}
+#create__product__form__file> input::file-selector-button{
+  height: 7vh;
+  font: 400 1.8vmax cursive;
+}
+#create__product__btn{
+  font: 300 1.9vmax "Roboto";
+  padding: 1.8vmax;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
