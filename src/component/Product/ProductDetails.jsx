@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
+import Button from "@mui/material/Button";
 import "./ProductDetails.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../../actions/productActions";
@@ -14,7 +15,7 @@ import { newReview } from "../../actions/productActions";
 import {
   reviewReset,
   clearNewReviewError,
-} from "../../Slices/newReviewReducer";
+} from "../../Slices/newReviewSlice";
 import {
   Dialog,
   DialogActions,
@@ -23,7 +24,7 @@ import {
   Rating,
 } from "@mui/material";
 
-import Button from "@mui/material/Button";
+
 export default function ProductDetails() {
   const { Id } = useParams();
   const dispatch = useDispatch();

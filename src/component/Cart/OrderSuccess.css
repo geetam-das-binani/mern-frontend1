@@ -24,7 +24,7 @@
   cursor: pointer;
   font: 400 1vmax "Roboto";
 }
-@media screen and (ma-width: 600px) {
+@media screen and (max-width: 600px) {
   .order__success > a {
     margin: 2vmax;
     font: 400 4vw "Roboto";

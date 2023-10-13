@@ -9,7 +9,8 @@ import cartReducer from './Slices/cartSlice'
 import newOrderReducer from './Slices/orderSlice'
 import myOrdersReducer from './Slices/myOrdersSlice'
 import orderDetailsReducer from './Slices/orderDetailsSlice'
-import newReviewReducer from './Slices/newReviewReducer'
+import newReviewReducer from './Slices/newReviewSlice'
+import createProductAdminReducer from './Slices/createProductAdminSlice'
 
 
 
@@ -24,7 +25,8 @@ const store = configureStore({
     newOrder:newOrderReducer,
     myOrders:myOrdersReducer,
     myOrderDetails:orderDetailsReducer,
-    newReview:newReviewReducer
+    newReview:newReviewReducer,
+    newProductAdmin:createProductAdminReducer
     
   },
  

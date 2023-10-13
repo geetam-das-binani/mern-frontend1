@@ -32,6 +32,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import DashBoard from "./component/Admin/DashBoard";
 import ProductList from './component/Admin/ProductList'
+import NewProduct from "./component/Admin/NewProduct";
 
 
 export default function App() {
@@ -132,6 +133,10 @@ export default function App() {
            <Route
             path="/admin/products"
             element={<ProtectedRoute isAdmin={true} Component={ProductList} />}
+          />
+            <Route
+            path="/admin/product"
+            element={<ProtectedRoute isAdmin={true} Component={NewProduct} />}
           />
         
       </Routes>

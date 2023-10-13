@@ -1,8 +1,10 @@
 import axios from "axios";
 import { allProductsFail, allProductsSuccess } from "../Slices/productsSlice";
 import { productFail, productSuccess } from "../Slices/productSlice";
-import { newReviewFail, newReviewSuccess } from "../Slices/newReviewReducer";
+import { newReviewFail, newReviewSuccess } from "../Slices/newReviewSlice";
 import { admniProductsSuccess } from "../Slices/productsSlice";
+import {newProductSuccess,newProductFail} from '../Slices/createProductAdminSlice'
+
 // get all products
 export const getAllProducts = async (
   dispatch,
@@ -67,6 +69,8 @@ export const newReview = async (dispatch, reviewData) => {
   }
 };
 
+
+// get all admin products 
 export const getAdminProducts = async (dispatch) => {
   const config = {
     withCredentials: true,
@@ -74,8 +78,7 @@ export const getAdminProducts = async (dispatch) => {
   try {
     const { data } = await axios.get(
       `http://localhost:8000/admin/products`,
-      reviewData,
-      config
+     config
     );
     dispatch(admniProductsSuccess(data.products));
   } catch (error) {
@@ -84,5 +87,28 @@ export const getAdminProducts = async (dispatch) => {
     }
 
     dispatch(allProductsFail(error.response.data.errorMessage));
+  }
+};
+
+// create new product admin
+
+export const createProduct = async (dispatch, productData) => {
+  const config = {
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true,
+  };
+  try {
+    const { data } = await axios.post(
+      `http://localhost:8000/admin/product/new`,
+      productData,
+      config
+    );
+    dispatch(newProductSuccess(data));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(newProductFail(error.message));
+    }
+
+    dispatch(newProductFail(error.response.data.errorMessage));
   }
 };

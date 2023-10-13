@@ -3,8 +3,9 @@ import "./myOrders.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { myOrders } from "../../actions/orderActions";
-import {  clearMyOrderFail } from "../../Slices/myOrdersSlice";
+import { clearMyOrderFail } from "../../Slices/myOrdersSlice";
 import { Typography } from "@mui/material";
+import CancelIcon from "@mui/icons-material/Cancel";
 import { Link } from "react-router-dom";
 import Metadata from "../layout/Metadata";
 import LaunchIcon from "@mui/icons-material/Launch";
@@ -87,17 +88,24 @@ export default function MyOrders() {
       <Metadata title={`${user.name}'s -  Orders`} />
       {loading ? (
         <Loader />
+      ) : orders.length > 0 ? (
+        <Fragment>
+          <div className="my__orders__page">
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              autoPageSize
+              disableSelectionOnClick
+              className="my__orders__table"
+            />
+            <Typography id="my__order__heading">{`${user.name}'s Orders`}</Typography>
+          </div>
+        </Fragment>
       ) : (
-        <div className="my__orders__page">
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            className="my__orders__table"
-            autoHeight
-          />
-          <Typography id="my__order__heading">{`${user.name}'s Orders`}</Typography>
+        <div className="no__orders__placed__div">
+          <CancelIcon />
+          <Typography>You haven't placed any order yet</Typography>
+          <Link to="/products">View Products</Link>
         </div>
       )}
       <ToastContainer />
