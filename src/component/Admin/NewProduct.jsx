@@ -79,6 +79,7 @@ export default function NewProduct() {
        const files=Array.from(e.target.files)
         setImages([])
         setImagePreview([])
+       
        files.forEach((file)=>{
         const reader=new FileReader()
         reader.onload=()=>{
@@ -167,7 +168,7 @@ export default function NewProduct() {
             </div>
             <div id="create__product__form__image">
               {imagePreviev.map((pic) => (
-                <img src={pic} key={pic} alt="avatar preview" />
+                <img src={pic} key={pic} alt="Product preview" />
               ))}
             </div>
             <Button id="create__product__btn" 

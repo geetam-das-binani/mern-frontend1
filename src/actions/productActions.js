@@ -3,7 +3,17 @@ import { allProductsFail, allProductsSuccess } from "../Slices/productsSlice";
 import { productFail, productSuccess } from "../Slices/productSlice";
 import { newReviewFail, newReviewSuccess } from "../Slices/newReviewSlice";
 import { admniProductsSuccess } from "../Slices/productsSlice";
-import {newProductSuccess,newProductFail} from '../Slices/createProductAdminSlice'
+import {
+  newProductSuccess,
+  newProductFail,
+} from "../Slices/createProductAdminSlice";
+import {
+  deleteProductFail,
+  deleteProductSuccess,
+  updateProductSuccess,
+  updateProductFail,
+} from "../Slices/deleteUpdateProductAdminSlice";
+
 
 // get all products
 export const getAllProducts = async (
@@ -69,8 +79,7 @@ export const newReview = async (dispatch, reviewData) => {
   }
 };
 
-
-// get all admin products 
+// get all admin products
 export const getAdminProducts = async (dispatch) => {
   const config = {
     withCredentials: true,
@@ -78,7 +87,7 @@ export const getAdminProducts = async (dispatch) => {
   try {
     const { data } = await axios.get(
       `http://localhost:8000/admin/products`,
-     config
+      config
     );
     dispatch(admniProductsSuccess(data.products));
   } catch (error) {
@@ -110,5 +119,46 @@ export const createProduct = async (dispatch, productData) => {
     }
 
     dispatch(newProductFail(error.response.data.errorMessage));
+  }
+};
+
+// update  product admin
+
+export const updateProduct = async (dispatch, productData, id) => {
+  const config = {
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true,
+  };
+  try {
+    const { data } = await axios.post(
+      `http://localhost:8000/admin/product/update/${id}`,
+      productData,
+      config
+    );
+    dispatch(updateProductSuccess(data.success));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(updateProductFail(error.message));
+    }
+
+    dispatch(updateProductFail(error.response.data.errorMessage));
+  }
+};
+
+// delete product admin
+
+export const deleteProduct = async (dispatch, id) => {
+  try {
+    const { data } = await axios.delete(
+      `http://localhost:8000/admin/product/delete/${id}`,
+      { withCredentials: true }
+    );
+    dispatch(deleteProductSuccess(data.success));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(deleteProductFail(error.message));
+    }
+
+    dispatch(deleteProductFail(error.response.data.errorMessage));
   }
 };

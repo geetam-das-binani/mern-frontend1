@@ -39,6 +39,7 @@ export default function Products() {
     resultsPerPage,
     filteredProductsCount,
   } = useSelector((state) => state.products);
+ 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };

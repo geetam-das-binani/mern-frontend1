@@ -23,7 +23,7 @@ import {
   DialogTitle,
   Rating,
 } from "@mui/material";
-
+import {clearProductError } from "../../Slices/productSlice";
 
 export default function ProductDetails() {
   const { Id } = useParams();
@@ -63,6 +63,7 @@ export default function ProductDetails() {
   useEffect(() => {
     if (error) {
       toast.error(error, { theme: "dark" });
+      dispatch(clearProductError())
     }
     if (reviewError) {
       toast.error(reviewError, { theme: "dark" });

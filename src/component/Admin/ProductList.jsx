@@ -4,8 +4,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts } from "../../actions/productActions";
 import { clearErrors } from "../../Slices/productsSlice";
+import {resetDeleteProductSuccess,clearDeleteProductError} from '../../Slices/deleteUpdateProductAdminSlice'
+import {deleteProduct} from '../../actions/productActions'
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Metadata from "../layout/Metadata";
@@ -14,8 +16,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Sidebar";
 import Loader from "../layout/loader/Loader";
 export default function ProductList() {
+  const navigate=useNavigate()
   const dispatch = useDispatch();
   const { error, loading, products } = useSelector((state) => state.products);
+  const { isDeleted,error:deleteError } = useSelector((state) => state.deleteUpdateProductAdmin);
+  const deleteProductHandler=(id)=>{
+ 
+       deleteProduct(dispatch,id)
+  }
   const columns = [
     {
       field: "id",
@@ -56,8 +64,9 @@ export default function ProductList() {
             <Link to={`/admin/product/${params.id}`}>
               <EditIcon />
             </Link>
-            <Button>
+            <Button  onClick={()=>deleteProductHandler(params.id)} >
               <DeleteIcon />
+           
             </Button>
           </Fragment>
         );
@@ -79,8 +88,19 @@ export default function ProductList() {
       toast.error(error, { theme: "dark" });
       dispatch(clearErrors());
     }
+    if(deleteError){
+      toast.error(deleteError, { theme: "dark" });
+      dispatch(clearDeleteProductError());
+    }
+    if(isDeleted){
+      toast.success('Product Deleted Successfully', { theme: "dark" });
+      dispatch(resetDeleteProductSuccess());
+      navigate('/admin/dashboard')
+    }
+
+
     getAdminProducts(dispatch);
-  }, [dispatch, error]);
+  }, [dispatch, error,isDeleted,deleteError,navigate]);
   return (
     <Fragment>
       {loading ? (
@@ -99,6 +119,7 @@ export default function ProductList() {
                 autoPageSize
                 disableSelectionOnClick
                 className="product__list__table"
+                autoHeight={false}
               />
             </div>
           </div>

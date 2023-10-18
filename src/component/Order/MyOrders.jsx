@@ -95,6 +95,7 @@ export default function MyOrders() {
               rows={rows}
               columns={columns}
               autoPageSize
+              autoHeight={false}
               disableSelectionOnClick
               className="my__orders__table"
             />
