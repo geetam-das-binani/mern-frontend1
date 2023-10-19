@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     orders: [],
     error: null,
+    loading:true
    
   };
   const adminAllOrdersReducer = createSlice({
@@ -10,10 +11,12 @@ const initialState = {
     reducers: {
       adminAllOrdersSuccess: (state, { payload }) => {
         state.orders = payload;
+        state.loading=false
         
       },
       adminAllOrdersFail: (state,{payload}) => {
         state.error = payload;
+        state.loading=false
        
       },
       clearAllOrdersFail:(state) => {

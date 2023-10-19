@@ -41,7 +41,7 @@ export default function Sidebar() {
           </TreeItem>
         </TreeView>
       </Link>
-      <Link to="/admin/order">
+      <Link to="/admin/orders">
         <p>
           <ListAltIcon />
           Orders

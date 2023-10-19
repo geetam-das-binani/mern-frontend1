@@ -94,8 +94,7 @@ export default function MyOrders() {
             <DataGrid
               rows={rows}
               columns={columns}
-              autoPageSize
-              autoHeight={false}
+            getRowHeight={()=>'auto'}
               disableSelectionOnClick
               className="my__orders__table"
             />

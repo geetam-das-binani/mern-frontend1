@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   error: null,
   isUpdated: false,
-  isDeleted:false
+  isDeleted:false,
+  
+  
 };
 const deleteUpdateOrderReducer = createSlice({
   name: "updateOrder",
@@ -10,9 +12,11 @@ const deleteUpdateOrderReducer = createSlice({
   reducers: {
     adminUpdateOrderSuccess: (state, { payload }) => {
       state.isUpdated = payload;
+      
     },
     adminUpdateOrderFail: (state, { payload }) => {
       state.error = payload;
+      
     },
     clearUpdateOrderFail: (state) => {
       state.error = null;

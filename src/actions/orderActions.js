@@ -136,8 +136,7 @@ export const deleteOrderAdmin = async (dispatch,id) => {
   try {
     const { data } = await axios.delete(
       `http://localhost:8000/admin/order/${id}`,
-      order,
-      config
+     config
     );
     dispatch(adminDeleteOrderSuccess(data.success));
     return data;

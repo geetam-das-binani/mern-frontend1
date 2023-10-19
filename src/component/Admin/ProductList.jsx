@@ -116,10 +116,10 @@ export default function ProductList() {
               <DataGrid
                 rows={rows}
                 columns={columns}
-                autoPageSize
+                getRowHeight={()=>'auto'}
                 disableSelectionOnClick
                 className="product__list__table"
-                autoHeight={false}
+                
               />
             </div>
           </div>

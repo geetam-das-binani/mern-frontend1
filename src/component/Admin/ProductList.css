@@ -20,8 +20,7 @@
 }
 .product__list__table  div{
     font: 300 1vmax "Roboto";
-    color: rgba(0, 0, 0, 0.678);
-    border: none !important;
+     border: none !important;
 }
 .product__list__table a,
 .product__list__table button{

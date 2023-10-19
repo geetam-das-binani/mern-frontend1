@@ -116,7 +116,7 @@ export default function UpdateProduct() {
       reader.readAsDataURL(file);
     });
   };
-  console.log(oldImages);
+
 
   return (
     <Fragment>

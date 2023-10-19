@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   order: {},
-
+loading:true,
   error: null,
 };
 const orderDetailsReducer = createSlice({
@@ -11,9 +11,11 @@ const orderDetailsReducer = createSlice({
   reducers: {
     orderDetailsSuccess: (state, { payload }) => {
       state.order = payload;
+      state.loading=false
     },
     orderDetailsFail: (state, { payload }) => {
       state.error = payload;
+      state.loading=false
     },
     clearOrderDetailsError: (state) => {
       state.error = null;

@@ -10,9 +10,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../layout/loader/Loader";
 export default function OrderDetails() {
-  const [loading, setLoading] = useState(true);
+ 
   const dispatch = useDispatch();
-  const { order, error } = useSelector((state) => state.myOrderDetails);
+  const { order, error ,loading} = useSelector((state) => state.myOrderDetails);
   const { id } = useParams();
 
   useEffect(() => {
@@ -20,9 +20,7 @@ export default function OrderDetails() {
       toast.error(error, { theme: "dark" });
       dispatch(clearOrderDetailsError());
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+  
     getOrderDetails(dispatch, id);
   }, [dispatch, id, error]);
   return (
