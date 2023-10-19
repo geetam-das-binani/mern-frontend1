@@ -85,7 +85,7 @@ export default function OrderDetails() {
                     <p
                       className={
                         order.paymentInfo &&
-                        order.paymentInfo.orderStatus === "Delievered"
+                        order.paymentInfo.orderStatus === "Delivered"
                           ? "green_Color"
                           : "red_Color"
                       }

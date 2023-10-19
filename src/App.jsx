@@ -35,7 +35,7 @@ import ProductList from './component/Admin/ProductList'
 import NewProduct from "./component/Admin/NewProduct";
 import UpdateProduct from "./component/Admin/UpdateProduct";
 import OrderList from "./component/Admin/OrderList";
-import ProcessOrder from "./component/Admin/ProcessOrder.jsx";
+import ProcessOrder from "./component/Admin/ProcessOrder";
 
 
 

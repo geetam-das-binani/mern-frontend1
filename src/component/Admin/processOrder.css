@@ -1,0 +1,73 @@
+.update__order__form {
+  margin: 5vmax 0;
+  padding: 3vmax;
+
+  background-color: white;
+}
+.update__order__form > div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.update__order__form > div > select {
+  padding: 1vmax 4vmax;
+  
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  border-radius: 4px;
+  font: 300 0.9vmax cursive;
+  outline: none;
+  margin: 2rem 0;
+}
+
+.update__order__form > div > svg {
+  position: absolute;
+  transform: translateX(1vmax);
+  font-size: 1.6vmax;
+  color: rgba(0, 0, 0, 0.623);
+}
+
+#update__order__btn {
+  border: none;
+  background-color: tomato;
+  color: white;
+  font: 300 0.9vmax "Roboto";
+  width: 100%;
+  padding: 0.8vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+}
+#update__order__btn:hover {
+  background: rgb(179, 66, 46);
+}
+
+#update__order__btn:disabled {
+  background: #e7e8e9;
+  color: #9fa3a9;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 600px) {
+  .update__order__form {
+    padding: 5vmax;
+    width: 40vh;
+    height: 70%;
+  }
+
+  .update__order__form > div > select {
+    padding: 2.5vmax 5vmax;
+    font: 300 1.7vmax cursive;
+  }
+  .update__order__form > div > svg {
+    font-size: 2.8vmax;
+  }
+
+  #update__order__btn {
+    font: 300 1.9vmax "Roboto";
+    padding: 1.8vmax;
+  }
+}

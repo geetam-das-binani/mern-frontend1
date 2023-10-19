@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from "react";
-
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,7 +10,6 @@ import {
   resetAdminDeleteOrderSuccess,
   clearDeleteOrderFail,
 } from "../../Slices/deleteUpdateOrderAdminSlice";
-
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,7 +20,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Sidebar";
 import Loader from "../layout/loader/Loader";
 
-export default function OrderList() {
+export default function  OrderList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { orders, error, loading } = useSelector(
@@ -43,10 +41,8 @@ export default function OrderList() {
       flex: 0.3,
 
       cellClassName: (params) => {
-        return (params.id, "status") === "Delivered"
-          ? "green_Color"
-          : "red_Color";
-      },
+        return params.value === "Delivered" ? "green_Color" : "red_Color";
+      }
     },
     {
       field: "itemsQty",
@@ -83,6 +79,7 @@ export default function OrderList() {
       },
     },
   ];
+  
   const rows = [];
   orders &&
     orders.forEach((item) => {
@@ -127,7 +124,8 @@ export default function OrderList() {
                 columns={columns}
                 disableSelectionOnClick
                 className="product__list__table"
-               getRowHeight={()=>'auto'}
+                getRowHeight={()=>'auto'}
+                
                
               />
             </div>

@@ -104,6 +104,7 @@ export const getAllOrdersAdmin = async (dispatch) => {
 
 // update order -( admin )
 export const updateOrderAdmin = async (dispatch, order,id) => {
+  console.log(id);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -117,7 +118,7 @@ export const updateOrderAdmin = async (dispatch, order,id) => {
       config
     );
     dispatch(adminUpdateOrderSuccess(data.success));
-    return data;
+    
   } catch (error) {
     if (error.message === "Network Error") {
       return dispatch(adminUpdateOrderFail(error.message));

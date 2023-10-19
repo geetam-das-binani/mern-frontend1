@@ -1,6 +1,7 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, memo } from "react";
 import Sidebar from "../Admin/Sidebar";
-import { useDispatch, useSelector } from "react-redux";
+import "./processOrder.css";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import Metadata from "../layout/Metadata";
 import { Typography } from "@mui/material";
 import { useNavigate, Link, useParams } from "react-router-dom";
@@ -16,25 +17,27 @@ import {
   clearUpdateOrderFail,
   resetAdminUpdateOrderSuccess,
 } from "../../Slices/deleteUpdateOrderAdminSlice";
-export default function ConfirmOrder() {
+function ProcessOrder() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [status, setStatus] = useState("");
   const [disabled, setDisabled] = useState(false);
   const { order, error, loading } = useSelector(
-    (state) => state.myOrderDetails
+    (state) => state.myOrderDetails,
+    shallowEqual
   );
   const { error: updateError, isUpdated } = useSelector(
     (state) => state.deleteUpdateOrderAdmin
   );
 
-  const updateOrderSubmitHandler = () => {
+  const updateOrderSubmitHandler = (e) => {
     e.preventDefault();
     const myform = new FormData();
     myform.set("status", status);
 
     setDisabled(true);
+
     updateOrderAdmin(dispatch, myform, id);
   };
 
@@ -46,14 +49,16 @@ export default function ConfirmOrder() {
     if (updateError) {
       toast.error(updateError, { theme: "dark" });
       dispatch(clearUpdateOrderFail());
+      setDisabled(false);
     }
     if (isUpdated) {
       toast.success(" Order Status Updated Successfully", { theme: "dark" });
       dispatch(resetAdminUpdateOrderSuccess());
+      setDisabled(false);
     }
 
     getOrderDetails(dispatch, id);
-  }, [id, error, navigate,updateError,isUpdated, dispatch]);
+  }, [id, error, navigate, updateError, isUpdated, dispatch]);
 
   return (
     <Fragment>
@@ -64,7 +69,15 @@ export default function ConfirmOrder() {
           {loading ? (
             <Loader />
           ) : (
-            <div className="confirm__order__page">
+            <div
+              className="confirm__order__page"
+              style={{
+                display:
+                  order.paymentInfo.orderStatus === "Delivered"
+                    ? "block"
+                    : "grid",
+              }}
+            >
               <div className="confirm__shipping__area">
                 <Typography>Shipping Info </Typography>
                 <div className="order__details__container__box">
@@ -82,7 +95,8 @@ export default function ConfirmOrder() {
                     <p>Address:</p>
                     <span>
                       {order.shippingInfo &&
-                        `${order.shippingInfo.address} ,${order.shippingInfo.city},${order.shippingInfo.state} ,${order.shippingInfo.country},${order.shippingInfo.pincode}`}
+                        `${order.shippingInfo.address} ,${order.shippingInfo.city},${order.shippingInfo.state} ,${order.shippingInfo.country},
+                      ${order.shippingInfo.pincode}`}
                     </span>
                   </div>
                 </div>
@@ -116,7 +130,7 @@ export default function ConfirmOrder() {
                     <p
                       className={
                         order.paymentInfo &&
-                        order.paymentInfo.orderStatus === "Delievered"
+                        order.paymentInfo.orderStatus === "Delivered"
                           ? "green_Color"
                           : "red_Color"
                       }
@@ -144,33 +158,43 @@ export default function ConfirmOrder() {
                   </div>
                 </div>
               </div>
-              <div style={{borderLeft:'1px solid rgba(0, 0, 0, 0.11)'}}>
-              <form
-                className="create__product__form"
-                encType="multipart/form-data"
-                onSubmit={updateOrderSubmitHandler}
+              <div
+                style={{
+                  borderLeft: "1px solid rgba(0, 0, 0, 0.11)",
+                  display:
+                    order.paymentInfo.orderStatus === "Delivered"
+                      ? "none"
+                      : "block",
+                }}
               >
-                <h1> Process Order</h1>
-
-                <div>
-                  <AccountTreeIcon />
-                  <select onChange={({ target }) => setStatus(target.value)}>
-                    <option value="">Status</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Delivered">Delivered</option>
-                  </select>
-                </div>
-
-                <Button
-                  id="create__product__btn"
-                  type="submit"
-                  disabled={disabled || status === "" ? true : false}
+                <form
+                  className="update__order__form"
+                  onSubmit={updateOrderSubmitHandler}
                 >
-                  {disabled ? <ButtonLoader /> : "Update Status"}
-                </Button>
-              </form>
+                  <h1> Process Order</h1>
+
+                  <div>
+                    <AccountTreeIcon />
+                    <select onChange={({ target }) => setStatus(target.value)}>
+                      <option value="">Status</option>
+                      {order.paymentInfo.orderStatus === "Processing" && (
+                        <option value="Shipped">Shipped</option>
+                      )}
+                      {order.paymentInfo.orderStatus === "Shipped" && (
+                        <option value="Delivered">Delivered</option>
+                      )}
+                    </select>
+                  </div>
+
+                  <Button
+                    id="update__order__btn"
+                    type="submit"
+                    disabled={disabled || status === "" ? true : false}
+                  >
+                    {disabled ? <ButtonLoader /> : "Process"}
+                  </Button>
+                </form>
               </div>
-              
             </div>
           )}
         </div>
@@ -179,3 +203,5 @@ export default function ConfirmOrder() {
     </Fragment>
   );
 }
+
+export default memo(ProcessOrder);

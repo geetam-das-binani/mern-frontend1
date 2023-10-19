@@ -19,17 +19,19 @@ export default function MyOrders() {
   const { error, orders } = useSelector((state) => state.myOrders);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+    {
+      field: "id",
+      headerName: "Order ID",
+      minWidth: 300,
+      flex: 1,
+    },
     {
       field: "status",
       headerName: "Status",
       minWidth: 150,
       flex: 0.3,
-
       cellClassName: (params) => {
-        return (params.id, "status") === "Delivered"
-          ? "green_Color"
-          : "red_Color";
+        return params.value === "Delivered" ? "green_Color" : "red_Color";
       },
     },
     {
@@ -94,7 +96,7 @@ export default function MyOrders() {
             <DataGrid
               rows={rows}
               columns={columns}
-            getRowHeight={()=>'auto'}
+              getRowHeight={() => "auto"}
               disableSelectionOnClick
               className="my__orders__table"
             />

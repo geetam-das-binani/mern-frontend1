@@ -22,6 +22,9 @@
 .my__orders__table {
   background: white;
 }
+.green_Color{
+  color: green !important;
+}
 .my__orders__table > div {
   font: 300 1vmax "Roboto";
   color: black;
