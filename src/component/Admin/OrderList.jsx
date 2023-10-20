@@ -19,8 +19,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Sidebar";
 import Loader from "../layout/loader/Loader";
+import { Typography } from "@mui/material";
+import CancelIcon from "@mui/icons-material/Cancel";
 
-export default function  OrderList() {
+export default function OrderList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { orders, error, loading } = useSelector(
@@ -42,7 +44,7 @@ export default function  OrderList() {
 
       cellClassName: (params) => {
         return params.value === "Delivered" ? "green_Color" : "red_Color";
-      }
+      },
     },
     {
       field: "itemsQty",
@@ -79,7 +81,7 @@ export default function  OrderList() {
       },
     },
   ];
-  
+
   const rows = [];
   orders &&
     orders.forEach((item) => {
@@ -111,7 +113,7 @@ export default function  OrderList() {
     <Fragment>
       {loading ? (
         <Loader />
-      ) : (
+      ) : orders.length > 0 ? (
         <Fragment>
           <Metadata title="ALL ORDERS-Admin" />
           <div className="dashboard">
@@ -124,13 +126,17 @@ export default function  OrderList() {
                 columns={columns}
                 disableSelectionOnClick
                 className="product__list__table"
-                getRowHeight={()=>'auto'}
-                
-               
+                getRowHeight={() => "auto"}
               />
             </div>
           </div>
         </Fragment>
+      ) : (
+        <div className="no__orders__placed__div">
+          <CancelIcon />
+          <Typography>Currently No orders placed</Typography>
+          <Link to="/admin/dashboard">View Dashboard</Link>
+        </div>
       )}
 
       <ToastContainer />

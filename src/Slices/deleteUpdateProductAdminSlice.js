@@ -5,7 +5,7 @@ const initialState = {
   isUpdated: false,
 };
 const deleteUpdateProductReducer = createSlice({
-  name: "new Product",
+  name: "updateDeleteProduct",
   initialState: initialState,
   reducers: {
     deleteProductSuccess: (state, { payload }) => {

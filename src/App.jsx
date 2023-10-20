@@ -36,6 +36,7 @@ import NewProduct from "./component/Admin/NewProduct";
 import UpdateProduct from "./component/Admin/UpdateProduct";
 import OrderList from "./component/Admin/OrderList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
+import UsersList  from './component/Admin/UsersList'
 
 
 
@@ -153,6 +154,10 @@ export default function App() {
              <Route
             path="/admin/order/:id"
             element={<ProtectedRoute isAdmin={true} Component={ProcessOrder} />}
+          />
+           <Route
+            path="/admin/users"
+            element={<ProtectedRoute isAdmin={true} Component={UsersList} />}
           />
       </Routes>
 

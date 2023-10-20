@@ -106,7 +106,7 @@ export default function MyOrders() {
       ) : (
         <div className="no__orders__placed__div">
           <CancelIcon />
-          <Typography>You haven't placed any order yet</Typography>
+          <Typography>No orders have been placed yet</Typography>
           <Link to="/products">View Products</Link>
         </div>
       )}

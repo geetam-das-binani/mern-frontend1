@@ -7,7 +7,7 @@ const initialState = {
   
 };
 const deleteUpdateOrderReducer = createSlice({
-  name: "updateOrder",
+  name: "updateDeleteOrder",
   initialState: initialState,
   reducers: {
     adminUpdateOrderSuccess: (state, { payload }) => {

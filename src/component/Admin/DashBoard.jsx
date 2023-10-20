@@ -8,9 +8,11 @@ import { Chart, registerables } from "chart.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts } from "../../actions/productActions";
 import Loader from "../layout/loader/Loader";
+import { getAllOrdersAdmin } from "../../actions/orderActions";
 export default function DashBoard() {
   const dispatch = useDispatch();
   const { loading, products } = useSelector((state) => state.products);
+  const { orders } = useSelector((state) => state.adminGetAllOrders);
 
   let outStock = 0;
  
@@ -24,12 +26,13 @@ export default function DashBoard() {
 
   useEffect(() => {
     getAdminProducts(dispatch);
+    getAllOrdersAdmin(dispatch)
   }, [dispatch]);
   Chart.register(...registerables);
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
     datasets: [
-      {
+      { 
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197,77,49)"],
@@ -47,9 +50,6 @@ export default function DashBoard() {
       },
     ],
   };
-  useEffect(() => {
-    getAdminProducts(dispatch);
-  }, [dispatch]);
 
   return (
     <Fragment>
@@ -76,7 +76,7 @@ export default function DashBoard() {
                   </Link>
                   <Link to="/admin/orders">
                     <p>Orders</p>
-                    <p>4</p>
+                    <p>{orders && orders.length}</p>
                   </Link>
                   <Link to="/admin/users">
                     <p>Users</p>

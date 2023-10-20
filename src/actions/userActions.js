@@ -22,6 +22,21 @@ import {
   resetPasswordSuccess,
 } from "../Slices/forgotPasswordSlice";
 
+import {
+  adminAllUsersSuccess,
+  adminAllUsersFail,
+} from "../Slices/adminAllUsersSlice";
+import {
+  adminUserDetailsFail,
+  adminUserDetailsSuccess,
+} from "../Slices/adminUserDetailsSlice";
+import {
+  adminDeleteUserFail,
+  adminUpdateUserFail,
+  adminDeleteUserSuccess,
+  adminUpdateUserSuccess,
+} from "../Slices/deleteUpdateUserAdminSlice";
+
 // login user
 
 export const login = async (dispatch, email, password) => {

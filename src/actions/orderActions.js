@@ -61,7 +61,7 @@ export const myOrders = async (dispatch) => {
   }
 };
 
-// get my order details request user
+// get my order details request user admin
 export const getOrderDetails = async (dispatch, id) => {
   const config = {
     withCredentials: true,
