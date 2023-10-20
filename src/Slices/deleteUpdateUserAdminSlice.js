@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isUpdated: false,
   isDeleted: false,
-  error: true,
+  error: false,
+  message:null
 };
 
 const deleteUpdateUserReducer = createSlice({
@@ -22,13 +23,16 @@ const deleteUpdateUserReducer = createSlice({
       state.error = false;
     },
     adminDeleteUserSuccess: (state, { payload }) => {
-      state.isDeleted = payload;
+      state.isDeleted = payload.success;
+      state.message = payload.message;
+
     },
     adminDeleteUserFail: (state, { payload }) => {
       state.error = payload;
     },
     resetAdminDeleteUserSuccess: (state) => {
       state.isDeleted = false;
+      state.message=null
     },
     clearAdminDeleteUserFail: (state) => {
       state.error = false;

@@ -37,7 +37,7 @@ import UpdateProduct from "./component/Admin/UpdateProduct";
 import OrderList from "./component/Admin/OrderList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList  from './component/Admin/UsersList'
-
+import UpdateUser from './component/Admin/UpdateUser'
 
 
 export default function App() {
@@ -158,6 +158,10 @@ export default function App() {
            <Route
             path="/admin/users"
             element={<ProtectedRoute isAdmin={true} Component={UsersList} />}
+          />
+              <Route
+            path="/admin/user/:id"
+            element={<ProtectedRoute isAdmin={true} Component={UpdateUser} />}
           />
       </Routes>
 

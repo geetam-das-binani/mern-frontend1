@@ -9,10 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts } from "../../actions/productActions";
 import Loader from "../layout/loader/Loader";
 import { getAllOrdersAdmin } from "../../actions/orderActions";
+import Metadata from "../layout/Metadata";
+import { getAllUsersAdmin } from "../../actions/userActions";
 export default function DashBoard() {
   const dispatch = useDispatch();
   const { loading, products } = useSelector((state) => state.products);
   const { orders } = useSelector((state) => state.adminGetAllOrders);
+  const { users } = useSelector((state) => state.adminGetAllUsers);
 
   let outStock = 0;
  
@@ -27,6 +30,7 @@ export default function DashBoard() {
   useEffect(() => {
     getAdminProducts(dispatch);
     getAllOrdersAdmin(dispatch)
+    getAllUsersAdmin(dispatch)
   }, [dispatch]);
   Chart.register(...registerables);
   const lineState = {
@@ -58,6 +62,7 @@ export default function DashBoard() {
       ) : (
         <Fragment>
           <div className="dashboard">
+            <Metadata title='ADMIN-DASHBOARD' />
             <Sidebar />
             <div className="dashboard__container">
               <Typography component="h1">Dashboard</Typography>
@@ -80,7 +85,7 @@ export default function DashBoard() {
                   </Link>
                   <Link to="/admin/users">
                     <p>Users</p>
-                    <p>2</p>
+                    <p>{users && users.length}</p>
                   </Link>
                 </div>
 

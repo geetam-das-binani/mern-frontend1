@@ -34,8 +34,7 @@ export default function NewProduct() {
   
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDesciption] = useState("");

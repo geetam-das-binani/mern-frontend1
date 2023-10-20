@@ -213,3 +213,78 @@ export const resetPassword = async (dispatch, passwords, token) => {
     dispatch(resetPasswordFail(error.response.data.errorMessage));
   }
 };
+
+// get all users admin
+export const getAllUsersAdmin = async (dispatch) => {
+  try {
+    const { data } = await axios.get(`http://localhost:8000/admin/users`, {
+      withCredentials: true,
+    });
+    dispatch(adminAllUsersSuccess(data.users));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(adminAllUsersFail(error.message));
+    }
+    dispatch(adminAllUsersFail(error.response.data.errorMessage));
+  }
+};
+
+// get user details ( admin )
+export const getUserDetailsAdmin = async (dispatch, id) => {
+  try {
+    const { data } = await axios.get(`http://localhost:8000/admin/user/${id}`, {
+      withCredentials: true,
+    });
+    dispatch(adminUserDetailsSuccess(data.user));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(adminUserDetailsFail(error.message));
+    }
+    dispatch(adminUserDetailsFail(error.response.data.errorMessage));
+  }
+};
+
+// update user  admin
+export const updateUser = async (dispatch, id, userData) => {
+  try {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      `http://localhost:8000/admin/user/${id}`,
+
+      userData,
+
+      config
+    );
+    dispatch(adminUpdateUserSuccess(data.success));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(adminUpdateUserFail(error.message));
+    }
+ 
+    dispatch(adminUpdateUserFail(error.response.data.errorMessage));
+  }
+};
+
+// delete user admin
+
+export const deleteUser = async (dispatch, id) => {
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    const { data } = await axios.delete(
+      `http://localhost:8000/admin/user/${id}`,
+      config
+    );
+    dispatch(adminDeleteUserSuccess(data));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(adminDeleteUserFail(error.message));
+    }
+
+    dispatch(adminDeleteUserFail(error.response.data.errorMessage));
+  }
+};
