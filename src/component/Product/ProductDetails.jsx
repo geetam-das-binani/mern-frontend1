@@ -12,10 +12,7 @@ import Loader from "../layout/loader/Loader";
 import Metadata from "../layout/Metadata";
 import { addItemsToCart } from "../../actions/cartActions";
 import { newReview } from "../../actions/productActions";
-import {
-  reviewReset,
-  clearNewReviewError,
-} from "../../Slices/newReviewSlice";
+import { reviewReset, clearNewReviewError } from "../../Slices/newReviewSlice";
 import {
   Dialog,
   DialogActions,
@@ -23,22 +20,23 @@ import {
   DialogTitle,
   Rating,
 } from "@mui/material";
-import {clearProductError } from "../../Slices/productSlice";
+import { clearProductError } from "../../Slices/productSlice";
 
 export default function ProductDetails() {
   const { Id } = useParams();
   const dispatch = useDispatch();
 
   const { product, loading, error } = useSelector((state) => state.product);
+  const { user } = useSelector((state) => state.user);
   const { success, error: reviewError } = useSelector(
     (state) => state.newReview
   );
 
   const options = {
-     value: product.ratings,
+    value: product.ratings,
     readOnly: true,
     size: "medium",
-    precision:.5
+    precision: 0.5,
   };
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
@@ -63,7 +61,7 @@ export default function ProductDetails() {
   useEffect(() => {
     if (error) {
       toast.error(error, { theme: "dark" });
-      dispatch(clearProductError())
+      dispatch(clearProductError());
     }
     if (reviewError) {
       toast.error(reviewError, { theme: "dark" });
@@ -106,7 +104,9 @@ export default function ProductDetails() {
               </div>
               <div className="details__block__2">
                 <Rating {...options} />
-                <span className="details__block__2__span ">{product.numOfReviews}Reviews </span>
+                <span className="details__block__2__span ">
+                  {product.numOfReviews}Reviews{" "}
+                </span>
               </div>
               <div className="details__block__3">
                 <h1>₹{product.price}</h1>
@@ -174,7 +174,7 @@ export default function ProductDetails() {
               <Rating
                 onChange={(e) => setRating(e.target.value)}
                 value={rating}
-                size="'large"
+                size="large"
               />
               <textarea
                 className="submit__dialog__textarea"

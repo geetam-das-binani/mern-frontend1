@@ -38,7 +38,9 @@ import OrderList from "./component/Admin/OrderList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList  from './component/Admin/UsersList'
 import UpdateUser from './component/Admin/UpdateUser'
-import ProductReviews from './component/Admin/ProductReviews.jsx'
+import ProductReviews from './component/Admin/ProductReviews'
+import Contact from './component/Contact/Contact'
+import About from './component/About/About.jsx'
 
 
 export default function App() {
@@ -167,6 +169,14 @@ export default function App() {
              <Route
             path="/admin/reviews"
             element={<ProtectedRoute isAdmin={true} Component={ProductReviews} />}
+          />
+            <Route
+            path="/contact"
+            element={<Contact />}
+          />
+              <Route
+            path="/about"
+            element={<About />}
           />
       </Routes>
 
