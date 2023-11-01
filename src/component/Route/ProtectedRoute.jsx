@@ -9,9 +9,12 @@ export default function ProtectedRoute({ Component, apikey, isAdmin }) {
   if (isAuthenticatedUser === false && !authentication) {
     return <Navigate to="/login" />;
   }
+
+
   if (isAdmin === true && user.role !== "admin" && isAuthenticatedUser) {
     return <Navigate to="/login" />;
   }
+
 
   return <Component apikey={apikey ?? ""} />;
 }

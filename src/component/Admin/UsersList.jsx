@@ -26,7 +26,7 @@ export default function Userslist() {
   const { users, error, loading } = useSelector(
     (state) => state.adminGetAllUsers
   );
-
+  const { user } = useSelector((state) => state.user);
 
   const {
     isDeleted,
@@ -34,7 +34,7 @@ export default function Userslist() {
     message,
   } = useSelector((state) => state.deleteUpdateUserAdmin);
   const deleteUserHandler = (id) => {
-  deleteUser(dispatch,id)
+    deleteUser(dispatch, id);
   };
   const columns = [
     {
@@ -62,7 +62,7 @@ export default function Userslist() {
       flex: 0.3,
       cellClassName: (params) => {
         return params.value === "admin" ? "green_Color" : "red_Color";
-      }
+      },
     },
     {
       field: "actions",
@@ -72,16 +72,20 @@ export default function Userslist() {
       sortable: false,
       flex: 0.3,
       renderCell: (params) => {
-        return (
-          <Fragment>
-            <Link to={`/admin/user/${params.id}`}>
-              <EditIcon />
-            </Link>
-            <Button onClick={() => deleteUserHandler(params.id)}>
-              <DeleteIcon />
-            </Button>
-          </Fragment>
-        );
+        if (user._id === params.id) {
+          return null;
+        } else {
+          return (
+            <Fragment>
+              <Link to={`/admin/user/${params.id}`}>
+                <EditIcon />
+              </Link>
+              <Button onClick={() => deleteUserHandler(params.id)}>
+                <DeleteIcon />
+              </Button>
+            </Fragment>
+          );
+        }
       },
     },
   ];
@@ -111,7 +115,7 @@ export default function Userslist() {
     }
 
     getAllUsersAdmin(dispatch);
-  }, [dispatch, error, isDeleted, deleteError, navigate,message]);
+  }, [dispatch, error, isDeleted, deleteError, navigate, message]);
   return (
     <Fragment>
       {loading ? (
@@ -147,14 +151,13 @@ export default function Userslist() {
           }}
         >
           <CancelIcon
-          style={{
-            color:" tomato",
-            fontSize: "7vmax"
-          }}
-          
+            style={{
+              color: " tomato",
+              fontSize: "7vmax",
+            }}
           />
           <Typography style={{ fontSize: "2vmax" }}>
-            Currently No Users 
+            Currently No Users
           </Typography>
           <Link
             style={{

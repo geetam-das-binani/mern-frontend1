@@ -225,6 +225,7 @@ export const getAllUsersAdmin = async (dispatch) => {
     if (error.message === "Network Error") {
       return dispatch(adminAllUsersFail(error.message));
     }
+    
     dispatch(adminAllUsersFail(error.response.data.errorMessage));
   }
 };

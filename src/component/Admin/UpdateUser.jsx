@@ -34,7 +34,6 @@ function UpdateUser() {
   const { isUpdated, error: updateError } = useSelector(
     (state) => state.deleteUpdateUserAdmin
   );
- 
 
   useEffect(() => {
     if (user && user._id !== id) {
@@ -47,14 +46,13 @@ function UpdateUser() {
 
     if (updateError) {
       toast.error(error, { theme: "dark" });
-
-      dispatch(clearAdminUpdateUserFail());
+     dispatch(clearAdminUpdateUserFail());
       setDisabled(false);
     }
     if (isUpdated) {
       toast.success("User Updated Successfully", { theme: "dark" });
       dispatch(resetAdminUpdateUserSuccess());
-      navigate('/admin/users')
+      navigate("/admin/users");
     }
   }, [dispatch, error, isUpdated, navigate, updateError, user, id]);
 
@@ -64,7 +62,6 @@ function UpdateUser() {
     myform.set("name", name);
     myform.set("email", email);
     myform.set("role", role);
-
     setDisabled(true);
     updateUser(dispatch, id, myform);
   };

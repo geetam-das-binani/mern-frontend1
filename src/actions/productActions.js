@@ -14,6 +14,14 @@ import {
   updateProductFail,
 } from "../Slices/deleteUpdateProductAdminSlice";
 
+import {
+  deleteReviewFail,
+  deleteReviewSuccess,
+} from "../Slices/adminDeleteReviewSlice";
+import {
+  allReviewsSuccess,
+  allReviewsFail,
+} from "../Slices/adminGetAllReviewsSlice";
 
 // get all products
 export const getAllProducts = async (
@@ -160,5 +168,48 @@ export const deleteProduct = async (dispatch, id) => {
     }
 
     dispatch(deleteProductFail(error.response.data.errorMessage));
+  }
+};
+
+// get all reviews of a product (admin )
+
+export const getAllReviews = async (dispatch, id) => {
+  const config = {
+    withCredentials: true,
+  };
+  try {
+    const { data } = await axios.get(
+      `http://localhost:8000/reviews?id=${id}`,
+      
+      config
+    );
+    dispatch(allReviewsSuccess(data.reviews));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(allReviewsFail(error.message));
+    }
+
+    dispatch(allReviewsFail(error.response.data.errorMessage));
+  }
+};
+
+// admin delete reviews 
+export const deleteReviews = async (dispatch, reviewId,productId) => {
+  const config = {
+    withCredentials: true,
+  };
+  try {
+    const { data } = await axios.delete(
+      `http://localhost:8000/reviews?Id=${reviewId}&productId=${productId}`,
+      
+      config
+    );
+    dispatch(deleteReviewSuccess(data.success));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(deleteReviewFail(error.message));
+    }
+
+    dispatch(deleteReviewFail(error.response.data.errorMessage));
   }
 };
