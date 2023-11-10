@@ -18,29 +18,36 @@ export default function DashBoard() {
   const { users } = useSelector((state) => state.adminGetAllUsers);
 
   let outStock = 0;
- 
+
   products &&
     products.forEach((item) => {
       if (item.Stock === 0) {
         outStock += 1;
       }
-    
     });
 
   useEffect(() => {
     getAdminProducts(dispatch);
-    getAllOrdersAdmin(dispatch)
-    getAllUsersAdmin(dispatch)
+    getAllOrdersAdmin(dispatch);
+    getAllUsersAdmin(dispatch);
   }, [dispatch]);
+
+  let totalAmount = 0;
+  if (orders.length > 0) {
+    orders.forEach((item) => {
+      totalAmount += item.paymentInfo.totalPrice;
+    });
+  }
+
   Chart.register(...registerables);
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
     datasets: [
-      { 
+      {
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197,77,49)"],
-        data: [0, 4000],
+        data: [0, totalAmount],
       },
     ],
   };
@@ -50,7 +57,7 @@ export default function DashBoard() {
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#25014F"],
-        data: [outStock, products.length-outStock],
+        data: [outStock, products.length - outStock],
       },
     ],
   };
@@ -62,7 +69,7 @@ export default function DashBoard() {
       ) : (
         <Fragment>
           <div className="dashboard">
-            <Metadata title='ADMIN-DASHBOARD' />
+            <Metadata title="ADMIN-DASHBOARD" />
             <Sidebar />
             <div className="dashboard__container">
               <Typography component="h1">Dashboard</Typography>
@@ -70,8 +77,7 @@ export default function DashBoard() {
                 <div>
                   <p>
                     Total Amount
-                    <br />
-                    ₹2000
+                    <br />₹{totalAmount}
                   </p>
                 </div>
                 <div className="dashboard__summary__box2">
@@ -100,7 +106,6 @@ export default function DashBoard() {
           </div>
         </Fragment>
       )}
-  
-  </Fragment>
+    </Fragment>
   );
 }

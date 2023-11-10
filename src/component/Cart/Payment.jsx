@@ -43,10 +43,10 @@ export default function Payment({ apikey }) {
     shippingInfo,
     orderItems: cartItems,
     paymentInfo: "",
-    itemsPrice: orderInfo.subtotal,
-    taxPrice: orderInfo.tax,
-    shippingPrice: orderInfo.shippingCharges,
-    totalPrice: orderInfo.totalPrice,
+    itemsPrice: orderInfo?.subtotal,
+    taxPrice: orderInfo?.tax,
+    shippingPrice: orderInfo?.shippingCharges,
+    totalPrice: orderInfo?.totalPrice,
   };
 
   const submitHandler = async (e) => {

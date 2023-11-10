@@ -9,6 +9,7 @@ import { MdAddShoppingCart } from "react-icons/md";
 export default function Header() {
   const options = {
     burgerColorHover: "#eb4034",
+    burgerColor:'tomato',
     logo,
     logoWidth: "20vmax",
     navColor1: "white",

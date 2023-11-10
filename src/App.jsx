@@ -31,17 +31,17 @@ import OrderDetails from "./component/Order/OrderDetails.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import DashBoard from "./component/Admin/DashBoard";
-import ProductList from './component/Admin/ProductList'
+import ProductList from "./component/Admin/ProductList";
 import NewProduct from "./component/Admin/NewProduct";
 import UpdateProduct from "./component/Admin/UpdateProduct";
 import OrderList from "./component/Admin/OrderList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
-import UsersList  from './component/Admin/UsersList'
-import UpdateUser from './component/Admin/UpdateUser'
-import ProductReviews from './component/Admin/ProductReviews'
-import Contact from './component/Contact/Contact'
-import About from './component/About/About.jsx'
-
+import UsersList from "./component/Admin/UsersList";
+import UpdateUser from "./component/Admin/UpdateUser";
+import ProductReviews from "./component/Admin/ProductReviews";
+import Contact from "./component/layout/Contact/Contact";
+import About from "./component/layout/About/About";
+import NotFound from "./component/layout/NotFound/NotFound";
 
 export default function App() {
   const { isAuthenticatedUser, user, logoutNotify } = useSelector(
@@ -69,6 +69,7 @@ export default function App() {
     getStripeApiKey();
   }, [logoutNotify, dispatch]);
 
+  // window.addEventListener('contextmenu',(e)=>e.preventDefault())
   return (
     <BrowserRouter>
       <Header />
@@ -133,51 +134,45 @@ export default function App() {
           element={<ProtectedRoute Component={ConfirmOrder} />}
         />
 
-        
-          <Route
-            path="/admin/dashboard"
-            element={<ProtectedRoute isAdmin={true} Component={DashBoard} />}
-          />
-           <Route
-            path="/admin/products"
-            element={<ProtectedRoute isAdmin={true} Component={ProductList} />}
-          />
-            <Route
-            path="/admin/product"
-            element={<ProtectedRoute isAdmin={true} Component={NewProduct} />}
-          />
-          <Route
-            path="/admin/product/:id"
-            element={<ProtectedRoute isAdmin={true} Component={UpdateProduct} />}
-          />
-            <Route
-            path="/admin/orders"
-            element={<ProtectedRoute isAdmin={true} Component={OrderList} />}
-          />
-             <Route
-            path="/admin/order/:id"
-            element={<ProtectedRoute isAdmin={true} Component={ProcessOrder} />}
-          />
-           <Route
-            path="/admin/users"
-            element={<ProtectedRoute isAdmin={true} Component={UsersList} />}
-          />
-              <Route
-            path="/admin/user/:id"
-            element={<ProtectedRoute isAdmin={true} Component={UpdateUser} />}
-          />
-             <Route
-            path="/admin/reviews"
-            element={<ProtectedRoute isAdmin={true} Component={ProductReviews} />}
-          />
-            <Route
-            path="/contact"
-            element={<Contact />}
-          />
-              <Route
-            path="/about"
-            element={<About />}
-          />
+        <Route
+          path="/admin/dashboard"
+          element={<ProtectedRoute isAdmin={true} Component={DashBoard} />}
+        />
+        <Route
+          path="/admin/products"
+          element={<ProtectedRoute isAdmin={true} Component={ProductList} />}
+        />
+        <Route
+          path="/admin/product"
+          element={<ProtectedRoute isAdmin={true} Component={NewProduct} />}
+        />
+        <Route
+          path="/admin/product/:id"
+          element={<ProtectedRoute isAdmin={true} Component={UpdateProduct} />}
+        />
+        <Route
+          path="/admin/orders"
+          element={<ProtectedRoute isAdmin={true} Component={OrderList} />}
+        />
+        <Route
+          path="/admin/order/:id"
+          element={<ProtectedRoute isAdmin={true} Component={ProcessOrder} />}
+        />
+        <Route
+          path="/admin/users"
+          element={<ProtectedRoute isAdmin={true} Component={UsersList} />}
+        />
+        <Route
+          path="/admin/user/:id"
+          element={<ProtectedRoute isAdmin={true} Component={UpdateUser} />}
+        />
+        <Route
+          path="/admin/reviews"
+          element={<ProtectedRoute isAdmin={true} Component={ProductReviews} />}
+        />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />
