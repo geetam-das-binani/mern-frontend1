@@ -19,6 +19,7 @@ import deleteUpdateUserReducer from './Slices/deleteUpdateUserAdminSlice'
 import adminUserDetailsReducer from './Slices/adminUserDetailsSlice'
 import productReviewsReducer from './Slices/adminGetAllReviewsSlice'
 import deleteReviewReducer   from './Slices/adminDeleteReviewSlice'
+import userDeleteReviewReducer   from './Slices/userDeleteReviewSlice'
 
 
 
@@ -43,7 +44,8 @@ const store = configureStore({
     deleteUpdateUserAdmin:deleteUpdateUserReducer,
     adminUserDetail:adminUserDetailsReducer,
     adminAllReviews:productReviewsReducer,
-    adminDeleteReview:deleteReviewReducer
+    adminDeleteReview:deleteReviewReducer,
+    userDeleteReview:userDeleteReviewReducer
 
     
   },

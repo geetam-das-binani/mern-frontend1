@@ -21,13 +21,20 @@ import {
   Rating,
 } from "@mui/material";
 import { clearProductError } from "../../Slices/productSlice";
+import { deleteUserReview } from "../../actions/productActions";
+import {
+  resetDeleteUserReviewSuccess,
+  clearUserReviewsError,
+} from "../../Slices/userDeleteReviewSlice";
 
 export default function ProductDetails() {
   const { Id } = useParams();
   const dispatch = useDispatch();
 
   const { product, loading, error } = useSelector((state) => state.product);
-  const { user } = useSelector((state) => state.user);
+  const { isDeleted, error: deleteError } = useSelector(
+    (state) => state.userDeleteReview
+  );
   const { success, error: reviewError } = useSelector(
     (state) => state.newReview
   );
@@ -58,6 +65,9 @@ export default function ProductDetails() {
     newReview(dispatch, form);
     setOpen(false);
   };
+  const deleteReview=()=>{
+    deleteUserReview(dispatch,Id)
+  }
   useEffect(() => {
     if (error) {
       toast.error(error, { theme: "dark" });
@@ -71,8 +81,17 @@ export default function ProductDetails() {
       toast.success("Review Submit Successfully", { theme: "dark" });
       dispatch(reviewReset());
     }
+    if(isDeleted){
+      toast.success('Review Deleted Successfully',{theme:'dark'})
+      dispatch(resetDeleteUserReviewSuccess())
+    }
+    if(deleteError){
+      toast.error(deleteError, { theme: "dark" });
+      dispatch(clearUserReviewsError())
+    }
+
     getProductDetails(dispatch, Id);
-  }, [dispatch, error, Id, reviewError, success]);
+  }, [dispatch, error, Id, reviewError, success,deleteError,isDeleted]);
 
   return (
     <Fragment>
@@ -156,10 +175,14 @@ export default function ProductDetails() {
               <div className="details__block__4">
                 Description : <p>{product.description}</p>
               </div>
-
-              <button onClick={submitReviewToggle} className="submit__button">
-                Submit Review
-              </button>
+              <div className="reviews__actions">
+                <button onClick={submitReviewToggle} className="submit__button">
+                  Submit Review
+                </button>
+                <button onClick={deleteReview} className="delete__button">
+                  Delete Review
+                </button>
+              </div>
             </div>
           </div>
           <h3 className="reviews__heading">REVIEWS</h3>

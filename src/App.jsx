@@ -8,7 +8,7 @@ import Home from "./component/Home/Home";
 import ProductDetails from "./component/Product/ProductDetails";
 import Products from "./component/Product/Products";
 import Search from "./component/Product/Search";
-import Profile from "./component/User/Profile.jsx";
+import Profile from "./component/User/Profile";
 import LoginSignup from "./component/User/LoginSignup";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./actions/userActions";
@@ -27,7 +27,7 @@ import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Payment from "./component/Cart/Payment";
 import OrderSuccess from "./component/Cart/OrderSuccess";
 import MyOrders from "./component/Order/MyOrders";
-import OrderDetails from "./component/Order/OrderDetails.jsx";
+import OrderDetails from "./component/Order/OrderDetails";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import DashBoard from "./component/Admin/DashBoard";
@@ -69,7 +69,6 @@ export default function App() {
     getStripeApiKey();
   }, [logoutNotify, dispatch]);
 
-  // window.addEventListener('contextmenu',(e)=>e.preventDefault())
   return (
     <BrowserRouter>
       <Header />
@@ -167,7 +166,7 @@ export default function App() {
           element={<ProtectedRoute isAdmin={true} Component={UpdateUser} />}
         />
         <Route
-          path="/admin/reviews"
+          path="/admin/reviews/:productId?"
           element={<ProtectedRoute isAdmin={true} Component={ProductReviews} />}
         />
         <Route path="/contact" element={<Contact />} />

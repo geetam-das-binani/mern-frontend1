@@ -23,6 +23,8 @@ import {
   allReviewsFail,
 } from "../Slices/adminGetAllReviewsSlice";
 
+import {deleteUserReviewFail,deleteUserReviewSuccess} from '../Slices/userDeleteReviewSlice'
+
 // get all products
 export const getAllProducts = async (
   dispatch,
@@ -213,3 +215,25 @@ export const deleteReviews = async (dispatch, reviewId,productId) => {
     dispatch(deleteReviewFail(error.response.data.errorMessage));
   }
 };
+
+// user delete review 
+export const deleteUserReview = async (dispatch,productId) => {
+  const config = {
+    withCredentials: true,
+  };
+  try {
+    const { data } = await axios.delete(
+      `http://localhost:8000/review/delete?productId=${productId}`,
+      
+      config
+    );
+    dispatch(deleteUserReviewSuccess(data.success));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(deleteUserReviewFail(error.message));
+    }
+
+    dispatch(deleteUserReviewFail(error.response.data.errorMessage));
+  }
+};
+

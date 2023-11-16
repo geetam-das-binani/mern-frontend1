@@ -1,58 +1,27 @@
-.products__review__container{
-    width: 100%;
-   
-    background-color: rgb(255, 255, 255);
-    border-left: 1px solid rgba(0, 0, 0, 0.158);
-    height: 100vh;
-}
-.products__reviews__form{
-    width: 20rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    padding: 3vmax;
-    background-color: white;
-}
-.product__reviews__form__heading{
-    color: rgba(0, 0, 0, 0.733);
-    font: 300 2rem "Roboto";
-    text-align: center;
-}
-.products__reviews__form > div {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    margin: 2rem;
-}
-.products__reviews__form > div > input{
-    padding: 1vmax 4vmax;
-    padding-right: 1vmax;
-    width: 100%;
-   border: 1px solid rgba(0, 0, 0, 0.267);
-    border-radius: 4px;
-    font: 300 0.9vmax cursive;
-    outline: none;
+.products__review__container {
+  width: 100%;
+
+  background-color: rgb(255, 255, 255);
+  border-left: 1px solid rgba(0, 0, 0, 0.158);
+  height: 100vh;
 }
 
-.products__reviews__form > div > svg{
-    position: absolute;
-    transform: translateX(1vmax);
-    font-size: 1.6vmax;
-    color: rgba(0, 0, 0, 0.623);
+.product__reviews__form__heading {
+  color: rgba(0, 0, 0, 0.733);
+  font: 300 2rem "Roboto";
+  text-align: center;
+  margin: 5vmax;
+}
+.products__reviews__form > div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 2rem;
 }
 
 @media screen and (max-width: 600px) {
-    .products__review__container {
-      border-left: none;
-      border-top: 1px solid rgba(0, 0, 0, 0.158);
-    }
-    .products__reviews__form > div > input {
-      padding: 2.5vmax 5vmax;
-      font: 300 1.7vmax cursive;
-    }
-  
-    .products__reviews__form > div > svg {
-      font-size: 2.8vmax;
-    }
+  .products__review__container {
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.158);
   }
+}

@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Metadata from "../layout/Metadata";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ReviewsIcon from '@mui/icons-material/Reviews';
 import Sidebar from "./Sidebar";
 import Loader from "../layout/loader/Loader";
 export default function ProductList() {
@@ -54,7 +55,7 @@ export default function ProductList() {
     {
       field: "actions",
       headerName: "Actions",
-      minwidth: 150,
+      minwidth: 160,
       type: "number",
       sortable: false,
       flex: 0.3,
@@ -63,6 +64,9 @@ export default function ProductList() {
           <Fragment>
             <Link to={`/admin/product/${params.id}`}>
               <EditIcon />
+            </Link>
+            <Link to={`/admin/reviews/${params.id}`}>
+              <ReviewsIcon />
             </Link>
             <Button  onClick={()=>deleteProductHandler(params.id)} >
               <DeleteIcon />

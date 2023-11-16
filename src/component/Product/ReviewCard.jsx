@@ -1,9 +1,9 @@
 import React from "react";
 import profilePng from "../../images/Profile.png";
 import { Rating } from "@mui/material";
-import { useSelector } from "react-redux";
-export default function ReviewCard({ name, rating, comment, user: userId }) {
-  const { user } = useSelector((state) => state.user);
+
+export default function ReviewCard({ name, rating, comment, avatar }) {
+
   const options = {
     value: rating,
     readOnly: true,
@@ -12,11 +12,7 @@ export default function ReviewCard({ name, rating, comment, user: userId }) {
   };
   return (
     <div className="review__card">
-      {user?._id === userId ? (
-        <img src={user?.avatar?.url || profilePng} alt="User" />
-      ) : (
-        <img src={profilePng} alt="User" />
-      )}
+      <img src={avatar || profilePng} alt="User" />
 
       <p>{name}</p>
       <Rating {...options} />

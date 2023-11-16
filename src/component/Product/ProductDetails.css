@@ -1,264 +1,276 @@
 .product__details {
-    width: 100vw;
-    max-width: 100%;
-    box-sizing: border-box;
-    padding: 6vmax;
-    display: flex;
-    background: white;
-  }
-  .product__details > div {
-    width: 100%;
+  width: 100vw;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6vmax;
+  display: flex;
+  background: white;
+}
+.product__details > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2vmax;
+  box-sizing: border-box;
+  border: 1px solid white;
+}
+.product__details > div:first-child {
+  text-align: center;
+}
+
+.product__details > div:last-child {
+  align-items: flex-start;
+}
+.carousel__image {
+  width: 30vmax;
+}
+.details__block__1 > h2 {
+  color: rgb(54, 54, 54);
+}
+.details__block__1 > p {
+  color: rgba(54, 54, 54, 0.582);
+  font: 200 0.56vmax cursive;
+}
+.details__block__2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.205);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+  width: 70%;
+  padding: 1vmax 0;
+}
+.details__block__2__span {
+  color: rgba(0, 0, 0, 0.699);
+  font: 200 0.8vmax cursive;
+}
+.details__block__3 {
+  width: 70%;
+}
+.details__block__3 > h1 {
+  color: rgba(17, 17, 17, 0.782);
+  font: 400 1.8vmax Franklin Gothic Medium;
+  margin: 1vmax 0;
+}
+.details__block__3__1 {
+  display: flex;
+  align-items: center;
+}
+.details__block__3__1__1 {
+  display: flex;
+}
+.details__block__3__1__1 > button {
+  border: none;
+  background: rgba(0, 0, 0, 0.616);
+  padding: 0.5vmax;
+  color: white;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.details__block__3__1__1 > button:hover {
+  background: rgba(0, 0, 0, 0.767);
+}
+.details__block__3__1__1 > input {
+  border: none;
+  padding: 0.5vmax;
+  width: 2vmax;
+  text-align: center;
+  outline: none;
+  font: 400 0.8vmax "Roboto";
+  color: rgba(0, 0, 0, 0.74);
+}
+
+.details__block__3__1 > button:last-child {
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s;
+  background: tomato;
+  font: 500 0.7vmax "Roboto";
+  border-radius: 20px;
+  outline: none;
+  margin: 1vmax;
+  padding: 0.5vmax 2vmax;
+}
+.details__block__3__1 > button:last-child:hover {
+  background: rgb(214, 84, 61);
+}
+.details__block__3 > p {
+  border-top: 1px solid rgba(0, 0, 0, 0.205);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+  padding: 1vmax 0;
+  color: rgba(0, 0, 0, 0.651);
+  margin: 1vmax 0;
+  font: 400 1vmax "Roboto";
+}
+.details__block__4 {
+  color: rgba(0, 0, 0, 0.897);
+  font: 500 1.2vmax "sans-serif";
+}
+.details__block__4 > p {
+  color: rgba(0, 0, 0, 0.534);
+  font: 300 0.8vmax "sans-serif";
+}
+
+.reviews__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}
+.submit__button,
+.delete__button {
+  border: none;
+  background: tomato;
+  font: 500 0.7vmax "Roboto";
+  border-radius: 20px;
+  padding: 0.6vmax 2vmax;
+  margin: 1vmax 0;
+  color: white;
+  cursor: pointer;
+  transition: all 0.5s;
+  outline: none;
+}
+.submit__button:hover,
+.delete__button:hover {
+  transform: scale(1.1);
+  background: rgb(197, 68, 45);
+}
+
+.submit__dialog {
+  display: flex;
+  flex-direction: column;
+}
+.submit__dialog__textarea {
+  border: 1px solid rgba(0, 0, 0, 0.082);
+  margin: 1vmax 0;
+  padding: 1rem;
+  font: 300 1rem "Roboto";
+  outline: none;
+}
+.reviews__heading {
+  color: #000000be;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.226);
+  font: 500 1.4vmax "Roboto";
+  text-align: center;
+  padding: 1vmax;
+  width: 20vmax;
+  margin: auto;
+  margin-bottom: 4vmax;
+}
+.reviews {
+  display: flex;
+  overflow: auto;
+}
+.reviews::-webkit-scrollbar {
+  width: 0;
+}
+.review__card {
+  flex: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.226);
+  border: 1px solid rgba(56, 56, 56, 0.116);
+  width: 30vmax;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1vmax;
+  margin: 1vmax;
+  transition: all .5s;
+}
+.review__card:hover {
+  transform: scale(1.1);
+}
+.review__card > img {
+  width: 5vmax;
+}
+.review__card > p {
+  color: rgba(0, 0, 0, 0.836);
+  font: 600 0.9vmax "Roboto";
+}
+.review__card__comment {
+  color: rgba(0, 0, 0, 0.445);
+  font: 300 0.8vmax cursive;
+}
+
+.no__reviews {
+  font: 400 1.3vmax "Gill Sans";
+  text-align: center;
+  color: rgba(0, 0, 0, 0.548);
+}
+@media screen and (max-width: 600px) {
+  .product__details {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    padding: 2vmax;
-    box-sizing: border-box;
-    border: 1px solid white;
   }
-  .product__details > div:first-child {
-    text-align: center;
-  }
-  
   .product__details > div:last-child {
-    align-items: flex-start;
-  }
-  .carousel__image {
-    width: 30vmax;
+    align-items: center;
   }
   .details__block__1 > h2 {
-    color: rgb(54, 54, 54);
+    font-size: 2.8vmax;
+    text-align: center;
   }
   .details__block__1 > p {
-    color: rgba(54, 54, 54, 0.582);
-    font: 200 0.56vmax cursive;
+    font-size: 1vmax;
+    text-align: center;
   }
   .details__block__2 {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.205);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
-    width: 70%;
-    padding: 1vmax 0;
+    justify-content: center;
   }
-  .details__block__2__span {
-  color: rgba(0, 0, 0, .699);
-    font: 200 .8vmax cursive;
-  }
-  .details__block__3 {
-    width: 70%;
+  .details__block__2 > span {
+    font-size: 1.5vmax;
   }
   .details__block__3 > h1 {
-    color: rgba(17, 17, 17, 0.782);
-    font: 400 1.8vmax Franklin Gothic Medium;
-    margin: 1vmax 0;
+    text-align: center;
+    font: 700 3vmax Franklin Gothic Medium;
   }
   .details__block__3__1 {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
   }
   .details__block__3__1__1 {
-    display: flex;
+    padding: 2vmax 0;
   }
   .details__block__3__1__1 > button {
-    border: none;
-    background: rgba(0, 0, 0, 0.616);
-    padding: 0.5vmax;
-    color: white;
-    transition: all 0.5s;
-    cursor: pointer;
+    padding: 1.2vmax;
+    width: 4vmax;
   }
-  .details__block__3__1__1 > button:hover {
-    background: rgba(0, 0, 0, 0.767);
+  .details__block__3__1__1 > input {
+    padding: 1.5vmax;
+    width: 4vmax;
+    font: 400 1.8vmax "Roboto";
   }
-  .details__block__3__1__1> input {
-    border: none;
-    padding: 0.5vmax;
-    width: 2vmax;
-    text-align: center;
-    outline: none;
-    font: 400 0.8vmax "Roboto";
-    color: rgba(0, 0, 0, 0.74);
-  }
-  
   .details__block__3__1 > button:last-child {
-    border: none;
-    cursor: pointer;
-    color: white;
-    transition: all 0.5s;
-    background: tomato;
-    font: 500 0.7vmax "Roboto";
-    border-radius: 20px;
-    outline: none;
-    margin: 1vmax;
-    padding: 0.5vmax 2vmax;
-  }
-  .details__block__3__1 > button:last-child:hover {
-    background: rgb(214, 84, 61);
+    padding: 1.5vmax;
+    width: 20vmax;
+    font: 500 1.7vmax "Roboto";
+    margin: 3vmax;
   }
   .details__block__3 > p {
-    border-top: 1px solid rgba(0, 0, 0, 0.205);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
-    padding: 1vmax 0;
-    color: rgba(0, 0, 0, 0.651);
-    margin: 1vmax 0;
-    font: 400 1vmax "Roboto";
+    font: 400 2vmax "Roboto";
+    padding: 2.5vmax;
+    text-align: center;
   }
   .details__block__4 {
-    color: rgba(0, 0, 0, 0.897);
-    font: 500 1.2vmax "sans-serif";
+    font: 500 2.5vmax "sans-serif";
   }
   .details__block__4 > p {
-    color: rgba(0, 0, 0, 0.534);
-    font: 300 0.8vmax "sans-serif";
+    font: 300 1.8vmax "sans-serif";
   }
-  
-  .submit__button {
-    border: none;
-    background: tomato;
-    font: 500 0.7vmax "Roboto";
-    border-radius: 20px;
-    padding: 0.6vmax 2vmax;
-    margin: 1vmax 0;
-    color: white;
-    cursor: pointer;
-    transition: all 0.5s;
-    outline: none;
-  }
-  .submit__button:hover {
-    transform: scale(1.1);
-    background: rgb(197, 68, 45);
+  .reviews__actions {
+    width: 80%;
   }
 
-  .submit__dialog{
-    display: flex;
-    flex-direction: column;
-  }
-  .submit__dialog__textarea{
-    border: 1px solid rgba(0, 0, 0, .082);
-    margin: 1vmax 0;
-    padding: 1rem;
-    font: 300 1rem 'Roboto';
-    outline: none;
-
-  }
-  .reviews__heading{
-    color: #000000be;
-    border-bottom: 1px solid rgba(0, 0, 0, .226);
-    font: 500 1.4vmax 'Roboto';
-    text-align: center;
-    padding: 1vmax;
+  .submit__button,
+  .delete__button {
+    padding: 1.5vmax;
     width: 20vmax;
-    margin: auto;
-    margin-bottom: 4vmax;
+    margin: 3vmax 0;
+    font: 500 1.7vmax "Roboto";
   }
-  .reviews{
-    display: flex;
-    overflow: auto;
+  .review__card > p {
+    font: 600 3vw "Roboto";
   }
-  .reviews::-webkit-scrollbar{
-    width: 0;
+  .review__card__comment {
+    font: 300 5vw "Roboto";
   }
-  .review__card{
-    flex: none;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .226);
-    border: 1px solid rgba(56, 56, 56, .116);
-    width: 30vmax;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1vmax;
-    margin: 1vmax;
-  }
-  .review__card > img{
-    width: 5vmax;
-  
-  }
-  .review__card >p {
-    color: rgba(0, 0, 0, .836);
-    font: 600 .9vmax 'Roboto';
-  
-  }
-  .review__card__comment{
-    color: rgba(0, 0, 0, .445);
-    font: 300 .8vmax cursive;
-  }
-
-  .no__reviews{
-    font: 400 1.3vmax 'Gill Sans';
-    text-align: center;
-    color: rgba(0, 0, 0, .548)
-  }
-  @media screen and (max-width: 600px) {
-    .product__details {
-      display: flex;
-      flex-direction: column;
-    }
-    .product__details > div:last-child {
-      align-items: center;
-    }
-    .details__block__1 > h2 {
-      font-size: 2.8vmax;
-      text-align: center;
-    }
-    .details__block__1 > p {
-      font-size: 1vmax;
-      text-align: center;
-    }
-    .details__block__2 {
-      justify-content: center;
-    }
-    .details__block__2 > span {
-      font-size: 1.5vmax;
-    }
-    .details__block__3 > h1 {
-      text-align: center;
-      font: 700 3vmax Franklin Gothic Medium;
-    }
-    .details__block__3__1 {
-      flex-direction: column;
-    }
-    .details__block__3__1__1{
-      padding: 2vmax 0;
-    }
-    .details__block__3__1__1 > button {
-      padding: 1.2vmax;
-      width: 4vmax;
-    }
-    .details__block__3__1__1 > input {
-      padding: 1.5vmax;
-      width: 4vmax;
-      font: 400 1.8vmax "Roboto";
-    }
-    .details__block__3__1 > button:last-child {
-      padding: 1.5vmax;
-      width: 20vmax;
-      font: 500 1.7vmax "Roboto";
-      margin: 3vmax;
-    }
-    .details__block__3 > p {
-      font: 400 2vmax "Roboto";
-      padding: 2.5vmax;
-      text-align: center;
-    }
-    .details__block__4{
-      font: 500 2.5vmax 'sans-serif'
-  
-    }
-    .details__block__4> p{
-      font: 300 1.8vmax 'sans-serif'
-    }
-    .submit__button{
-      padding: 1.5vmax;
-      width: 20vmax;
-      margin: 3vmax 0;
-      font:500 1.7vmax 'Roboto' ;
-    }
-    .review__card >p{
-      font: 600 3vw 'Roboto';
-    }
-    .review__card__comment{
-      font: 300 5vw 'Roboto';
-    }
-  }
-  
+}

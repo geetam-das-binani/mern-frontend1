@@ -12,31 +12,28 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Metadata from "../layout/Metadata";
-import StarIcon from "@mui/icons-material/Star";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Sidebar";
-import Loader from "../layout/loader/Loader";
+import { useParams } from "react-router-dom";
 
 export default function ProductReviews() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [productId, setProductId] = useState("");
-
+  let { productId } = useParams();
+  if (productId) {
+    localStorage.setItem("productId", productId);
+  }
   const { reviews, error } = useSelector((state) => state.adminAllReviews);
   const { isDeleted, error: deleteError } = useSelector(
     (state) => state.adminDeleteReview
   );
 
   const deleteReviewHandler = (reviewId) => {
+    productId = localStorage.getItem("productId");
     deleteReviews(dispatch, reviewId, productId);
   };
 
-  const productsReviewsSubmitHandler = (e) => {
-    e.preventDefault();
-
-    getAllReviews(dispatch, productId);
-  };
   const columns = [
     {
       field: "id",
@@ -118,7 +115,7 @@ export default function ProductReviews() {
     if (isDeleted) {
       toast.success("Review Deleted Successfully", { theme: "dark" });
       dispatch(resetDeleteReviewSuccess());
-      
+      getAllReviews(dispatch, localStorage.getItem("productId"));
       navigate("/admin/reviews");
     }
   }, [dispatch, error, isDeleted, deleteError, navigate, productId]);
@@ -129,31 +126,7 @@ export default function ProductReviews() {
         <div className="dashboard">
           <Sidebar />
           <div className="products__review__container">
-            <form
-              className="products__reviews__form"
-              encType="multipart/form-data"
-              onSubmit={productsReviewsSubmitHandler}
-            >
-              <h1 className="product__reviews__form__heading"> ALL REVIEWS</h1>
-              <div>
-                <StarIcon />
-                <input
-                  type="text"
-                  placeholder="Product Id"
-                  required
-                  value={productId}
-                  onChange={({ target }) => setProductId(target.value)}
-                />
-              </div>
-
-              <Button
-                id="create__product__btn"
-                type="submit"
-                disabled={productId === "" ? true : false}
-              >
-                Search
-              </Button>
-            </form>
+            <h1 className="product__reviews__form__heading"> ALL REVIEWS</h1>
 
             {reviews && reviews.length > 0 ? (
               <DataGrid
@@ -165,7 +138,7 @@ export default function ProductReviews() {
               />
             ) : (
               <h1 className="product__reviews__form__heading">
-                No ReviewsFound
+                No Reviews Found
               </h1>
             )}
           </div>

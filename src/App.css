@@ -1,21 +1,21 @@
-*{
+* {
   margin: 0;
   scroll-behavior: smooth;
   box-sizing: border-box;
 }
-body{
-  cursor: url('./images/cursor.png'),  auto;
+body {
+  cursor: url("./images/cursor.png"), auto;
 }
 
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
+input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.green_Color{
+.green_Color {
   color: green !important;
 }
-.red_Color{
+.red_Color {
   color: red !important ;
 }
