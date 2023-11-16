@@ -11,6 +11,14 @@
   font: 300 2rem "Roboto";
   text-align: center;
   margin: 5vmax;
+  border-bottom: 1px solid gray;
+}
+.no__product__reviews__heading{
+  color: rgba(0, 0, 0, 0.733);
+  font: 300 2rem "Roboto";
+  text-align: center;
+  margin: 5vmax;
+  
 }
 .products__reviews__form > div {
   display: flex;
@@ -18,10 +26,21 @@
   align-items: center;
   margin: 2rem;
 }
+.review__icon {
+  text-align: center;
+}
+.review__icon > svg {
+  font-size: 7vmax;
+  color: tomato;
+}
 
 @media screen and (max-width: 600px) {
   .products__review__container {
     border-left: none;
     border-top: 1px solid rgba(0, 0, 0, 0.158);
+  }
+  .review__icon > svg {
+    font-size: 18vmax;
+    color: tomato;
   }
 }

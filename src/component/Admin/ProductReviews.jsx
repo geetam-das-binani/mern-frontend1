@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Metadata from "../layout/Metadata";
-
+import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Sidebar";
 import { useParams } from "react-router-dom";
@@ -137,9 +137,12 @@ export default function ProductReviews() {
                 className="product__list__table"
               />
             ) : (
-              <h1 className="product__reviews__form__heading">
+              <>
+              <h1 className="no__product__reviews__heading">
                 No Reviews Found
               </h1>
+              <p className="review__icon"><CancelIcon/></p>
+              </>
             )}
           </div>
         </div>

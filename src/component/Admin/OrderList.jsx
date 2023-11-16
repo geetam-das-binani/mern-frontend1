@@ -16,7 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Metadata from "../layout/Metadata";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Sidebar from "./Sidebar";
 import Loader from "../layout/loader/Loader";
 import { Typography } from "@mui/material";
@@ -74,7 +74,7 @@ export default function OrderList() {
               <EditIcon />
             </Link>
             <Button onClick={() => deleteOrderHandler(params.id)}>
-              <DeleteIcon />
+              <DeleteForeverIcon />
             </Button>
           </Fragment>
         );

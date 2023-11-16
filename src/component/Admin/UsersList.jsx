@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Metadata from "../layout/Metadata";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Sidebar from "./Sidebar";
 import Loader from "../layout/loader/Loader";
 import { clearAllUsersFail } from "../../Slices/adminAllUsersSlice";
@@ -81,7 +81,7 @@ export default function Userslist() {
                 <EditIcon />
               </Link>
               <Button onClick={() => deleteUserHandler(params.id)}>
-                <DeleteIcon />
+                <DeleteForeverIcon />
               </Button>
             </Fragment>
           );
