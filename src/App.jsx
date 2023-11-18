@@ -20,7 +20,8 @@ import ProtectedRoute from "./component/Route/ProtectedRoute";
 import UpdateProfile from "./component/User/UpdateProfile";
 import UpdatePassword from "./component/User/UpdatePassword";
 import ForgotPassword from "./component/User/ForgotPassword";
-import ResetPassword from "./component/User/ResetPassword.jsx";
+import OtpLogin from "./component/User/OtpLogin";
+import ResetPassword from "./component/User/ResetPassword";
 import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
@@ -93,6 +94,7 @@ export default function App() {
           element={<ProtectedRoute Component={UpdatePassword} />}
         />
         <Route path="/password/forget" element={<ForgotPassword />} />
+        <Route path="/otp/login" element={<OtpLogin />} />
         <Route
           path="/api/v1/password/reset/:token"
           element={<ResetPassword />}

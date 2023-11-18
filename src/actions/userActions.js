@@ -37,6 +37,9 @@ import {
   adminUpdateUserSuccess,
 } from "../Slices/deleteUpdateUserAdminSlice";
 
+import { otpSuccess, otpFail } from "../Slices/loginOtpSlice";
+import { otpVerifySuccess, otpVerifyFail } from "../Slices/loginOtpSlice";
+
 // login user
 
 export const login = async (dispatch, email, password) => {
@@ -95,7 +98,9 @@ export const loadUser = async (dispatch) => {
     const { data } = await axios.get(`http://localhost:8000/me`, {
       withCredentials: true,
     });
+
     dispatch(loadUserSuccess(data.user));
+   
   } catch (error) {
     dispatch(loadUserFail());
   }
@@ -115,6 +120,47 @@ export const logout = async (dispatch) => {
     }
 
     dispatch(logoutFail(error.response.data.errorMessage));
+  }
+};
+
+// otp login
+export const loginOtp = async (dispatch, phoneNumber) => {
+  const config = {
+    headers: { "Content-Type": "application/json" },
+  };
+  try {
+    const { data } = await axios.post(
+      `http://localhost:8000/sendotp`,
+      { phoneNumber },
+      config
+    );
+    dispatch(otpSuccess(data.success));
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(otpFail(error.message));
+    }
+
+    dispatch(otpFail(error.response.data.errorMessage));
+  }
+};
+
+// otp verify
+export const verifyOtp = async (dispatch,otp) => {
+  try {
+    const { data } = await axios.post(
+      `http://localhost:8000/verifyOtp`,
+      { otp },
+      { withCredentials: true }
+    );
+ 
+    dispatch(otpVerifySuccess(data.success));
+    
+  } catch (error) {
+    if (error.message === "Network Error") {
+      return dispatch(otpVerifyFail(error.message));
+    }
+
+    dispatch(otpVerifyFail(error.response.data.errorMessage));
   }
 };
 
@@ -225,7 +271,7 @@ export const getAllUsersAdmin = async (dispatch) => {
     if (error.message === "Network Error") {
       return dispatch(adminAllUsersFail(error.message));
     }
-    
+
     dispatch(adminAllUsersFail(error.response.data.errorMessage));
   }
 };
@@ -264,7 +310,7 @@ export const updateUser = async (dispatch, id, userData) => {
     if (error.message === "Network Error") {
       return dispatch(adminUpdateUserFail(error.message));
     }
- 
+
     dispatch(adminUpdateUserFail(error.response.data.errorMessage));
   }
 };

@@ -5,6 +5,7 @@ import Loader from "../layout/loader/Loader";
 import LockIcon from "@mui/icons-material/Lock";
 import FaceIcon from "@mui/icons-material/Face";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PhoneIcon from '@mui/icons-material/Phone';
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -32,6 +33,7 @@ export default function LoginSignup() {
     name: "",
     email: "",
     password: "",
+    phoneNumber:""
   });
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
@@ -49,6 +51,7 @@ export default function LoginSignup() {
     myform.set("email", user.email);
     myform.set("password", user.password);
     myform.set("avatar", avatar);
+    myform.set("phoneNumber", user.phoneNumber);
     dispatch(setLoading(true));
     register(dispatch, myform);
   };
@@ -152,7 +155,12 @@ export default function LoginSignup() {
                     onChange={({ target }) => setLoginPassword(target.value)}
                   />
                 </div>
+                <div className="login__actions">
                 <Link to="/password/forget">Forgot Password ?</Link>
+                <Link to="/otp/login"> Login Using Otp</Link>
+                </div>
+              
+
                 <input type="submit" value="login" className="login__btn" />
               </form>
               <form
@@ -194,12 +202,25 @@ export default function LoginSignup() {
                     onChange={registerDateChange}
                   />
                 </div>
+                
+                <div>
+              <PhoneIcon/>
+                <input
+                    type="number"
+                    placeholder="Number"
+                    required
+                    name="phoneNumber"
+                    value={user.phoneNumber}
+                    onChange={registerDateChange}
+                  />
+                </div>
                 <div id="register__image">
                   <img src={avatarPreview} alt="Avatar Preview" />
                   <input
                     type="file"
                     name="avatar"
                     accept="image/*"
+                    required
                     onChange={registerDateChange}
                   />
                 </div>

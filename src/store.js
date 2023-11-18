@@ -20,6 +20,7 @@ import adminUserDetailsReducer from './Slices/adminUserDetailsSlice'
 import productReviewsReducer from './Slices/adminGetAllReviewsSlice'
 import deleteReviewReducer   from './Slices/adminDeleteReviewSlice'
 import userDeleteReviewReducer   from './Slices/userDeleteReviewSlice'
+import  otpReducer  from './Slices/loginOtpSlice'
 
 
 
@@ -45,7 +46,8 @@ const store = configureStore({
     adminUserDetail:adminUserDetailsReducer,
     adminAllReviews:productReviewsReducer,
     adminDeleteReview:deleteReviewReducer,
-    userDeleteReview:userDeleteReviewReducer
+    userDeleteReview:userDeleteReviewReducer,
+    otp:otpReducer
 
     
   },
