@@ -7,6 +7,8 @@ const initialState = {
   logoutNotify: false,
   loginRegisterNotify: false,
   loading: true,
+  showloginTab:null,
+  showRegisterTab:null
 };
 
 const userReducer = createSlice({
@@ -25,6 +27,7 @@ const userReducer = createSlice({
       state.error = payload;
       state.isAuthenticatedUser = false;
       state.user = null;
+      state.showloginTab=true
     },
 
     registerSuccess: (state, { payload }) => {
@@ -37,6 +40,7 @@ const userReducer = createSlice({
       state.error = payload;
       state.isAuthenticatedUser = false;
       state.user = null;
+      state.showRegisterTab=true
     },
     loadUserSuccess: (state, { payload }) => {
       state.user = payload;
@@ -59,6 +63,8 @@ const userReducer = createSlice({
     clearError: (state) => {
       state.error = null;
       state.logoutNotify = false;
+      state.showloginTab=null
+      state.showRegisterTab=null
     },
     clearNotifyMessage: (state) => {
       state.loginRegisterNotify = false;

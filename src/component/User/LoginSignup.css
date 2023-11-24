@@ -131,10 +131,18 @@
   transition: all 0.5s;
   outline: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+  display: grid;
+  place-items: center;
 }
 .login__btn:hover,
 .signUp__btn:hover {
   background: rgb(170, 66, 46);
+}
+.signUp__btn:disabled,.login__btn:disabled {
+  background: #e7e8e9;
+  color: #9fa3a9;
+
+  cursor: not-allowed;
 }
 .shift__to__left {
   transform: translateX(-100%);

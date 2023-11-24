@@ -5,7 +5,7 @@ import Loader from "../layout/loader/Loader";
 import LockIcon from "@mui/icons-material/Lock";
 import FaceIcon from "@mui/icons-material/Face";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import PhoneIcon from '@mui/icons-material/Phone';
+import PhoneIcon from "@mui/icons-material/Phone";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,14 +17,23 @@ import {
   clearNotifyMessage,
   setLoading,
 } from "../../Slices/userSlice";
+import ButtonLoader from "../layout/loader/ButtonLoader";
+
 export default function LoginSignup() {
-  const { error, isAuthenticatedUser, loginRegisterNotify, loading } =
-    useSelector((state) => state.user);
+  const {
+    error,
+    isAuthenticatedUser,
+    loginRegisterNotify,
+    loading,
+    showloginTab,
+    showRegisterTab
+  } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginPassword, setLoginPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
@@ -33,15 +42,15 @@ export default function LoginSignup() {
     name: "",
     email: "",
     password: "",
-    phoneNumber:""
+    phoneNumber: "",
   });
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
-  const loginSubmit = async (e) => {
+  const loginSubmit = (e) => {
     e.preventDefault();
-    dispatch(setLoading(true));
-    await login(dispatch, loginEmail, loginPassword);
+    setDisabled(true);
+    login(dispatch, loginEmail, loginPassword);
   };
 
   const registerSubmit = (e) => {
@@ -52,7 +61,7 @@ export default function LoginSignup() {
     myform.set("password", user.password);
     myform.set("avatar", avatar);
     myform.set("phoneNumber", user.phoneNumber);
-    dispatch(setLoading(true));
+    setDisabled(true);
     register(dispatch, myform);
   };
 
@@ -75,14 +84,29 @@ export default function LoginSignup() {
 
   const redirect = location.search ? location.search.split("=")[1] : "account";
 
+
   useEffect(() => {
-    if (error) {
-      dispatch(setLoading(false));
+    if (error && showloginTab) {
       toast.error(error, { theme: "dark" });
       dispatch(clearError());
+      setDisabled(false);
+      switcherTab.current.classList.add("shift__to__neutral");
+      switcherTab.current.classList.remove("shift__to__right");
+      registerTab.current.classList.remove("shift__to__neutral__form");
+      loginTab.current.classList.remove("shift__to__left");
+    } 
+    
+    else if(error &&  showRegisterTab) {
+      toast.error(error, { theme: "dark" });
+      dispatch(clearError());
+      setDisabled(false);
+      switcherTab.current.classList.add("shift__to__right");
+      switcherTab.current.classList.remove("shift__to__neutral");
+      registerTab.current.classList.add("shift__to__neutral__form");
+      loginTab.current.classList.add("shift__to__left");
     }
+
     if (isAuthenticatedUser) {
-      dispatch(setLoading(false));
       if (loginRegisterNotify === "Loged in") {
         toast.success("Log in Successfull", { theme: "dark" });
         dispatch(clearNotifyMessage());
@@ -92,7 +116,6 @@ export default function LoginSignup() {
       }
 
       navigate(`/${redirect}`);
-     
     }
 
     setTimeout(() => {
@@ -156,12 +179,18 @@ export default function LoginSignup() {
                   />
                 </div>
                 <div className="login__actions">
-                <Link to="/password/forget">Forgot Password ?</Link>
-                <Link to="/otp/login"> Login Using Otp</Link>
+                  <Link to="/password/forget">Forgot Password ?</Link>
+                  <Link to="/otp/login"> Login Using Otp ?</Link>
                 </div>
-              
 
-                <input type="submit" value="login" className="login__btn" />
+                <button
+                  disabled={disabled}
+                  type="submit"
+                  className="login__btn"
+                >
+                  {disabled ? <ButtonLoader /> : "Login"}
+                </button>
+              
               </form>
               <form
                 className="signUp__form"
@@ -202,10 +231,10 @@ export default function LoginSignup() {
                     onChange={registerDateChange}
                   />
                 </div>
-                
+
                 <div>
-              <PhoneIcon/>
-                <input
+                  <PhoneIcon />
+                  <input
                     type="number"
                     placeholder="Number"
                     required
@@ -224,7 +253,13 @@ export default function LoginSignup() {
                     onChange={registerDateChange}
                   />
                 </div>
-                <input type="submit" value="Register" className="signUp__btn" />
+                <button
+                  disabled={disabled}
+                  type="submit"
+                  className="signUp__btn"
+                >
+                  {disabled ? <ButtonLoader /> : "Register"}
+                </button>
               </form>
             </div>
           </div>
