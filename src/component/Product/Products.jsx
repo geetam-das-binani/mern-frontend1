@@ -19,9 +19,34 @@ const categories = [
   "T-shirts",
   "Attire",
   "camera",
-  "Tops",
+  "Books",
   "SmartPhones",
-  "Toys"
+  "Toys",
+  "Home & Living",
+];
+const brands = [
+  "Apple",
+  "Samsung",
+  "Sony",
+  "Nike",
+  "Adidas",
+  "Lego",
+  "Puma",
+  "Play Station",
+  "Xbox",
+  "Bed Bath & Beyond",
+  "Pottery Barn",
+  "Crate & Barrel",
+  "Maybelline",
+  `L'Oréal`,
+  "Clinique",
+  "Marvel Comics",
+  "National Geographic",
+  "Brooks Brothers",
+  "Hugo Boss",
+  "Express",
+  "Zara",
+  "River Island",
 ];
 export default function Products() {
   const { keyword } = useParams();
@@ -31,6 +56,7 @@ export default function Products() {
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState("");
   const [ratings, setRatings] = useState(0);
+  const [isSelectedBrand, setIsSelectedBrand] = useState(false);
   const {
     loading,
     products,
@@ -39,20 +65,37 @@ export default function Products() {
     resultsPerPage,
     filteredProductsCount,
   } = useSelector((state) => state.products);
- 
+
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
   const priceHandler = (e, newPrice) => {
     setPrice(newPrice);
   };
+
   useEffect(() => {
     if (error) {
-      toast.error(error, { theme: "dark"});
-     
+      toast.error(error, { theme: "dark" });
     }
-    getAllProducts(dispatch, keyword, currentPage, price, category, ratings);
-  }, [dispatch, error, keyword, currentPage, price, category, ratings]);
+    getAllProducts(
+      dispatch,
+      keyword,
+      currentPage,
+      price,
+      category,
+      ratings,
+      isSelectedBrand
+    );
+  }, [
+    dispatch,
+    error,
+    keyword,
+    currentPage,
+    price,
+    category,
+    ratings,
+    isSelectedBrand,
+  ]);
   let count = filteredProductsCount;
   return (
     <Fragment>
@@ -60,7 +103,7 @@ export default function Products() {
         <Loader />
       ) : (
         <Fragment>
-          <Metadata title='PRODUCTS ...ECOMMERCE'/>
+          <Metadata title="PRODUCTS ...ECOMMERCE" />
           <h2 className="products__heading">Products</h2>
 
           <div className="products">
@@ -81,20 +124,31 @@ export default function Products() {
               min={0}
               max={25000}
             />
-            <Typography>Categories</Typography>
-            <ul className="category__box">
-              {categories.map((category) => {
-                return (
-                  <li
-                    className="category__link"
-                    key={category}
-                    onClick={() => setCategory(category)}
-                  >
-                    {category}
-                  </li>
-                );
-              })}
-            </ul>
+
+            <select
+              value={category}
+              onChange={({ target }) => setCategory(target.value)}
+            >
+              <option value="">Sort</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={isSelectedBrand}
+              onChange={({ target }) => setIsSelectedBrand(target.value)}
+            >
+              <option value="">Brands</option>
+              {brands.map((brand) => (
+                <option key={brand} value={brand}>
+                  {brand}
+                </option>
+              ))}
+            </select>
+
             <fieldset>
               <Typography>Ratings Above</Typography>
               <Slider
@@ -126,11 +180,9 @@ export default function Products() {
               />
             </div>
           )}
-     
-
         </Fragment>
       )}
-     <ToastContainer  />
+      <ToastContainer />
     </Fragment>
   );
 }

@@ -1,104 +1,100 @@
 .products__heading {
-    margin: 2vmax auto;
-    width: 15vw;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.171);
-    text-align: center;
-    padding: 2vmax;
-    color: rgba(0, 0, 0, 0.678);
-    font: 500 1.5vmax "Roboto";
-    text-align: center;
-  }
-  
-  .products {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 5vmax;
-    justify-content: center;
-    min-height: 30vh;
-  }
-  .pagination__box {
-    display: flex;
-    justify-content: center;
-    margin-top: 1vmax;
-  }
-  .pagination {
-    display: flex;
-    justify-content: center;
-    padding: 0;
-  }
-  .page__item {
-    list-style: none;
-    background: rgb(255, 255, 255);
-    border: 1px solid rgba(0, 0, 0, 0.178);
-    padding: 1vmax 1.5vmax;
-    transition: all 0.5s;
-    cursor: pointer;
-  }
-  
-  .page__item:first-child {
-    border-radius: 5px 0 0 5px;
-  }
-  .page__item:last-child {
-    border-radius: 0 5px 5px 0;
+  margin: 2vmax auto;
+  width: 15vw;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.171);
+  text-align: center;
+  padding: 2vmax;
+  color: rgba(0, 0, 0, 0.678);
+  font: 500 1.5vmax "Roboto";
+  text-align: center;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 5vmax;
+  justify-content: center;
+  min-height: 30vh;
+}
+.pagination__box {
+  display: flex;
+  justify-content: center;
+  margin-top: 1vmax;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+.page__item {
+  list-style: none;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.178);
+  padding: 1vmax 1.5vmax;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.page__item:first-child {
+  border-radius: 5px 0 0 5px;
+}
+.page__item:last-child {
+  border-radius: 0 5px 5px 0;
+}
+.page__link {
+  text-decoration: none;
+  color: rgb(80, 80, 80);
+  font: 300 1vmax "Roboto";
+  transition: all 0.5s;
+}
+.page__item:hover {
+  background: rgb(230, 230, 230);
+}
+.page__item:hover .page__link {
+  color: rgb(0, 0, 0);
+}
+.page__item__active {
+  background: tomato;
+}
+.page__link__active {
+  color: white;
+}
+
+.filter__box {
+  width: 10vmax;
+  position: absolute;
+  top: 10vmax;
+  left: 2vmax;
+}
+.filter__box > select {
+  width: 100%;
+  padding: 1vmax;
+
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  outline: none;
+  font: 300 0.9vmax cursive;
+  border-radius: 4px;
+  margin: .5vmax 0;
+}
+
+
+.filter__box > fieldset {
+  border: 1px solid rgba(0, 0, 0, 0.129);
+  padding: 0%;
+  margin: 0%;
+}
+.filter__box > fieldset > p {
+  font: 500 1.3vmax "Roboto";
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  .filter__box {
+    position: static;
+    width: 20vmax;
+    margin: auto;
   }
   .page__link {
-    text-decoration: none;
-    color: rgb(80, 80, 80);
-    font: 300 1vmax "Roboto";
-    transition: all 0.5s;
+    font: 300 1.7vmax "Roboto";
   }
-  .page__item:hover {
-    background: rgb(230, 230, 230);
-  }
-  .page__item:hover .page__link {
-    color: rgb(0, 0, 0);
-  }
-  .page__item__active {
-    background: tomato;
-  }
-  .page__link__active {
-    color: white;
-  }
-  .filter__box {
-    width: 10vmax;
-    position: absolute;
-    top: 10vmax;
-    left: 2vmax;
-  }
-  .category__box {
-    padding: 0%;
-    list-style: none;
-    color: rgba(0, 0, 0, 0.61);
-    font: 400 0.8vmax "Roboto";
-    margin: 0.4vmax;
-    cursor: pointer;
-    transition: all 0.5s;
-  }
-  .category__link:hover {
-    color: tomato;
-  }
-  .filter__box > fieldset {
-    border: 1px solid rgba(0, 0, 0, 0.129);
-    padding: 0%;
-    margin: 0%;
-  }
-  .filter__box > fieldset > p {
-    font: 500 1.3vmax "Roboto";
-    text-align: center;
-  }
-  @media screen and (max-width: 600px) {
-    .filter__box {
-      position: static;
-      width: 20vmax;
-      margin: auto;
-  
-  
-    }
-    .page__link {
-      font: 300 1.7vmax "Roboto";
-    }
-    .category__link{
-      font: 400 1.8vmax 'Roboto';
-    }
-  }
-  
+ 
+}

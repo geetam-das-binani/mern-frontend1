@@ -17,6 +17,7 @@ import Sidebar from "../Admin/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import ButtonLoader from "../layout/loader/ButtonLoader";
+import BrandingWatermarkIcon from "@mui/icons-material/BrandingWatermark";
 import "react-toastify/dist/ReactToastify.css";
 const categories = [
   "Laptop",
@@ -27,19 +28,19 @@ const categories = [
   "camera",
   "Tops",
   "SmartPhones",
-  "Toys"
+  "Toys",
 ];
 
 export default function NewProduct() {
-  
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDesciption] = useState("");
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
+  const [brand,setBrand]=useState("")
   const [images, setImages] = useState([]);
   const [imagePreviev, setImagePreview] = useState([]);
 
@@ -52,7 +53,7 @@ export default function NewProduct() {
       setDisabled(false);
     }
     if (success) {
-      toast.success('Product Created Successfully',{theme:'dark'})
+      toast.success("Product Created Successfully", { theme: "dark" });
       dispatch(resetProductSuccess());
       navigate("/admin/dashboard");
     }
@@ -60,37 +61,37 @@ export default function NewProduct() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const myform= new FormData()
-    myform.set('name',name)
-    myform.set('price',price)
-    myform.set('description',description)
-    myform.set('category',category)
-    myform.set('Stock',stock)
+    const myform = new FormData();
+    myform.set("name", name);
+    myform.set("price", price);
+    myform.set("description", description);
+    myform.set("category", category);
+    myform.set("Stock", stock);
+    myform.set("brand", brand);
 
-    images.forEach((image)=>{
-        myform.append('images',image)
-    })
-    setDisabled(true)
-    createProduct(dispatch,myform)
+    images.forEach((image) => {
+      myform.append("images", image);
+    });
+    setDisabled(true);
+    createProduct(dispatch, myform);
   };
 
-  const createProductImageChange=(e)=>{
-       const files=Array.from(e.target.files)
-        setImages([])
-        setImagePreview([])
-       
-       files.forEach((file)=>{
-        const reader=new FileReader()
-        reader.onload=()=>{
-            if (reader.readyState === 2) {
-              setImages((prev)=>[...prev,reader.result])
-              setImagePreview((prev)=>[...prev,reader.result])
-             
-              }
+  const createProductImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setImages([]);
+    setImagePreview([]);
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImages((prev) => [...prev, reader.result]);
+          setImagePreview((prev) => [...prev, reader.result]);
         }
-        reader.readAsDataURL(file)
-       })
-  }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
   return (
     <Fragment>
       <Metadata title="Create Product" />
@@ -153,27 +154,35 @@ export default function NewProduct() {
                 type="number"
                 placeholder="Stock"
                 required
-               onChange={({ target }) => setStock(target.value)}
+                onChange={({ target }) => setStock(target.value)}
               />
             </div>
+            <div>
+              <BrandingWatermarkIcon />
+              <input
+                type="text"
+                placeholder="Brand"
+                required
+                value={brand}
+                onChange={({ target }) => setBrand(target.value)}
+              />
+            
+            </div>
             <div id="create__product__form__file">
-              <input 
-              type="file"
-              onChange={createProductImageChange} 
-              name="avatar" 
-              accept="images/*"
-              multiple
-               />
+              <input
+                type="file"
+                onChange={createProductImageChange}
+                name="avatar"
+                accept="images/*"
+                multiple
+              />
             </div>
             <div id="create__product__form__image">
               {imagePreviev.map((pic) => (
                 <img src={pic} key={pic} alt="Product preview" />
               ))}
             </div>
-            <Button id="create__product__btn" 
-            type="submit" 
-            disabled={disabled}
-            >
+            <Button id="create__product__btn" type="submit" disabled={disabled}>
               {disabled ? <ButtonLoader /> : "Create Product"}
             </Button>
           </form>

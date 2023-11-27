@@ -23,7 +23,10 @@ import {
   allReviewsFail,
 } from "../Slices/adminGetAllReviewsSlice";
 
-import {deleteUserReviewFail,deleteUserReviewSuccess} from '../Slices/userDeleteReviewSlice'
+import {
+  deleteUserReviewFail,
+  deleteUserReviewSuccess,
+} from "../Slices/userDeleteReviewSlice";
 
 // get all products
 export const getAllProducts = async (
@@ -32,7 +35,8 @@ export const getAllProducts = async (
   currentPage = 1,
   price = [0, 25000],
   category,
-  ratings = 0
+  ratings = 0,
+  brand = ""
 ) => {
   try {
     let link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
@@ -40,7 +44,14 @@ export const getAllProducts = async (
       link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
     }
 
+    if (brand) {
+      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}`;
+    }
+    if(category && brand){
+      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&category=${category}`;
+    }
     const { data } = await axios.get(link);
+    console.log(data, brand);
     dispatch(allProductsSuccess(data));
     return data;
   } catch (error) {
@@ -182,7 +193,7 @@ export const getAllReviews = async (dispatch, id) => {
   try {
     const { data } = await axios.get(
       `http://localhost:8000/reviews?id=${id}`,
-      
+
       config
     );
     dispatch(allReviewsSuccess(data.reviews));
@@ -195,15 +206,15 @@ export const getAllReviews = async (dispatch, id) => {
   }
 };
 
-// admin delete reviews 
-export const deleteReviews = async (dispatch, reviewId,productId) => {
+// admin delete reviews
+export const deleteReviews = async (dispatch, reviewId, productId) => {
   const config = {
     withCredentials: true,
   };
   try {
     const { data } = await axios.delete(
       `http://localhost:8000/reviews?Id=${reviewId}&productId=${productId}`,
-      
+
       config
     );
     dispatch(deleteReviewSuccess(data.success));
@@ -216,15 +227,15 @@ export const deleteReviews = async (dispatch, reviewId,productId) => {
   }
 };
 
-// user delete review 
-export const deleteUserReview = async (dispatch,productId) => {
+// user delete review
+export const deleteUserReview = async (dispatch, productId) => {
   const config = {
     withCredentials: true,
   };
   try {
     const { data } = await axios.delete(
       `http://localhost:8000/review/delete?productId=${productId}`,
-      
+
       config
     );
     dispatch(deleteUserReviewSuccess(data.success));
@@ -236,4 +247,3 @@ export const deleteUserReview = async (dispatch,productId) => {
     dispatch(deleteUserReviewFail(error.response.data.errorMessage));
   }
 };
-
