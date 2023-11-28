@@ -27,7 +27,7 @@ export const createOrder = async (dispatch, order) => {
   };
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/order/new",
+      "http://localhost:8000/api/v1/order/new",
       order,
       config
     );
@@ -48,7 +48,7 @@ export const myOrders = async (dispatch) => {
   };
   try {
     const { data } = await axios.get(
-      "http://localhost:8000/orders/me",
+      "http://localhost:8000/api/v1/orders/me",
 
       config
     );
@@ -61,14 +61,14 @@ export const myOrders = async (dispatch) => {
   }
 };
 
-// get my order details request user admin
+// get order details request user or  admin
 export const getOrderDetails = async (dispatch, id) => {
   const config = {
     withCredentials: true,
   };
   try {
     const { data } = await axios.get(
-      `http://localhost:8000/order/${id}`,
+      `http://localhost:8000/api/v1/order/${id}`,
 
       config
     );
@@ -88,7 +88,7 @@ export const getAllOrdersAdmin = async (dispatch) => {
   };
   try {
     const { data } = await axios.get(
-      "http://localhost:8000/admin/orders",
+      "http://localhost:8000/api/v1/admin/orders",
 
       config
     );
@@ -104,7 +104,7 @@ export const getAllOrdersAdmin = async (dispatch) => {
 
 // update order -( admin )
 export const updateOrderAdmin = async (dispatch, order,id) => {
-  console.log(id);
+ 
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -113,7 +113,7 @@ export const updateOrderAdmin = async (dispatch, order,id) => {
   };
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/admin/order/${id}`,
+      `http://localhost:8000/api/v1/admin/order/${id}`,
       order,
       config
     );
@@ -136,7 +136,7 @@ export const deleteOrderAdmin = async (dispatch,id) => {
   };
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/admin/order/${id}`,
+      `http://localhost:8000/api/v1/admin/order/${id}`,
      config
     );
     dispatch(adminDeleteOrderSuccess(data.success));

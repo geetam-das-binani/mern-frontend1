@@ -15,8 +15,8 @@ import {
   resetAdminUpdateUserSuccess,
   clearAdminUpdateUserFail,
 } from "../../Slices/deleteUpdateUserAdminSlice";
-
 import Loader from "../layout/loader/Loader";
+
 function UpdateUser() {
   const { id } = useParams();
 

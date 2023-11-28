@@ -63,7 +63,7 @@ export default function Payment({ apikey }) {
       };
 
       const { data } = await axios.post(
-        "http://localhost:8000/payment/process",
+        "http://localhost:8000/api/v1/payment/process",
         paymentData,
 
         config
@@ -92,17 +92,18 @@ export default function Payment({ apikey }) {
         toast.error(result.error.message, { theme: "dark" });
       } else {
         if (result.paymentIntent.status === "succeeded") {
-          order.paymentInfo={
-            id:result.paymentIntent.id,
-            status:result.paymentIntent.status
-          }
-         await createOrder(dispatch,order)
-         
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+          await createOrder(dispatch, order);
+
           navigate("/success");
         } else {
           toast.error(`There's is some issue while processing payment`, {
             theme: "dark",
           });
+          setDisabled(false);
         }
       }
     } catch (error) {

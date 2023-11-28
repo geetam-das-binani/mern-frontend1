@@ -4,7 +4,7 @@ import { addToCart, removeFromCart ,saveShippingInfo} from "../Slices/cartSlice"
 
 //add to cart
 export const addItemsToCart = async (dispatch, id, quantity) => {
-  const { data } = await axios.get(`http://localhost:8000/product/${id}`);
+  const { data } = await axios.get(`http://localhost:8000/api/v1/product/${id}`);
   const payload = {
     product: data.product._id,
     name: data.product.name,
@@ -18,7 +18,7 @@ export const addItemsToCart = async (dispatch, id, quantity) => {
 
 // remove from cart 
 export const removeCartItems = async (dispatch, id) => {
-  const { data } = await axios.get(`http://localhost:8000/product/${id}`);
+  const { data } = await axios.get(`http://localhost:8000/api/v1/product/${id}`);
 
   dispatch(removeFromCart(data.product._id));
 };

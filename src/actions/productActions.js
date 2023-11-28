@@ -40,16 +40,16 @@ export const getAllProducts = async (
   checked
 ) => {
   try {
-    let link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&checked=${checked}`;
+    let link = `http://localhost:8000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&checked=${checked}`;
     if (category) {
-      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}&checked=${checked}`;
+      link = `http://localhost:8000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}&checked=${checked}`;
     }
 
     if (brand) {
-      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&checked=${checked}`;
+      link = `http://localhost:8000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&checked=${checked}`;
     }
     if(category && brand){
-      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&category=${category}&checked=${checked}`;
+      link = `http://localhost:8000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&category=${category}&checked=${checked}`;
     }
     const { data } = await axios.get(link);
     
@@ -67,7 +67,7 @@ export const getAllProducts = async (
 // get single product details
 export const getProductDetails = async (dispatch, id) => {
   try {
-    const { data } = await axios.get(`http://localhost:8000/product/${id}`);
+    const { data } = await axios.get(`http://localhost:8000/api/v1/product/${id}`);
     dispatch(productSuccess(data.product));
     return data.product;
   } catch (error) {
@@ -87,7 +87,7 @@ export const newReview = async (dispatch, reviewData) => {
   };
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/review`,
+      `http://localhost:8000/api/v1/review`,
       reviewData,
       config
     );
@@ -108,7 +108,7 @@ export const getAdminProducts = async (dispatch) => {
   };
   try {
     const { data } = await axios.get(
-      `http://localhost:8000/admin/products`,
+      `http://localhost:8000/api/v1/admin/products`,
       config
     );
     dispatch(admniProductsSuccess(data.products));
@@ -130,7 +130,7 @@ export const createProduct = async (dispatch, productData) => {
   };
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/admin/product/new`,
+      `http://localhost:8000/api/v1/admin/product/new`,
       productData,
       config
     );
@@ -153,7 +153,7 @@ export const updateProduct = async (dispatch, productData, id) => {
   };
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/admin/product/update/${id}`,
+      `http://localhost:8000/api/v1/admin/product/update/${id}`,
       productData,
       config
     );
@@ -172,7 +172,7 @@ export const updateProduct = async (dispatch, productData, id) => {
 export const deleteProduct = async (dispatch, id) => {
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/admin/product/delete/${id}`,
+      `http://localhost:8000/api/v1/admin/product/delete/${id}`,
       { withCredentials: true }
     );
     dispatch(deleteProductSuccess(data.success));
@@ -193,7 +193,7 @@ export const getAllReviews = async (dispatch, id) => {
   };
   try {
     const { data } = await axios.get(
-      `http://localhost:8000/reviews?id=${id}`,
+      `http://localhost:8000/api/v1/reviews?id=${id}`,
 
       config
     );
@@ -214,7 +214,7 @@ export const deleteReviews = async (dispatch, reviewId, productId) => {
   };
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/reviews?Id=${reviewId}&productId=${productId}`,
+      `http://localhost:8000/api/v1/reviews?Id=${reviewId}&productId=${productId}`,
 
       config
     );
@@ -235,7 +235,7 @@ export const deleteUserReview = async (dispatch, productId) => {
   };
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/review/delete?productId=${productId}`,
+      `http://localhost:8000/api/v1/review/delete?productId=${productId}`,
 
       config
     );

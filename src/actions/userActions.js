@@ -49,7 +49,7 @@ export const login = async (dispatch, email, password) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `http://localhost:8000/login`,
+      `http://localhost:8000/api/v1/login`,
       {
         email,
         password,
@@ -75,7 +75,7 @@ export const register = async (dispatch, userData) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `http://localhost:8000/register`,
+      `http://localhost:8000/api/v1/register`,
 
       userData,
 
@@ -95,7 +95,7 @@ export const register = async (dispatch, userData) => {
 
 export const loadUser = async (dispatch) => {
   try {
-    const { data } = await axios.get(`http://localhost:8000/me`, {
+    const { data } = await axios.get(`http://localhost:8000/api/v1/me`, {
       withCredentials: true,
     });
 
@@ -110,7 +110,7 @@ export const loadUser = async (dispatch) => {
 
 export const logout = async (dispatch) => {
   try {
-    await axios.get(`http://localhost:8000/logout`, {
+    await axios.get(`http://localhost:8000/api/v1/logout`, {
       withCredentials: true,
     });
     dispatch(logoutSuccess());
@@ -130,7 +130,7 @@ export const loginOtp = async (dispatch, phoneNumber) => {
   };
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/sendotp`,
+      `http://localhost:8000/api/v1/sendotp`,
       { phoneNumber },
       config
     );
@@ -148,7 +148,7 @@ export const loginOtp = async (dispatch, phoneNumber) => {
 export const verifyOtp = async (dispatch,otp) => {
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/verifyOtp`,
+      `http://localhost:8000/api/v1/verifyOtp`,
       { otp },
       { withCredentials: true }
     );
@@ -173,7 +173,7 @@ export const updateProfile = async (dispatch, userData) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `http://localhost:8000/me/update`,
+      `http://localhost:8000/api/v1/me/update`,
 
       userData,
 
@@ -197,7 +197,7 @@ export const updatePassword = async (dispatch, passwords) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `http://localhost:8000/password/update`,
+      `http://localhost:8000/api/v1/password/update`,
 
       passwords,
 
@@ -221,7 +221,7 @@ export const forgotPassword = async (dispatch, email) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `http://localhost:8000/password/forgot`,
+      `http://localhost:8000/api/v1/password/forgot`,
 
       email,
 
@@ -263,7 +263,7 @@ export const resetPassword = async (dispatch, passwords, token) => {
 // get all users admin
 export const getAllUsersAdmin = async (dispatch) => {
   try {
-    const { data } = await axios.get(`http://localhost:8000/admin/users`, {
+    const { data } = await axios.get(`http://localhost:8000/api/v1/admin/users`, {
       withCredentials: true,
     });
     dispatch(adminAllUsersSuccess(data.users));
@@ -279,7 +279,7 @@ export const getAllUsersAdmin = async (dispatch) => {
 // get user details ( admin )
 export const getUserDetailsAdmin = async (dispatch, id) => {
   try {
-    const { data } = await axios.get(`http://localhost:8000/admin/user/${id}`, {
+    const { data } = await axios.get(`http://localhost:8000/api/v1/admin/user/${id}`, {
       withCredentials: true,
     });
     dispatch(adminUserDetailsSuccess(data.user));
@@ -299,7 +299,7 @@ export const updateUser = async (dispatch, id, userData) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      `http://localhost:8000/admin/user/${id}`,
+      `http://localhost:8000/api/v1/admin/user/${id}`,
 
       userData,
 
@@ -323,7 +323,7 @@ export const deleteUser = async (dispatch, id) => {
       withCredentials: true,
     };
     const { data } = await axios.delete(
-      `http://localhost:8000/admin/user/${id}`,
+      `http://localhost:8000/api/v1/admin/user/${id}`,
       config
     );
     dispatch(adminDeleteUserSuccess(data));
