@@ -33,25 +33,26 @@ export const getAllProducts = async (
   dispatch,
   keyword = "",
   currentPage = 1,
-  price = [0, 25000],
+  price = [0, 100000],
   category,
   ratings = 0,
-  brand = ""
+  brand = "",
+  checked
 ) => {
   try {
-    let link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+    let link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&checked=${checked}`;
     if (category) {
-      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}&checked=${checked}`;
     }
 
     if (brand) {
-      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}`;
+      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&checked=${checked}`;
     }
     if(category && brand){
-      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&category=${category}`;
+      link = `http://localhost:8000/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&category=${category}&checked=${checked}`;
     }
     const { data } = await axios.get(link);
-    console.log(data, brand);
+    
     dispatch(allProductsSuccess(data));
     return data;
   } catch (error) {

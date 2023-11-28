@@ -6,7 +6,6 @@
   padding: 2vmax;
   color: rgba(0, 0, 0, 0.678);
   font: 500 1.5vmax "Roboto";
-  text-align: center;
 }
 
 .products {
@@ -61,31 +60,42 @@
 }
 
 .filter__box {
-  width: 10vmax;
+  width: 11vmax;
   position: absolute;
   top: 10vmax;
-  left: 2vmax;
+  left: 1vmax;
+}
+.filter__box  > p{
+  font: 300 1vmax 'Roboto';
+  
 }
 .filter__box > select {
-  width: 100%;
+  width: calc(100% -100px);
   padding: 1vmax;
-
   border: 1px solid rgba(0, 0, 0, 0.267);
   outline: none;
   font: 300 0.9vmax cursive;
   border-radius: 4px;
-  margin: .5vmax 0;
+  margin: 0.5vmax 0;
 }
 
-
 .filter__box > fieldset {
-  border: 1px solid rgba(0, 0, 0, 0.129);
+  border: 0px solid rgba(0, 0, 0, 0.129);
   padding: 0%;
   margin: 0%;
 }
 .filter__box > fieldset > p {
   font: 500 1.3vmax "Roboto";
   text-align: center;
+}
+.filter__box > div{
+  display: flex;
+  align-items: center;
+  
+}
+.filter__box > div > label{
+  margin-left: .5vmax;
+ 
 }
 @media screen and (max-width: 600px) {
   .filter__box {
@@ -96,5 +106,4 @@
   .page__link {
     font: 300 1.7vmax "Roboto";
   }
- 
 }

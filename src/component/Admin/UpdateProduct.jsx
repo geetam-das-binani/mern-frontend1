@@ -20,16 +20,40 @@ import ButtonLoader from "../layout/loader/ButtonLoader";
 import "react-toastify/dist/ReactToastify.css";
 import { clearProductError } from "../../Slices/productSlice";
 import Loader from "../layout/loader/Loader";
+import BrandingWatermarkIcon from "@mui/icons-material/BrandingWatermark";
 const categories = [
   "Laptop",
   "Footwear",
   "Shirts",
   "T-shirts",
   "Attire",
-  "camera",
-  "Tops",
+  "Camera",
+  "Books",
   "SmartPhones",
   "Toys",
+  "Living",
+  "Games",
+  "Beauty",
+  "Fashion",
+  "Zara",
+];
+const brands = [
+  "Apple",
+  "Samsung",
+  "Sony",
+  "Nike",
+  "Adidas",
+  "Lego",
+  "Puma",
+  "Xbox",
+  "Pottery Barn",
+  "Maybelline",
+  `L'Oréal`,
+  "Clinique",
+  "Marvel Comics",
+  `Levi's`,
+  "Zara",
+  "Penguin Random House",
 ];
 
 export default function UpdateProduct() {
@@ -48,6 +72,7 @@ export default function UpdateProduct() {
   const [description, setDesciption] = useState("");
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
+  const [brand, setBrand] = useState("");
   const [images, setImages] = useState([]);
   const [imagePreviev, setImagePreview] = useState([]);
   const [oldImages, setOldImages] = useState([]);
@@ -60,6 +85,7 @@ export default function UpdateProduct() {
       setPrice(product.price);
       setCategory(product.category);
       setStock(product.Stock);
+      setBrand(product.brand);
       setDesciption(product.description);
       setOldImages(product.images);
     }
@@ -71,7 +97,6 @@ export default function UpdateProduct() {
       setDisabled(false);
     }
     if (updateError) {
-   
       setDisabled(false);
       toast.error(updateError, { theme: "dark" });
       dispatch(clearUpdateProductError());
@@ -91,6 +116,7 @@ export default function UpdateProduct() {
     myform.set("description", description);
     myform.set("category", category);
     myform.set("Stock", stock);
+    myform.set("brand", brand);
 
     images.forEach((image) => {
       myform.append("images", image);
@@ -116,7 +142,6 @@ export default function UpdateProduct() {
       reader.readAsDataURL(file);
     });
   };
-
 
   return (
     <Fragment>
@@ -182,6 +207,21 @@ export default function UpdateProduct() {
                 </div>
 
                 <div>
+                  <BrandingWatermarkIcon />
+                  <select
+                    value={brand}
+                    onChange={({ target }) => setBrand(target.value)}
+                  >
+                    <option value=""> Choose Brands</option>
+                    {brands.map((brand) => (
+                      <option key={brand} value={brand}>
+                        {brand}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
                   <StorageIcon />
                   <input
                     type="number"
@@ -191,6 +231,7 @@ export default function UpdateProduct() {
                     onChange={({ target }) => setStock(target.value)}
                   />
                 </div>
+              
                 <div id="create__product__form__file">
                   <input
                     type="file"

@@ -18,12 +18,16 @@ const categories = [
   "Shirts",
   "T-shirts",
   "Attire",
-  "camera",
+  "Camera",
   "Books",
   "SmartPhones",
   "Toys",
-  "Home & Living",
+  "Living",
+  "Games",
+  "Beauty",
+  'Fashion'
 ];
+
 const brands = [
   "Apple",
   "Samsung",
@@ -32,31 +36,27 @@ const brands = [
   "Adidas",
   "Lego",
   "Puma",
-  "Play Station",
   "Xbox",
-  "Bed Bath & Beyond",
   "Pottery Barn",
-  "Crate & Barrel",
   "Maybelline",
   `L'Oréal`,
   "Clinique",
   "Marvel Comics",
-  "National Geographic",
-  "Brooks Brothers",
-  "Hugo Boss",
-  "Express",
-  "Zara",
-  "River Island",
+  `Levi's`,
+  'Zara',
+  'Penguin Random House'
+  
 ];
 export default function Products() {
   const { keyword } = useParams();
 
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const [price, setPrice] = useState([0, 25000]);
+  const [price, setPrice] = useState([0, 100000]);
   const [category, setCategory] = useState("");
   const [ratings, setRatings] = useState(0);
   const [isSelectedBrand, setIsSelectedBrand] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const {
     loading,
     products,
@@ -84,7 +84,8 @@ export default function Products() {
       price,
       category,
       ratings,
-      isSelectedBrand
+      isSelectedBrand,
+      isChecked
     );
   }, [
     dispatch,
@@ -95,6 +96,7 @@ export default function Products() {
     category,
     ratings,
     isSelectedBrand,
+    isChecked,
   ]);
   let count = filteredProductsCount;
   return (
@@ -124,7 +126,7 @@ export default function Products() {
               min={0}
               max={25000}
             />
-
+            <Typography>By Categories</Typography>
             <select
               value={category}
               onChange={({ target }) => setCategory(target.value)}
@@ -136,7 +138,7 @@ export default function Products() {
                 </option>
               ))}
             </select>
-
+            <Typography>By Brands</Typography>
             <select
               value={isSelectedBrand}
               onChange={({ target }) => setIsSelectedBrand(target.value)}
@@ -161,6 +163,15 @@ export default function Products() {
                 valueLabelDisplay="auto"
               />
             </fieldset>
+            <div>
+              <input
+                type="checkbox"
+                id="check__stock"
+                checked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+              />
+              <label htmlFor="check__stock">In Stock</label>
+            </div>
           </div>
           {resultsPerPage < count && (
             <div className="pagination__box">

@@ -25,10 +25,32 @@ const categories = [
   "Shirts",
   "T-shirts",
   "Attire",
-  "camera",
-  "Tops",
+  "Camera",
+  "Books",
   "SmartPhones",
   "Toys",
+  "Living",
+  "Games",
+  "Beauty",
+  "Fashion",
+];
+const brands = [
+  "Apple",
+  "Samsung",
+  "Sony",
+  "Nike",
+  "Adidas",
+  "Lego",
+  "Puma",
+  "Xbox",
+  "Pottery Barn",
+  "Maybelline",
+  `L'Oréal`,
+  "Clinique",
+  "Marvel Comics",
+  `Levi's`,
+  "Zara",
+  "Penguin Random House",
 ];
 
 export default function NewProduct() {
@@ -40,7 +62,7 @@ export default function NewProduct() {
   const [description, setDesciption] = useState("");
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
-  const [brand,setBrand]=useState("")
+  const [brand, setBrand] = useState("");
   const [images, setImages] = useState([]);
   const [imagePreviev, setImagePreview] = useState([]);
 
@@ -55,7 +77,7 @@ export default function NewProduct() {
     if (success) {
       toast.success("Product Created Successfully", { theme: "dark" });
       dispatch(resetProductSuccess());
-      navigate("/admin/dashboard");
+      navigate("/products");
     }
   }, [dispatch, error, success, navigate]);
 
@@ -78,6 +100,7 @@ export default function NewProduct() {
 
   const createProductImageChange = (e) => {
     const files = Array.from(e.target.files);
+
     setImages([]);
     setImagePreview([]);
 
@@ -147,6 +170,20 @@ export default function NewProduct() {
                 ))}
               </select>
             </div>
+            <div>
+              <BrandingWatermarkIcon />
+              <select
+                value={brand}
+                onChange={({ target }) => setBrand(target.value)}
+              >
+                <option value=""> Choose Brands</option>
+                {brands.map((brand) => (
+                  <option key={brand} value={brand}>
+                    {brand}
+                  </option>
+                ))}
+              </select>
+            </div>
 
             <div>
               <StorageIcon />
@@ -157,17 +194,7 @@ export default function NewProduct() {
                 onChange={({ target }) => setStock(target.value)}
               />
             </div>
-            <div>
-              <BrandingWatermarkIcon />
-              <input
-                type="text"
-                placeholder="Brand"
-                required
-                value={brand}
-                onChange={({ target }) => setBrand(target.value)}
-              />
-            
-            </div>
+
             <div id="create__product__form__file">
               <input
                 type="file"
