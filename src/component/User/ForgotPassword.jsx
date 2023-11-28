@@ -12,7 +12,7 @@ import {
   forgotPasswordResetMessage,
   setLoading,
 } from "../../Slices/forgotPasswordSlice";
-
+import ButtonLoader from "../layout/loader/ButtonLoader";
 export default function ForgotPassword() {
   const { error, message, loading } = useSelector(
     (state) => state.forgotPassword
@@ -20,24 +20,26 @@ export default function ForgotPassword() {
 
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [disabled, setDisabled] = useState(false);
+
   const forgotPasswordSubmit = (e) => {
     e.preventDefault();
     const myform = new FormData();
 
     myform.set("email", email);
-    dispatch(setLoading(true));
+    setDisabled(true);
     forgotPassword(dispatch, myform);
   };
 
   useEffect(() => {
     if (error) {
-      setLoading(false);
+      setDisabled(false);
       toast.error(error, { theme: "dark" });
 
       dispatch(clearForgotPasswordError());
     }
     if (message) {
-      setLoading(false);
+      setDisabled(false);
       toast.success(message, { theme: "dark" });
 
       dispatch(forgotPasswordResetMessage());
@@ -73,12 +75,13 @@ export default function ForgotPassword() {
                     onChange={({ target }) => setEmail(target.value)}
                   />
                 </div>
-
-                <input
+                <button
                   type="submit"
-                  value="Send"
+                  disabled={disabled}
                   className="forgot__password__btn"
-                />
+                >
+                  {disabled ? <ButtonLoader /> : "Send"}
+                </button>
               </form>
             </div>
           </div>

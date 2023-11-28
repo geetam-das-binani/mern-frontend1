@@ -100,6 +100,13 @@
   transition: all 0.5s;
   outline: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+  display: grid;
+  place-items: center;
+}
+.update__profile__btn:disabled{
+  background: #e7e8e9;
+  color: #9fa3a9;
+  cursor: not-allowed;
 }
 .update__profile__btn:hover {
   background: rgb(170, 66, 46);

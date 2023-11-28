@@ -8,22 +8,23 @@ import { updatePassword } from "../../actions/userActions";
 import {
   clearProfileError,
   updatePasswordReset,
-  setLoading
+  setLoading,
 } from "../../Slices/profileSlice";
 import Metadata from "../layout/Metadata";
 import Loader from "../layout/loader/Loader";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
-
+import ButtonLoader from "../layout/loader/ButtonLoader";
 export default function UpdatePassword() {
-  const { error, isUpdated,loading } = useSelector((state) => state.profile);
-  
+  const { error, isUpdated, loading } = useSelector((state) => state.profile);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [disabled, setDisabled] = useState(false);
   const passwordUpdate = (e) => {
     e.preventDefault();
 
@@ -32,16 +33,14 @@ export default function UpdatePassword() {
     myform.set("newPassword", newPassword);
 
     myform.set("confirmPassword", confirmPassword);
-      dispatch(setLoading(true))
-    updatePassword(dispatch,myform);
+    setDisabled(true);
+    updatePassword(dispatch, myform);
   };
 
   useEffect(() => {
-   
-
     if (error) {
       toast.error(error, { theme: "dark" });
-
+      setDisabled(false);
       dispatch(clearProfileError());
     }
     if (isUpdated) {
@@ -52,13 +51,11 @@ export default function UpdatePassword() {
       dispatch(updatePasswordReset());
     }
     setTimeout(() => {
-     dispatch(setLoading(false));
+      dispatch(setLoading(false));
     }, 300);
   }, [dispatch, error, isUpdated, navigate]);
 
-
-
-    return (
+  return (
     <Fragment>
       {loading ? (
         <Loader />
@@ -106,12 +103,15 @@ export default function UpdatePassword() {
                     onChange={({ target }) => setConfirmPassword(target.value)}
                   />
                 </div>
-
-                <input
+                <button
+                 
                   type="submit"
-                  value="Change"
+                  disabled={disabled}
                   className="update__password__btn"
-                />
+                >
+                  {disabled ? <ButtonLoader /> : "Update"}
+                </button>
+                
               </form>
             </div>
           </div>

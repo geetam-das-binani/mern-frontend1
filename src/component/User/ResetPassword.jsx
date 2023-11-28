@@ -14,7 +14,7 @@ import Metadata from "../layout/Metadata";
 import Loader from "../layout/loader/Loader";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
-
+import ButtonLoader from "../layout/loader/ButtonLoader";
 export default function ResetPassword() {
   const { token } = useParams();
   const { error, success, loading } = useSelector(
@@ -26,6 +26,7 @@ export default function ResetPassword() {
 
   const [password, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [disabled, setDisabled] = useState(false);
   const resetPasswordUpdate = (e) => {
     e.preventDefault();
 
@@ -33,15 +34,14 @@ export default function ResetPassword() {
     myform.set("password", password);
 
     myform.set("confirmPassword", confirmPassword);
-
+    setDisabled(true);
     resetPassword(dispatch, myform, token);
-    dispatch(setLoading(true));
   };
 
   useEffect(() => {
     if (error) {
       toast.error(error, { theme: "dark" });
-
+      setDisabled(false);
       dispatch(clearForgotPasswordError());
     }
     if (success) {
@@ -93,12 +93,13 @@ export default function ResetPassword() {
                     onChange={({ target }) => setConfirmPassword(target.value)}
                   />
                 </div>
-
-                <input
+                <button
                   type="submit"
-                  value="Update"
+                  disabled={disabled}
                   className="reset__password__btn"
-                />
+                >
+                  {disabled ? <ButtonLoader /> : "Send"}
+                </button>
               </form>
             </div>
           </div>

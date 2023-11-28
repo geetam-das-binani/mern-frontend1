@@ -14,6 +14,8 @@ import {
 } from "../../Slices/profileSlice";
 import Metadata from "../layout/Metadata";
 import Loader from "../layout/loader/Loader";
+import ButtonLoader from "../layout/loader/ButtonLoader";
+
 export default function UpdateProfile() {
   const { user } = useSelector((state) => state.user);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
@@ -24,6 +26,7 @@ export default function UpdateProfile() {
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const updateProfileSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +35,7 @@ export default function UpdateProfile() {
     myform.set("email", email);
 
     myform.set("avatar", avatar);
-    dispatch(setLoading(true));
+    setDisabled(true);
     updateProfile(dispatch, myform);
   };
 
@@ -50,16 +53,16 @@ export default function UpdateProfile() {
     if (user) {
       setName(user.name);
       setEmail(user.email);
-      setAvatarPreview(user.avatar.url);
+      setAvatarPreview(user?.avatar?.url);
     }
 
     if (error) {
       toast.error(error, { theme: "dark" });
-
+      setDisabled(false);
       dispatch(clearProfileError());
     }
     if (isUpdated) {
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
       toast.success("Profile Updated Successfully", { theme: "dark" });
       loadUser(dispatch);
       navigate("/account");
@@ -118,11 +121,15 @@ export default function UpdateProfile() {
                     onChange={updateProfileDateChange}
                   />
                 </div>
-                <input
+
+                <button
+                 
                   type="submit"
-                  value="Update"
+                  disabled={disabled}
                   className="update__profile__btn"
-                />
+                >
+                  {disabled ? <ButtonLoader /> : "Update"}
+                </button>
               </form>
             </div>
           </div>

@@ -60,7 +60,7 @@ export default function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (logoutNotify) {
-      toast.success("Logout Succcessfull", { theme: "dark", autoClose: 2500 });
+      toast.success("Logout Succcessfully", { theme: "dark", autoClose: 2500 });
       setTimeout(() => {
         dispatch(clearError());
       }, 3000);

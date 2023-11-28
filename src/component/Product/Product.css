@@ -70,7 +70,7 @@
   
 }
 .filter__box > select {
-  width: calc(100% -100px);
+  width: 11.5vmax;
   padding: 1vmax;
   border: 1px solid rgba(0, 0, 0, 0.267);
   outline: none;
