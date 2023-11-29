@@ -10,14 +10,20 @@ import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Loader from "../layout/loader/Loader";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import Metadata from "../layout/Metadata";
 
 export default function Cart() {
   const [loading, setLoading] = useState(true);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  const deleteCartItems = (productId) => {
+    removeCartItems(dispatch, productId);
+    toast.success("Removed Successfully", { theme: "dark", autoClose: 1500 });
+  };
+
   const increaseQuantity = (id, quantity, stock) => {
     if (quantity < stock) {
       const newQty = quantity + 1;
@@ -26,29 +32,32 @@ export default function Cart() {
       toast.warning("Not enough stock", { theme: "dark", autoClose: 1500 });
     }
   };
+
   const decreaseQunatity = (id, quantity) => {
-    if (quantity <= 1) return;
+    if (quantity <= 1) {
+      deleteCartItems(id);
+      return;
+    }
 
     const newQty = quantity - 1;
     addItemsToCart(dispatch, id, newQty);
   };
 
-  const deleteCartItems = (productId) => {
-    removeCartItems(dispatch, productId);
-    toast.success("Removed Successfully", { theme: "dark", autoClose: 1500 });
-  };
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  },[]);
+  }, []);
 
   const grosstotal = () => {
-    return cartItems?.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    return cartItems?.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
   };
-  const checkoutHandler=()=>{
-     navigate('/login?redirect=shipping')
-  }
+  const checkoutHandler = () => {
+    navigate("/login?redirect=shipping");
+  };
   return (
     <Fragment>
       {loading ? (
@@ -57,17 +66,16 @@ export default function Cart() {
         <Fragment>
           {cartItems.length === 0 ? (
             <>
-            <Metadata title='Your Cart'/>
-               <div className="empty__card">
-              <RemoveShoppingCartIcon />
-              <Typography>No Products in your cart</Typography>
-              <Link to="/products">View Products</Link>
-            </div>
+              <Metadata title="Your Cart" />
+              <div className="empty__card">
+                <RemoveShoppingCartIcon />
+                <Typography>No Products in your cart</Typography>
+                <Link to="/products">View Products</Link>
+              </div>
             </>
-         
           ) : (
             <Fragment>
-              <Metadata title='Your Cart'/>
+              <Metadata title="Your Cart" />
               <div className="cart__page">
                 <div className="cart__header">
                   <p>Product</p>
