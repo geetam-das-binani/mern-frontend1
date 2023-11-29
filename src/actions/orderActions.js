@@ -17,6 +17,10 @@ import {
   adminAllOrdersSuccess,
 } from "../Slices/adminAllOrdersSlice";
 
+
+
+const url = "http://localhost:8000/api/v1";
+
 // create order request
 export const createOrder = async (dispatch, order) => {
   const config = {
@@ -27,7 +31,7 @@ export const createOrder = async (dispatch, order) => {
   };
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/api/v1/order/new",
+      `${url}/order/new`,
       order,
       config
     );
@@ -48,7 +52,7 @@ export const myOrders = async (dispatch) => {
   };
   try {
     const { data } = await axios.get(
-      "http://localhost:8000/api/v1/orders/me",
+      `${url}/orders/me`,
 
       config
     );
@@ -68,7 +72,7 @@ export const getOrderDetails = async (dispatch, id) => {
   };
   try {
     const { data } = await axios.get(
-      `http://localhost:8000/api/v1/order/${id}`,
+      `${url}/order/${id}`,
 
       config
     );
@@ -88,7 +92,7 @@ export const getAllOrdersAdmin = async (dispatch) => {
   };
   try {
     const { data } = await axios.get(
-      "http://localhost:8000/api/v1/admin/orders",
+      `${url}/admin/orders`,
 
       config
     );
@@ -113,7 +117,7 @@ export const updateOrderAdmin = async (dispatch, order,id) => {
   };
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/api/v1/admin/order/${id}`,
+      `${url}/admin/order/${id}`,
       order,
       config
     );
@@ -136,7 +140,7 @@ export const deleteOrderAdmin = async (dispatch,id) => {
   };
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/api/v1/admin/order/${id}`,
+      `${url}/admin/order/${id}`,
      config
     );
     dispatch(adminDeleteOrderSuccess(data.success));

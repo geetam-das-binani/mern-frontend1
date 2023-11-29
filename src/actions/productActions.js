@@ -28,6 +28,8 @@ import {
   deleteUserReviewSuccess,
 } from "../Slices/userDeleteReviewSlice";
 
+const url = "http://localhost:8000/api/v1";
+
 // get all products
 export const getAllProducts = async (
   dispatch,
@@ -40,19 +42,19 @@ export const getAllProducts = async (
   checked
 ) => {
   try {
-    let link = `http://localhost:8000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&checked=${checked}`;
+    let link = `${url}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&checked=${checked}`;
     if (category) {
-      link = `http://localhost:8000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}&checked=${checked}`;
+      link = `${url}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}&checked=${checked}`;
     }
 
     if (brand) {
-      link = `http://localhost:8000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&checked=${checked}`;
+      link = `${url}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&checked=${checked}`;
     }
-    if(category && brand){
-      link = `http://localhost:8000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&category=${category}&checked=${checked}`;
+    if (category && brand) {
+      link = `${url}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&brand=${brand}&category=${category}&checked=${checked}`;
     }
     const { data } = await axios.get(link);
-    
+
     dispatch(allProductsSuccess(data));
     return data;
   } catch (error) {
@@ -67,7 +69,7 @@ export const getAllProducts = async (
 // get single product details
 export const getProductDetails = async (dispatch, id) => {
   try {
-    const { data } = await axios.get(`http://localhost:8000/api/v1/product/${id}`);
+    const { data } = await axios.get(`${url}/product/${id}`);
     dispatch(productSuccess(data.product));
     return data.product;
   } catch (error) {
@@ -86,11 +88,7 @@ export const newReview = async (dispatch, reviewData) => {
     withCredentials: true,
   };
   try {
-    const { data } = await axios.post(
-      `http://localhost:8000/api/v1/review`,
-      reviewData,
-      config
-    );
+    const { data } = await axios.post(`${url}/review`, reviewData, config);
     dispatch(newReviewSuccess(data.success));
   } catch (error) {
     if (error.message === "Network Error") {
@@ -108,7 +106,7 @@ export const getAdminProducts = async (dispatch) => {
   };
   try {
     const { data } = await axios.get(
-      `http://localhost:8000/api/v1/admin/products`,
+      `${url}/admin/products`,
       config
     );
     dispatch(admniProductsSuccess(data.products));
@@ -130,7 +128,7 @@ export const createProduct = async (dispatch, productData) => {
   };
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/api/v1/admin/product/new`,
+      `${url}/admin/product/new`,
       productData,
       config
     );
@@ -153,7 +151,7 @@ export const updateProduct = async (dispatch, productData, id) => {
   };
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/api/v1/admin/product/update/${id}`,
+      `${url}/admin/product/update/${id}`,
       productData,
       config
     );
@@ -172,7 +170,7 @@ export const updateProduct = async (dispatch, productData, id) => {
 export const deleteProduct = async (dispatch, id) => {
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/api/v1/admin/product/delete/${id}`,
+      `${url}/admin/product/delete/${id}`,
       { withCredentials: true }
     );
     dispatch(deleteProductSuccess(data.success));
@@ -193,7 +191,7 @@ export const getAllReviews = async (dispatch, id) => {
   };
   try {
     const { data } = await axios.get(
-      `http://localhost:8000/api/v1/reviews?id=${id}`,
+      `${url}/reviews?id=${id}`,
 
       config
     );
@@ -214,7 +212,7 @@ export const deleteReviews = async (dispatch, reviewId, productId) => {
   };
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/api/v1/reviews?Id=${reviewId}&productId=${productId}`,
+      `${url}/reviews?Id=${reviewId}&productId=${productId}`,
 
       config
     );
@@ -235,7 +233,7 @@ export const deleteUserReview = async (dispatch, productId) => {
   };
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/api/v1/review/delete?productId=${productId}`,
+      `${url}/review/delete?productId=${productId}`,
 
       config
     );
