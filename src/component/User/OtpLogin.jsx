@@ -12,7 +12,7 @@ import {
 } from "../../Slices/loginOtpSlice";
 import { loadUser, loginOtp, verifyOtp } from "../../actions/userActions";
 import DialpadIcon from "@mui/icons-material/Dialpad";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import ButtonLoader from "../layout/loader/ButtonLoader";
 export default function otpLogin() {
@@ -21,7 +21,7 @@ export default function otpLogin() {
     (state) => state.otp
   );
   const { isAuthenticatedUser } = useSelector((state) => state.user);
-  const [disabled,setDisabled]=useState(false)
+  const [disabled, setDisabled] = useState(false);
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
@@ -30,46 +30,42 @@ export default function otpLogin() {
     e.preventDefault();
 
     loginOtp(dispatch, phoneNumber);
-    setDisabled(true)
+    setDisabled(true);
   };
   const handleVerifyOtp = (e) => {
     e.preventDefault();
-    verifyOtp(dispatch,otp);
-    setDisabled(true)
+    verifyOtp(dispatch, otp);
+    setDisabled(true);
   };
-
- 
 
   useEffect(() => {
     if (error) {
       toast.error(error, { theme: "dark" });
       dispatch(clearOtpFail());
-      setDisabled(false)
+      setDisabled(false);
     }
     if (isSended) {
       toast.success("Otp Send Successfully", { theme: "dark" });
       dispatch(resetOtpSuccess());
       setSwitchView(true);
-      setDisabled(false)
+      setDisabled(false);
     }
     if (isVerified) {
       dispatch(resetOtpVerifySuccess());
-      loadUser(dispatch)
-      setDisabled(false)
-      
+      loadUser(dispatch);
+      setDisabled(false);
     }
     if (verifyError) {
       toast.error(verifyError, { theme: "dark" });
       dispatch(clearOtpVerifYError());
-      setSwitchView(true)
-      setDisabled(false)
+      setSwitchView(true);
+      setDisabled(false);
     }
-    if(isAuthenticatedUser){
-      toast.success('Login Successfully',{theme:'dark'})
-      navigate('/account')
+    if (isAuthenticatedUser) {
+      toast.success("Login Successfully", { theme: "dark" });
+      navigate("/account");
     }
-
-  }, [dispatch, isSended, error, isVerified, verifyError,isAuthenticatedUser]);
+  }, [dispatch, isSended, error, isVerified, verifyError, isAuthenticatedUser]);
 
   return (
     <Fragment>
@@ -91,11 +87,9 @@ export default function otpLogin() {
                     value={phoneNumber}
                     onChange={({ target }) => setPhoneNumber(target.value)}
                   />
-
                 </div>
 
-              
-                  <Button
+                <Button
                   id="create__product__btn"
                   type="submit"
                   disabled={disabled}
@@ -103,6 +97,7 @@ export default function otpLogin() {
                   {disabled ? <ButtonLoader /> : "Send"}
                 </Button>
               </form>
+              <Link to="/login"> go back </Link>
             </div>
           </div>
         </Fragment>
@@ -127,18 +122,15 @@ export default function otpLogin() {
                     value={otp}
                     onChange={({ target }) => setOtp(target.value)}
                   />
-                  
                 </div>
 
-               
-                  <Button
+                <Button
                   id="create__product__btn"
                   type="submit"
                   disabled={disabled}
                 >
                   {disabled ? <ButtonLoader /> : "Send"}
                 </Button>
-              
               </form>
             </div>
           </div>
