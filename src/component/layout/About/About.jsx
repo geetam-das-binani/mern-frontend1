@@ -33,7 +33,7 @@ export default function About() {
             <Button onClick={visitFacebook} color="primary">
               Visit Facebook
             </Button>
-            <span>This is a sample wesbite made by @megeetamdasbinani.</span>
+            <span>This is a e-commerce wesbite made by @megeetamdasbinani.</span>
           </div>
           <div className="about__section__container2">
             <Typography component="h2">Our Brands</Typography>

@@ -91,7 +91,7 @@ transition: all .5s;
 }
 .cart__gross__total {
   display: grid;
-  grid-template-columns: 2fr 1.2fr;
+  grid-template-columns: 2fr 1.3fr;
 }
 .cart__gross__profit__box {
   display: flex;
@@ -108,14 +108,15 @@ transition: all .5s;
 .checkout__btn > button {
   border: none;
   background: tomato;
-  font: 500 0.7vmax "Roboto";
+  font: 800 .70vmax "Roboto";
   border-radius: 30px;
-  padding: 0.8vmax 4vmax;
+  padding: 0.4vmax 2.6vmax;
   margin: 1vmax 4vmax;
   color: white;
   cursor: pointer;
   transition: all 0.5s;
   outline: none;
+  
 }
 .checkout__btn > button:hover {
   transform: scale(1.1);

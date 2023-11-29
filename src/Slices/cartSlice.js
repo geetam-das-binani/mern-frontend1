@@ -36,6 +36,10 @@ const cartReducer = createSlice({
       state.shippingInfo = payload;
       saveShippingInfoToStorage(state.shippingInfo);
     },
+    removeAllProducts:(state)=>{
+      state.cartItems=[]
+      saveItemsToStorage(state.cartItems);
+    }
   },
 });
 
@@ -47,5 +51,5 @@ function saveShippingInfoToStorage(shippingInfo) {
   localStorage.setItem("shippingInfo", JSON.stringify(shippingInfo));
 }
 export default cartReducer.reducer;
-export const { addToCart, removeFromCart, saveShippingInfo } =
+export const { addToCart, removeFromCart, saveShippingInfo,removeAllProducts } =
   cartReducer.actions;

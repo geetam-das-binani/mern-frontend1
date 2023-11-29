@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Loader from "../layout/loader/Loader";
 import { useNavigate } from "react-router-dom";
 import Metadata from "../layout/Metadata";
+import { removeAllProducts } from "../../Slices/cartSlice";
 
 export default function Cart() {
   const [loading, setLoading] = useState(true);
@@ -57,6 +58,10 @@ export default function Cart() {
   };
   const checkoutHandler = () => {
     navigate("/login?redirect=shipping");
+  };
+  const handleRemoveAll = () => {
+    dispatch(removeAllProducts());
+    toast.success("Removed all products", { theme: "dark" });
   };
   return (
     <Fragment>
@@ -127,6 +132,7 @@ export default function Cart() {
                   </div>
                   <div></div>
                   <div className="checkout__btn">
+                    <button onClick={handleRemoveAll}>Remove All</button>
                     <button onClick={checkoutHandler}>Check out</button>
                   </div>
                 </div>
