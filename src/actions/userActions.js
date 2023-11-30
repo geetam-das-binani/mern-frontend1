@@ -41,8 +41,8 @@ import { otpSuccess, otpFail } from "../Slices/loginOtpSlice";
 import { otpVerifySuccess, otpVerifyFail } from "../Slices/loginOtpSlice";
 
 
-const url = "http://localhost:8000/api/v1";
-
+// const url = "http://localhost:8000/api/v1";
+const url="https://mernecommercebackend-k5a2.onrender.com/api/v1"
 // login user
 
 export const login = async (dispatch, email, password) => {

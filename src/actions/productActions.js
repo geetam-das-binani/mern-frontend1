@@ -28,8 +28,8 @@ import {
   deleteUserReviewSuccess,
 } from "../Slices/userDeleteReviewSlice";
 
-const url = "http://localhost:8000/api/v1";
-
+// const url = "http://localhost:8000/api/v1";
+const url="https://mernecommercebackend-k5a2.onrender.com/api/v1"
 // get all products
 export const getAllProducts = async (
   dispatch,
