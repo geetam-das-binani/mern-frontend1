@@ -40,9 +40,8 @@ import {
 import { otpSuccess, otpFail } from "../Slices/loginOtpSlice";
 import { otpVerifySuccess, otpVerifyFail } from "../Slices/loginOtpSlice";
 
-
 // const url = "http://localhost:8000/api/v1";
-const url="https://mernecommercebackend-k5a2.onrender.com/api/v1"
+const url = "https://mernecommercebackend-k5a2.onrender.com/api/v1";
 // login user
 
 export const login = async (dispatch, email, password) => {
@@ -103,7 +102,6 @@ export const loadUser = async (dispatch) => {
     });
 
     dispatch(loadUserSuccess(data.user));
-   
   } catch (error) {
     dispatch(loadUserFail());
   }
@@ -148,16 +146,15 @@ export const loginOtp = async (dispatch, phoneNumber) => {
 };
 
 // otp verify
-export const verifyOtp = async (dispatch,otp) => {
+export const verifyOtp = async (dispatch, otp) => {
   try {
     const { data } = await axios.post(
       `${url}/verifyOtp`,
       { otp },
       { withCredentials: true }
     );
- 
+
     dispatch(otpVerifySuccess(data.success));
-    
   } catch (error) {
     if (error.message === "Network Error") {
       return dispatch(otpVerifyFail(error.message));
@@ -325,10 +322,7 @@ export const deleteUser = async (dispatch, id) => {
     const config = {
       withCredentials: true,
     };
-    const { data } = await axios.delete(
-      `${url}/admin/user/${id}`,
-      config
-    );
+    const { data } = await axios.delete(`${url}/admin/user/${id}`, config);
     dispatch(adminDeleteUserSuccess(data));
   } catch (error) {
     if (error.message === "Network Error") {
