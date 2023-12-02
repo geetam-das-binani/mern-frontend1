@@ -29,7 +29,7 @@ import {
 } from "../Slices/userDeleteReviewSlice";
 
 // const url = "http://localhost:8000/api/v1";
-const url="https://mernecommercebackend-k5a2.onrender.com"
+const url="https://mernecommercebackend-k5a2.onrender.com/api/v1"
 // get all products
 export const getAllProducts = async (
   dispatch,
@@ -42,7 +42,7 @@ export const getAllProducts = async (
   checked
 ) => {
   try {
-    let link = `${url}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&checked=${checked}`;
+    let link = `${url}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&checked=${checked}`;
     if (category) {
       link = `${url}/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}&checked=${checked}`;
     }
@@ -69,7 +69,7 @@ export const getAllProducts = async (
 // get single product details
 export const getProductDetails = async (dispatch, id) => {
   try {
-    const { data } = await axios.get(`${url}/api/v1/product/${id}`);
+    const { data } = await axios.get(`${url}/product/${id}`);
     dispatch(productSuccess(data.product));
     return data.product;
   } catch (error) {
