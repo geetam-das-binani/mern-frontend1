@@ -63,7 +63,7 @@ export default function Payment({ apikey }) {
       };
 
       const { data } = await axios.post(
-        "http://localhost:8000/api/v1/payment/process",
+        "https://becoomerce.onrender.com/api/v1/payment/process",
         paymentData,
 
         config

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { addToCart, removeFromCart ,saveShippingInfo} from "../Slices/cartSlice";
 
-const url = "http://localhost:8000/api/v1";
+const url="https://becoomerce.onrender.com/api/v1"
 //add to cart
 export const addItemsToCart = async (dispatch, id, quantity) => {
   const { data } = await axios.get(`${url}/product/${id}`);
