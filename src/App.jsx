@@ -52,7 +52,7 @@ export default function App() {
   const [stripeApikey, setStripeApikey] = useState("");
   const getStripeApiKey = async () => {
     const { data } = await axios.get(
-      "https://mernecommercebackend-k5a2.onrender.com/api/v1/stripeApiKey",
+      "http://localhost:8000/api/v1/stripeApiKey",
       {
         withCredentials: true,
       }

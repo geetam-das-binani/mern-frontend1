@@ -19,8 +19,8 @@ import {
 
 
 
-// const url = "http://localhost:8000/api/v1";
-const url="https://mernecommercebackend-k5a2.onrender.com/api/v1"
+const url = "http://localhost:8000/api/v1";
+
 // create order request
 export const createOrder = async (dispatch, order) => {
   const config = {

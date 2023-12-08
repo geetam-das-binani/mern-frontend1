@@ -1,7 +1,7 @@
 import axios from "axios";
 import { addToCart, removeFromCart ,saveShippingInfo} from "../Slices/cartSlice";
 
-const url="https://mernecommercebackend-k5a2.onrender.com/api/v1"
+const url = "http://localhost:8000/api/v1";
 //add to cart
 export const addItemsToCart = async (dispatch, id, quantity) => {
   const { data } = await axios.get(`${url}/product/${id}`);
@@ -18,7 +18,7 @@ export const addItemsToCart = async (dispatch, id, quantity) => {
 
 // remove from cart 
 export const removeCartItems = async (dispatch, id) => {
-  const { data } = await axios.get(`http://localhost:8000/api/v1/product/${id}`);
+  const { data } = await axios.get(`${url}/product/${id}`);
 
   dispatch(removeFromCart(data.product._id));
 };

@@ -63,7 +63,7 @@ export default function Payment({ apikey }) {
       };
 
       const { data } = await axios.post(
-        "https://mernecommercebackend-k5a2.onrender.com/api/v1/payment/process",
+        "http://localhost:8000/api/v1/payment/process",
         paymentData,
 
         config
