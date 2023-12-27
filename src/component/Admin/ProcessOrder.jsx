@@ -1,6 +1,11 @@
 import React, { Fragment, useEffect, useState, memo } from "react";
-import Sidebar from "../Admin/Sidebar";
+import Sidebar from "./Sidebar";
 import "./processOrder.css";
+import "./newProduct.css";
+import '../Cart/ConfirmOrder.css'
+import '../Order/OrderDetails.css'
+import '../Cart/ConfirmOrder.css'
+import './Dashboard.css'
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import Metadata from "../layout/Metadata";
 import { Typography } from "@mui/material";

@@ -26,13 +26,7 @@
   align-items: center;
   margin: 2rem;
 }
-.review__icon {
-  text-align: center;
-}
-.review__icon > svg {
-  font-size: 7vmax;
-  color: tomato;
-}
+
 
 @media screen and (max-width: 600px) {
   .products__review__container {

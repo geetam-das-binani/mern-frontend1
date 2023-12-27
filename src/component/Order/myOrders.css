@@ -49,32 +49,8 @@
   display: none !important;
 }
 
-.no__orders__placed__div{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  text-align: center;
-  height: 60vh;
-}
-.no__orders__placed__div > p {
-  font-size: 2vmax;
-}
-.no__orders__placed__div > a {
-  background: rgb(51, 51, 51);
-  text-decoration: none;
-  color: white;
-  margin: 2vmax;
-  border: none;
-  padding: 1vmax 3vmax;
-  cursor: pointer;
-  font: 400 1vmax "Roboto";
-}
-.no__orders__placed__div >svg{
-  color: tomato;
-  font-size: 7vmax;
-}
+
+
 
 @media screen and (max-width: 600px) {
   .my__orders__page {
@@ -96,20 +72,6 @@
   }
 
 
-  .no__orders__placed__div > a {
-    margin: 2vmax;
-    font: 400 4vw "Roboto";
-    padding: 3vw 6vw;
-  }
 
-  .no__orders__placed__div > svg {
-    font-size: 20vw;
-  }
-  .no__orders__placed__div > p {
-    font-size: 5vw;
-    margin: 2vmax;
-  }
-  .no__orders__placed__div >svg{
-    font-size: 20vw;
-  }
+ 
 }

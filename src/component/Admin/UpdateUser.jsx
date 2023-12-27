@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useState, memo } from "react";
+import './Dashboard.css'
+import './newProduct.css'
 import { getUserDetailsAdmin, updateUser } from "../../actions/userActions";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import Metadata from "../layout/Metadata";
 import PersonIcon from "@mui/icons-material/Person";

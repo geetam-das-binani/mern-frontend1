@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { myOrders } from "../../actions/orderActions";
 import { clearMyOrderFail } from "../../Slices/myOrdersSlice";
 import { Typography } from "@mui/material";
-import CancelIcon from "@mui/icons-material/Cancel";
 import { Link } from "react-router-dom";
 import Metadata from "../layout/Metadata";
 import LaunchIcon from "@mui/icons-material/Launch";
@@ -104,10 +103,42 @@ export default function MyOrders() {
           </div>
         </Fragment>
       ) : (
-        <div className="no__orders__placed__div">
-          <CancelIcon />
-          <Typography>No orders have been placed yet</Typography>
-          <Link to="/products">View Products</Link>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: " center",
+            alignItems: "center",
+            margin: "auto",
+            textAlign: "center",
+            height: "60vh",
+            
+          }}
+          className="no__orders__placed__div"
+        >
+          
+          <Typography
+            style={{
+              fontSize: "2vmax",
+            }}
+          >
+            No orders have been placed yet
+          </Typography>
+          <Link
+            style={{
+              background: "tomato",
+              textDecoration: "none",
+              color: "white",
+              margin: "2vmax",
+              border: "none",
+              padding: "1vmax 3vmax",
+              cursor: "pointer",
+              font: "400 1vmax Roboto",
+            }}
+            to="/products"
+          >
+            View Products
+          </Link>
         </div>
       )}
       <ToastContainer />

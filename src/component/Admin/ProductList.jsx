@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import "./ProductList.css";
+import './Dashboard.css'
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProducts } from "../../actions/productActions";

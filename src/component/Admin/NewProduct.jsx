@@ -1,5 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
+import './Dashboard.css'
 import "./newProduct.css";
+import './Sidebar.css'
+
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../actions/productActions";
 import {
@@ -13,7 +16,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import StorageIcon from "@mui/icons-material/Storage";
 import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import Sidebar from "../Admin/Sidebar";
+import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import ButtonLoader from "../layout/loader/ButtonLoader";

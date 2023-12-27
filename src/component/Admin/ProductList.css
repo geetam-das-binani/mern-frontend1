@@ -1,46 +1,50 @@
-.products__lists__container{
-    width: 100%;
-    background: rgb(255, 255, 255);
-    border-left: 1px solid rgba(0, 0, 0, .358);
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+.products__lists__container {
+  width: 100%;
+  background: rgb(255, 255, 255);
+  border-left: 1px solid rgba(0, 0, 0, 0.358);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
-#product__list__heading{
-    font: 400 2rem "Roboto";
-    padding: 0.5vmax;
-    color: rgba(0, 0, 0, 0.637);
-    transition: all 0.5s;
-    margin: 2rem;
-    text-align: center;
+#product__list__heading {
+  font: 400 2rem "Roboto";
+  padding: 0.5vmax;
+  color: rgba(0, 0, 0, 0.637);
+  transition: all 0.5s;
+  margin: 2rem;
+  text-align: center;
 }
-.product__list__table{
-    background-color: white;
-    border: none !important;
-   
-    
+.product__list__table {
+  border: none !important;
 }
-.product__list__table  div{
-    font: 300 1vmax "Roboto";
-     border: none !important;
-     
+.MuiDataGrid-columnHeadersInner {
+  background: tomato;
+}
+
+.MuiDataGrid-columnHeaderTitleContainerContent
+  > .MuiDataGrid-columnHeaderTitle {
+  color: black;
+}
+.product__list__table div {
+  font: 300 1vmax "Roboto";
+  border: none !important;
 }
 .product__list__table a,
-.product__list__table button{
-    color: rgba(0, 0, 0, 0.527);
-    transition: all 0.5s;
+.product__list__table button {
+  color: rgba(0, 0, 0, 0.527);
+  transition: all 0.5s;
 }
-.product__list__table a:hover{
-    color: tomato;
+.product__list__table a:hover {
+  color: tomato;
 }
-.product__list__table button:hover{
-    color: rgb(236, 30, 30);
+.product__list__table button:hover {
+  color: rgb(236, 30, 30);
 }
 .MuiDataGrid-columnHeader div {
-    color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+@media screen and (max-width: 600px) {
+  .product__list__table div {
+    font: 300 4vw "Roboto";
   }
-  @media screen and (max-width: 600px) {
-    .product__list__table div {
-      font: 300 4vw "Roboto";
-    }
-  }
+}

@@ -1,5 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import "./productReviews.css";
+import './Dashboard.css'
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllReviews, deleteReviews } from "../../actions/productActions";
@@ -12,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Metadata from "../layout/Metadata";
-import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Sidebar";
 import { useParams } from "react-router-dom";
@@ -141,7 +141,7 @@ export default function ProductReviews() {
               <h1 className="no__product__reviews__heading">
                 No Reviews Found
               </h1>
-              <p className="review__icon"><CancelIcon/></p>
+              
               </>
             )}
           </div>

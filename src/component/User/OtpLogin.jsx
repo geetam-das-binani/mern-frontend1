@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import PhoneIcon from "@mui/icons-material/Phone";
+import './ForgotPassword.css'
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

@@ -1,4 +1,6 @@
 import React, { Fragment, useEffect } from "react";
+import "./ProductList.css";
+import "./Dashboard.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,11 +18,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Metadata from "../layout/Metadata";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Sidebar from "./Sidebar";
 import Loader from "../layout/loader/Loader";
 import { Typography } from "@mui/material";
-import CancelIcon from "@mui/icons-material/Cancel";
+
 
 export default function OrderList() {
   const navigate = useNavigate();
@@ -132,10 +134,40 @@ export default function OrderList() {
           </div>
         </Fragment>
       ) : (
-        <div className="no__orders__placed__div">
-          <CancelIcon />
-          <Typography>Currently No orders placed</Typography>
-          <Link to="/admin/dashboard">View Dashboard</Link>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: " center",
+            alignItems: "center",
+            margin: "auto",
+            textAlign: "center",
+            height: "60vh",
+          }}
+         
+        >
+          <Typography
+            style={{
+              fontSize: "2vmax",
+            }}
+          >
+            Currently No orders placed
+          </Typography>
+          <Link
+            style={{
+              background: "tomato",
+              textDecoration: "none",
+              color: "white",
+              margin: "2vmax",
+              border: "none",
+              padding: "1vmax 3vmax",
+              cursor: "pointer",
+              font: "400 1vmax Roboto",
+            }}
+            to="/admin/dashboard"
+          >
+            View Dashboard
+          </Link>
         </div>
       )}
 
