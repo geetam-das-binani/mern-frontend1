@@ -19,9 +19,9 @@ export default function Footer() {
       </div>
       <div className="right_footer">
         <h4>Follow us</h4>
-        <Link to="https://www.facebook.com">Facebook</Link>
-        <Link to="https://www.instagram.com">Instagram</Link>
-        <Link to="https://www.telegram.com">Telegram</Link>
+        <Link to="#">Facebook</Link>
+        <Link to="#">Instagram</Link>
+        
       </div>
     </footer>
   );
