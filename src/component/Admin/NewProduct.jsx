@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import './Dashboard.css'
-import "./newProduct.css";
+// import "./newProduct.css";
 import './Sidebar.css'
-
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from "../../actions/productActions";
 import {
